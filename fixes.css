@@ -1,4 +1,4 @@
-/* Ajustes finais OLEGARIO TECH: card do hero + WhatsApp flutuante */
+/* Ajustes finais OLEGARIO TECH: card do hero + WhatsApp flutuante + mobile */
 
 .hero-bottom-card {
     left: 50% !important;
@@ -41,6 +41,51 @@
     overflow-wrap: anywhere;
     word-break: normal;
     font-size: clamp(.82rem, 1.2vw, .98rem);
+}
+
+/* Monte do seu jeito: remove os números e deixa os cards mais elegantes */
+.step-card {
+    isolation: isolate;
+    background:
+        radial-gradient(circle at 18% 12%, rgba(255, 215, 0, .24), transparent 26%),
+        radial-gradient(circle at 88% 18%, rgba(255, 105, 180, .16), transparent 28%),
+        linear-gradient(145deg, rgba(255,255,255,.92), rgba(255,247,223,.86)) !important;
+    border: 1px solid rgba(107, 46, 127, .12) !important;
+    box-shadow: 0 24px 70px rgba(45, 8, 56, .13) !important;
+}
+
+.step-card strong {
+    display: none !important;
+}
+
+.step-card h3 {
+    color: var(--primary-color) !important;
+    text-shadow: 0 8px 24px rgba(107,46,127,.08);
+}
+
+.step-card p {
+    color: #6d4c72 !important;
+}
+
+.step-card::before {
+    content: '';
+    position: absolute;
+    width: 92px;
+    height: 92px;
+    right: -28px;
+    top: -28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255,215,0,.55), rgba(255,105,180,.24));
+    filter: blur(.2px);
+    opacity: .75;
+    z-index: -1;
+    transform: scale(.8);
+    transition: transform .55s ease, opacity .35s ease;
+}
+
+.step-card:hover::before {
+    transform: scale(1.18);
+    opacity: 1;
 }
 
 .whatsapp-float-btn {
@@ -90,6 +135,57 @@
     opacity: 1;
 }
 
+/* Breakpoint mais alto porque alguns navegadores mobile renderizam perto de 980px */
+@media (max-width: 1100px) {
+    .site-header {
+        width: calc(100% - 24px) !important;
+        max-width: 760px !important;
+        overflow: hidden;
+    }
+
+    .nav-shell {
+        height: 70px !important;
+        gap: 10px !important;
+        padding: 0 12px !important;
+        justify-content: space-between !important;
+    }
+
+    .nav-links,
+    .site-header ul.nav-links {
+        display: none !important;
+    }
+
+    .brand {
+        min-width: 0;
+        flex: 1 1 auto;
+    }
+
+    .brand .logo,
+    .logo {
+        width: 54px !important;
+        height: 54px !important;
+        flex: 0 0 54px;
+    }
+
+    .brand span {
+        display: inline-block !important;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: .92rem;
+    }
+
+    .nav-cta {
+        flex: 0 0 auto;
+        min-width: 124px !important;
+        min-height: 46px !important;
+        padding: 0 16px !important;
+        font-size: .88rem !important;
+        white-space: nowrap !important;
+    }
+}
+
 @media (max-width: 920px) {
     .hero-bottom-card {
         position: relative !important;
@@ -117,6 +213,40 @@
 }
 
 @media (max-width: 640px) {
+    .site-header {
+        top: 8px !important;
+        width: calc(100% - 16px) !important;
+        border-radius: 999px !important;
+    }
+
+    .nav-shell {
+        height: 62px !important;
+        padding: 0 8px 0 10px !important;
+    }
+
+    .brand .logo,
+    .logo {
+        width: 48px !important;
+        height: 48px !important;
+        flex-basis: 48px;
+    }
+
+    .brand span {
+        max-width: 126px;
+        font-size: .82rem;
+    }
+
+    .nav-cta {
+        min-width: 108px !important;
+        min-height: 42px !important;
+        padding: 0 12px !important;
+        font-size: .82rem !important;
+    }
+
+    .hero-section {
+        padding-top: 112px !important;
+    }
+
     .hero-bottom-card {
         margin-top: 28px;
         width: 100% !important;
@@ -130,6 +260,16 @@
         height: 60px;
         min-height: 60px;
         padding: 0;
+    }
+}
+
+@media (max-width: 390px) {
+    .brand span {
+        display: none !important;
+    }
+
+    .nav-cta {
+        min-width: 104px !important;
     }
 }
 

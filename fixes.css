@@ -265,7 +265,8 @@
 
 @media (max-width: 390px) {
     .brand span {
-        display: none !important;
+        max-width: 108px;
+        font-size: .76rem;
     }
 
     .nav-cta {

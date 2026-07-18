@@ -1,10 +1,14 @@
 # Açaí São Marcos
 
-Site institucional e comercial para a Açaí São Marcos, açaiteria e sorveteria localizada no bairro São Marcos, em Valinhos/SP.
+Site institucional e comercial da Açaí São Marcos, açaiteria e sorveteria localizada no bairro São Marcos, em Valinhos/SP.
 
 ## Objetivo
 
-Valorizar a marca, apresentar produtos de forma premium e levar o visitante para pedido pelo WhatsApp.
+Valorizar a marca, apresentar os produtos com visual premium e levar o visitante para pedido pelo WhatsApp ou visita à loja.
+
+## Link publicado
+
+https://olegariotech-site.github.io/acai-sao-marcos/
 
 ## Dados principais
 
@@ -14,9 +18,7 @@ Valorizar a marca, apresentar produtos de forma premium e levar o visitante para
 - Instagram: https://www.instagram.com/acaisaomarcos
 - Facebook: https://www.facebook.com/profile.php?id=61574657775118
 
-## Estrutura esperada de assets
-
-Preferencialmente, use esta estrutura:
+## Estrutura ideal de assets
 
 ```txt
 assets/
@@ -31,23 +33,25 @@ assets/
     └── hero-acai-sao-marcos.mp4
 ```
 
-O código também possui fallback para nomes achatados que podem aparecer quando o upload é feito sem as barras de pasta.
+O código também mantém fallback para nomes achatados gerados em upload manual, como `assetslogologo-acai-sao-marcos.png` e `assetsvideohero-acai-sao-marcos.mp4`.
 
-## Arquivos
+## Arquivos principais
 
 - `index.html`
 - `style.css`
 - `script.js`
+- `.nojekyll`
 
-## Publicação
+## Publicação no GitHub Pages
 
-Pode ser publicado no Netlify, Vercel ou GitHub Pages.
+Em `Settings > Pages`:
 
-No Netlify:
+- Source: `Deploy from a branch`
+- Branch: `main`
+- Folder: `/ (root)`
 
-- Build command: deixar vazio
-- Publish directory: `/`
+Depois aguarde alguns minutos e acesse o link publicado.
 
-## Observação sobre preços
+## Observação comercial
 
-O site trabalha com referências de mercado, mas não apresenta preço oficial sem validação do cliente. A chamada principal direciona para o WhatsApp para confirmar sabores, tamanhos, valores e disponibilidade do dia.
+O site evita promessas comerciais que precisam de confirmação operacional, como “100% natural” ou “feito na hora”. O texto valoriza sabor, apresentação, atendimento e experiência, mantendo segurança para divulgação.

@@ -1,0 +1,123 @@
+/* Ajustes finais OLEGARIO TECH: card do hero + WhatsApp flutuante */
+
+.hero-bottom-card {
+    width: min(920px, calc(100% - 32px));
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    overflow: visible;
+    text-align: center;
+}
+
+.hero-bottom-card strong {
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+.hero-bottom-card span {
+    flex: 1 1 360px;
+    min-width: 0;
+    display: block;
+    line-height: 1.35;
+    white-space: normal;
+    overflow-wrap: normal;
+}
+
+.whatsapp-float-btn {
+    width: 62px;
+    min-width: 62px;
+    height: 62px;
+    min-height: 62px;
+    padding: 0;
+    gap: 0;
+    overflow: hidden;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #25D366 0%, #16b957 48%, #128C7E 100%);
+    color: #ffffff;
+    box-shadow: 0 18px 42px rgba(37, 211, 102, .38), inset 0 1px 0 rgba(255,255,255,.34);
+    transition: width .32s ease, padding .32s ease, gap .32s ease, transform .26s ease, box-shadow .26s ease;
+}
+
+.whatsapp-float-btn:hover,
+.whatsapp-float-btn:focus-visible {
+    width: 170px;
+    padding: 0 18px;
+    gap: 10px;
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 24px 52px rgba(37, 211, 102, .48), inset 0 1px 0 rgba(255,255,255,.36);
+}
+
+.whatsapp-icon {
+    width: 33px;
+    height: 33px;
+    flex: 0 0 33px;
+    color: #ffffff;
+}
+
+.whatsapp-float-btn strong {
+    display: inline-block;
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: max-width .32s ease, opacity .2s ease;
+}
+
+.whatsapp-float-btn:hover strong,
+.whatsapp-float-btn:focus-visible strong {
+    max-width: 92px;
+    opacity: 1;
+}
+
+@media (max-width: 920px) {
+    .hero-bottom-card {
+        width: min(640px, calc(100% - 28px));
+        margin-inline: auto;
+        padding: 16px 18px;
+    }
+
+    .hero-bottom-card span {
+        flex-basis: auto;
+    }
+}
+
+@media (max-width: 640px) {
+    .hero-bottom-card {
+        position: relative;
+        margin-top: 28px;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        width: 100%;
+        border-radius: 24px;
+        flex-direction: column;
+    }
+
+    .hero-bottom-card strong,
+    .hero-bottom-card span {
+        width: 100%;
+    }
+
+    .whatsapp-float-btn {
+        right: 14px;
+        bottom: 14px;
+        width: 60px;
+        min-width: 60px;
+        height: 60px;
+        min-height: 60px;
+        padding: 0;
+    }
+}
+
+@media (hover: none) {
+    .whatsapp-float-btn strong {
+        display: none;
+    }
+
+    .whatsapp-float-btn:hover,
+    .whatsapp-float-btn:focus-visible {
+        width: 62px;
+        padding: 0;
+        gap: 0;
+    }
+}

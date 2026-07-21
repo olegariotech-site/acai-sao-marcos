@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://olegariotech-site.github.io/acai-sao-marcos/sitemap.xml

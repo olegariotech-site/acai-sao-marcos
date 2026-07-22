@@ -38,6 +38,13 @@ body{color:var(--text-color);background:radial-gradient(circle at 12% 9%,rgba(24
 .btn-ifood:hover,.btn-ifood:focus-visible{background:linear-gradient(135deg,#ff5663 0%,#f12a39 48%,#d31221 100%);box-shadow:0 24px 48px rgba(234,29,44,.38),inset 0 1px 0 rgba(255,255,255,.32)}
 .btn-99{color:#ffe000;background:#0b0b0b;border:2px solid #ffe000;box-shadow:0 20px 42px rgba(255,224,0,.18),inset 0 1px 0 rgba(255,255,255,.08)}
 .btn-99:hover,.btn-99:focus-visible{color:#0b0b0b;background:#ffe000;box-shadow:0 24px 48px rgba(255,224,0,.30),inset 0 1px 0 rgba(255,255,255,.35)}
+.rating-proof{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:18px}
+.rating-badge{display:inline-flex;align-items:center;gap:9px;min-height:38px;padding:7px 12px;border-radius:999px;background:rgba(0,0,0,.52);border:1px solid rgba(247,194,27,.25);color:#fff;backdrop-filter:blur(10px);box-shadow:0 12px 28px rgba(0,0,0,.22);transition:transform .25s ease,border-color .25s ease,background .25s ease}
+.rating-badge:hover,.rating-badge:focus-visible{transform:translateY(-2px);background:rgba(0,0,0,.72);border-color:rgba(247,194,27,.55)}
+.rating-badge .stars{color:#f7c21b;font-size:.78rem;letter-spacing:.08em;white-space:nowrap}
+.rating-badge strong{color:#fff;font-size:.8rem;white-space:nowrap}
+.rating-badge.rating-ifood{border-color:rgba(234,29,44,.36)}
+.rating-badge.rating-99{border-color:rgba(255,224,0,.42)}
 .hero-bottom-card{background:rgba(0,0,0,.54);border-color:rgba(247,194,27,.24)}
 .marquee{background:#050505;color:var(--secondary-color);border-block-color:rgba(125,179,67,.2)}
 .experiencia-content h2,.section-header h2,.momentos-content h2,.location-content h2,.cta-final-section h2{color:var(--secondary-color)}
@@ -81,6 +88,10 @@ footer p,footer a{color:rgba(255,255,255,.68)}
 @media(max-width:640px){
   .brand-name strong{font-size:.9rem}
   .brand-name small{display:none}
+  .rating-proof{gap:8px;margin-top:14px}
+  .rating-badge{padding:6px 10px}
+  .rating-badge .stars{font-size:.7rem}
+  .rating-badge strong{font-size:.74rem}
 }
 @media(max-width:420px){
   .produto-img-container{height:245px!important;min-height:245px}

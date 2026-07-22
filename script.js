@@ -3,17 +3,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const cursorGlow = document.querySelector('.cursor-glow');
     const progress = document.querySelector('.scroll-progress');
     const heroVideo = document.querySelector('.hero-video');
+    const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+    let scrollTicking = false;
 
     const updateScrollState = () => {
         const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        const progressValue = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
+        const progressValue = maxScroll > 0 ? window.scrollY / maxScroll : 0;
 
         if (header) header.classList.toggle('scrolled', window.scrollY > 50);
-        if (progress) progress.style.width = `${Math.min(progressValue, 100)}%`;
+        if (progress) progress.style.transform = `scaleX(${Math.min(Math.max(progressValue, 0), 1)})`;
+        scrollTicking = false;
+    };
+
+    const requestScrollUpdate = () => {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        window.requestAnimationFrame(updateScrollState);
     };
 
     updateScrollState();
-    window.addEventListener('scroll', updateScrollState, { passive: true });
+    window.addEventListener('scroll', requestScrollUpdate, { passive: true });
+    window.addEventListener('resize', requestScrollUpdate, { passive: true });
 
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener('click', (event) => {
@@ -45,6 +55,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2500);
     }
 
+    const revealDirectionMap = [
+        ['.experiencia-content[data-reveal]', 'reveal-left'],
+        ['.experiencia-image[data-reveal]', 'reveal-right'],
+        ['.location-content[data-reveal]', 'reveal-left'],
+        ['.map-container[data-reveal]', 'reveal-right'],
+        ['.produto-item.destaque[data-reveal]', 'reveal-scale']
+    ];
+
+    revealDirectionMap.forEach(([selector, className]) => {
+        document.querySelectorAll(selector).forEach((element) => element.classList.add(className));
+    });
+
     const revealItems = document.querySelectorAll('[data-reveal]');
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
@@ -58,20 +80,24 @@ document.addEventListener('DOMContentLoaded', () => {
         rootMargin: '0px 0px -70px 0px'
     });
 
-    revealItems.forEach((item, index) => {
-        item.style.transitionDelay = `${Math.min(index * 45, 320)}ms`;
+    revealItems.forEach((item) => {
+        const siblings = Array.from(item.parentElement?.children || []).filter((element) => element.hasAttribute?.('data-reveal'));
+        const localIndex = Math.max(siblings.indexOf(item), 0);
+        item.style.transitionDelay = `${Math.min(localIndex * 90, 270)}ms`;
         revealObserver.observe(item);
     });
 
-    document.querySelectorAll('.produto-item, .step-card').forEach((card) => {
-        card.addEventListener('pointermove', (event) => {
-            const rect = card.getBoundingClientRect();
-            const x = ((event.clientX - rect.left) / rect.width) * 100;
-            const y = ((event.clientY - rect.top) / rect.height) * 100;
-            card.style.setProperty('--mx', `${x}%`);
-            card.style.setProperty('--my', `${y}%`);
+    if (hasFinePointer) {
+        document.querySelectorAll('.produto-item, .step-card').forEach((card) => {
+            card.addEventListener('pointermove', (event) => {
+                const rect = card.getBoundingClientRect();
+                const x = ((event.clientX - rect.left) / rect.width) * 100;
+                const y = ((event.clientY - rect.top) / rect.height) * 100;
+                card.style.setProperty('--mx', `${x}%`);
+                card.style.setProperty('--my', `${y}%`);
+            });
         });
-    });
+    }
 
     const platformTypeFromHref = (href = '') => {
         if (href.includes('wa.me')) return 'whatsapp';
@@ -246,9 +272,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    window.addEventListener('pointermove', (event) => {
-        if (!cursorGlow) return;
-        cursorGlow.style.left = `${event.clientX}px`;
-        cursorGlow.style.top = `${event.clientY}px`;
-    }, { passive: true });
+    if (hasFinePointer) {
+        window.addEventListener('pointermove', (event) => {
+            if (!cursorGlow) return;
+            cursorGlow.style.left = `${event.clientX}px`;
+            cursorGlow.style.top = `${event.clientY}px`;
+        }, { passive: true });
+    }
 });

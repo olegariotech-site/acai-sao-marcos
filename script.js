@@ -128,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         document.body.append(lightbox);
 
+        const lightboxDialog = lightbox.querySelector('.product-lightbox-dialog');
         const lightboxImage = lightbox.querySelector('.product-lightbox-image');
         const lightboxCaption = lightbox.querySelector('figcaption');
         const closeButton = lightbox.querySelector('.product-lightbox-close');
@@ -136,6 +137,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let activeIndex = 0;
         let lastFocusedElement = null;
         let closeTimer = null;
+        let savedScrollY = 0;
+        let touchStartX = 0;
+        let touchStartY = 0;
 
         const showLightboxImage = (index) => {
             activeIndex = (index + productImages.length) % productImages.length;
@@ -148,25 +152,45 @@ document.addEventListener('DOMContentLoaded', () => {
             lightboxCaption.textContent = title;
         };
 
+        const lockPageScroll = () => {
+            savedScrollY = window.scrollY;
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${savedScrollY}px`;
+            document.body.style.left = '0';
+            document.body.style.right = '0';
+            document.body.style.width = '100%';
+            document.body.classList.add('lightbox-open');
+        };
+
+        const unlockPageScroll = () => {
+            document.body.classList.remove('lightbox-open');
+            document.body.style.removeProperty('position');
+            document.body.style.removeProperty('top');
+            document.body.style.removeProperty('left');
+            document.body.style.removeProperty('right');
+            document.body.style.removeProperty('width');
+            window.scrollTo(0, savedScrollY);
+        };
+
         const openLightbox = (index, trigger) => {
             if (closeTimer) clearTimeout(closeTimer);
             lastFocusedElement = trigger || document.activeElement;
             showLightboxImage(index);
             lightbox.hidden = false;
-            document.body.classList.add('lightbox-open');
+            lockPageScroll();
             requestAnimationFrame(() => {
                 lightbox.classList.add('active');
-                closeButton.focus();
+                closeButton.focus({ preventScroll: true });
             });
         };
 
         const closeLightbox = () => {
             lightbox.classList.remove('active');
-            document.body.classList.remove('lightbox-open');
+            unlockPageScroll();
             closeTimer = setTimeout(() => {
                 lightbox.hidden = true;
                 lightboxImage.removeAttribute('src');
-                lastFocusedElement?.focus?.();
+                lastFocusedElement?.focus?.({ preventScroll: true });
             }, 180);
         };
 
@@ -198,6 +222,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         previousButton.addEventListener('click', () => showLightboxImage(activeIndex - 1));
         nextButton.addEventListener('click', () => showLightboxImage(activeIndex + 1));
+
+        lightboxDialog.addEventListener('touchstart', (event) => {
+            const touch = event.changedTouches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+        }, { passive: true });
+
+        lightboxDialog.addEventListener('touchend', (event) => {
+            const touch = event.changedTouches[0];
+            const deltaX = touch.clientX - touchStartX;
+            const deltaY = touch.clientY - touchStartY;
+
+            if (Math.abs(deltaX) < 48 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+            showLightboxImage(deltaX < 0 ? activeIndex + 1 : activeIndex - 1);
+        }, { passive: true });
 
         document.addEventListener('keydown', (event) => {
             if (lightbox.hidden) return;

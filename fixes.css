@@ -319,3 +319,32 @@
         padding-inline: 10px !important;
     }
 }
+
+/* Logo oficial Açaí do Dudu: ocupa o círculo sem alterar a arte */
+.hero-logo-wrap {
+    overflow: visible !important;
+}
+
+.hero-logo {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    background: transparent !important;
+    border-radius: 50% !important;
+    clip-path: circle(49.5% at 50% 50%) !important;
+    transform: scale(1.18);
+    transform-origin: center;
+    box-shadow: 0 24px 55px rgba(0,0,0,.32) !important;
+}
+
+.site-header .logo {
+    max-width: none !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    background: transparent !important;
+    clip-path: circle(49.5% at 50% 50%) !important;
+    transform: scale(1.12);
+    transform-origin: center;
+}

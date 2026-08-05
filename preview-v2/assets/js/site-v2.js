@@ -1,3 +1,78 @@
+(() => {
+  const modalFix = document.createElement('style');
+  modalFix.id = 'modal-scroll-fix-v2';
+  modalFix.textContent = `
+    .product-modal {
+      padding: clamp(10px, 2vw, 22px);
+    }
+
+    .modal-dialog {
+      height: min(88dvh, 820px);
+      max-height: calc(100dvh - 24px);
+      grid-template-rows: minmax(0, 1fr);
+    }
+
+    .modal-media {
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .modal-content {
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-gutter: stable;
+      padding: 34px 26px 0 34px;
+    }
+
+    .modal-content::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .modal-content::-webkit-scrollbar-track {
+      background: rgba(78, 15, 96, .06);
+      border-radius: 999px;
+    }
+
+    .modal-content::-webkit-scrollbar-thumb {
+      background: rgba(78, 15, 96, .34);
+      border: 2px solid transparent;
+      border-radius: 999px;
+      background-clip: padding-box;
+    }
+
+    .modal-actions {
+      bottom: 0;
+      z-index: 5;
+      margin: 28px -26px 0 -34px;
+      padding: 18px 26px 24px 34px;
+      box-shadow: 0 -16px 28px rgba(49, 5, 63, .08);
+    }
+
+    @media (max-width: 760px) {
+      .product-modal {
+        padding: 0;
+      }
+
+      .modal-dialog {
+        height: min(92dvh, 900px);
+        max-height: 92dvh;
+      }
+
+      .modal-content {
+        padding: 26px 18px 0 20px;
+      }
+
+      .modal-actions {
+        bottom: 0;
+        margin: 24px -18px 0 -20px;
+        padding: 16px 18px 22px 20px;
+      }
+    }
+  `;
+  document.head.appendChild(modalFix);
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
   const state = {
     catalog: null,

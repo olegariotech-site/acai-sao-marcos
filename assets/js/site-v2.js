@@ -1,33 +1,4 @@
 (() => {
-  const OFFICIAL_IFOOD_URL = 'https://www.ifood.com.br/delivery/valinhos-sp/acai-do-dudu-jardim-sao-marcos/7a5caf33-92ee-414c-aef6-96e7c8f44e98';
-  const IFOOD_SELECTOR = 'a[data-modal-ifood], a[href*="ifood.com.br"], a[data-track*="ifood"], a.button-ifood';
-
-  const normalizeIfoodLinks = (scope = document) => {
-    scope.querySelectorAll?.(IFOOD_SELECTOR).forEach((link) => {
-      link.href = OFFICIAL_IFOOD_URL;
-      link.target = '_blank';
-      link.rel = 'noopener';
-    });
-  };
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => normalizeIfoodLinks(), { once: true });
-  } else {
-    normalizeIfoodLinks();
-  }
-
-  document.addEventListener('click', (event) => {
-    const link = event.target.closest?.('a');
-    if (!link || !link.matches(IFOOD_SELECTOR)) return;
-    link.href = OFFICIAL_IFOOD_URL;
-    link.target = '_blank';
-    link.rel = 'noopener';
-  }, true);
-
-  window.ACAI_DUDU_IFOOD_URL = OFFICIAL_IFOOD_URL;
-})();
-
-(() => {
   const modalFix = document.createElement('style');
   modalFix.id = 'modal-scroll-fix-v2';
   modalFix.textContent = `
@@ -134,8 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modalExtrasBlock: document.querySelector('[data-modal-extras-block]'),
     modalExtras: document.querySelector('[data-modal-extras]'),
     modalNotes: document.querySelector('[data-modal-notes]'),
-    modalWhatsapp: document.querySelector('[data-modal-whatsapp]'),
-    modalIfood: document.querySelector('[data-modal-ifood]')
+    modalWhatsapp: document.querySelector('[data-modal-whatsapp]')
   };
 
   const formatCurrency = (value) => new Intl.NumberFormat('pt-BR', {
@@ -347,7 +317,6 @@ document.addEventListener('DOMContentLoaded', () => {
     elements.modalNotes.innerHTML = notes.map((note) => `<p>${escapeHTML(note)}</p>`).join('');
 
     elements.modalWhatsapp.href = buildWhatsAppUrl(product);
-    elements.modalIfood.href = window.ACAI_DUDU_IFOOD_URL;
 
     elements.modal.classList.add('open');
     elements.modal.setAttribute('aria-hidden', 'false');
@@ -433,7 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       console.error(error);
       if (elements.productGrid) {
-        elements.productGrid.innerHTML = '<div class="product-empty">O cardápio não carregou agora. Use os botões de WhatsApp ou iFood para consultar os produtos.</div>';
+        elements.productGrid.innerHTML = '<div class="product-empty">O cardápio não carregou agora. Use o WhatsApp para consultar os produtos.</div>';
       }
     }
   };

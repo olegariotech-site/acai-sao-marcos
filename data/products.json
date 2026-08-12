@@ -1,12 +1,10 @@
 {
   "meta": {
     "brand": "Açaí do Dudu",
-    "updatedAt": "2026-08-05",
+    "updatedAt": "2026-08-11",
     "currency": "BRL",
     "whatsapp": "https://wa.me/5519991288849",
-    "ifood": "https://www.ifood.com.br/delivery/valinhos-sp/acai-do-dudu-jardim-sao-marcos/7a5caf33-92ee-414c-aef6-96e7c8f44e98",
-    "ninetyNine": "https://oia.99app.com/dlp9/GxxXYu",
-    "priceDisclaimer": "Preços e disponibilidade podem mudar conforme o canal de pedido. Confira o valor final antes de concluir."
+    "priceDisclaimer": "Preços e disponibilidade podem mudar. Consulte a loja pelo WhatsApp antes de concluir o pedido."
   },
   "categories": [
     { "id": "destaques", "label": "Destaques" },
@@ -25,17 +23,17 @@
       "image": "assets/img/produtos/acai/acai-duplo-tropical-destaque.png",
       "featured": true,
       "offer": true,
-      "priceLabel": "A partir de R$ 25,00",
+      "priceLabel": "A partir de R$ 16,00",
       "sizes": [
-        { "label": "300 ml", "price": 25.00 },
-        { "label": "400 ml", "price": 29.00 },
-        { "label": "500 ml", "price": 35.00 },
-        { "label": "700 ml", "price": 41.00 }
+        { "label": "300 ml", "price": 16.00 },
+        { "label": "400 ml", "price": 22.00 },
+        { "label": "500 ml", "price": 28.00 },
+        { "label": "700 ml", "price": 32.00 }
       ],
       "includes": [
         "1 opção obrigatória de Açaí Natural",
         "Até 2 frutas nas opções exibidas no cardápio",
-        "Acompanhamentos e caldas conforme tamanho e canal"
+        "Acompanhamentos e caldas conforme a montagem escolhida"
       ],
       "flavors": ["Morango", "Uva-verde sem semente", "Manga"],
       "extras": [
@@ -43,10 +41,10 @@
         "Skimo chocolate branco + R$ 4,00"
       ],
       "notes": [
-        "As opções e os limites de escolha podem variar por tamanho e canal.",
+        "As opções e os limites de escolha podem variar por tamanho.",
         "Banana no Açaí Natural permanece pendente de confirmação."
       ],
-      "channels": ["whatsapp", "ifood", "99"]
+      "channels": ["whatsapp"]
     },
     {
       "id": "acai-trufado",
@@ -57,17 +55,17 @@
       "image": "assets/img/produtos/acai/acai-trufado-frutas-crocante-hero.png",
       "featured": true,
       "offer": true,
-      "priceLabel": "A partir de R$ 28,99",
+      "priceLabel": "A partir de R$ 16,00",
       "sizes": [
-        { "label": "300 ml", "price": 28.99 },
-        { "label": "400 ml", "price": 33.99 },
-        { "label": "500 ml", "price": 40.99 },
-        { "label": "700 ml", "price": 45.99 }
+        { "label": "300 ml", "price": 16.00 },
+        { "label": "400 ml", "price": 22.00 },
+        { "label": "500 ml", "price": 28.00 },
+        { "label": "700 ml", "price": 32.00 }
       ],
       "includes": [
         "Escolha 1 base de açaí",
         "Até 2 frutas nas opções exibidas",
-        "Acompanhamentos e caldas conforme tamanho e canal"
+        "Acompanhamentos e caldas conforme a montagem escolhida"
       ],
       "flavors": [
         "Açaí Natural",
@@ -83,10 +81,8 @@
         "Skimo chocolate meio amargo + R$ 4,00",
         "Skimo chocolate branco + R$ 4,00"
       ],
-      "notes": [
-        "No tamanho de 700 ml, a quantidade de acompanhamentos pode variar no iFood."
-      ],
-      "channels": ["whatsapp", "ifood", "99"]
+      "notes": [],
+      "channels": ["whatsapp"]
     },
     {
       "id": "milkshake-tradicional",
@@ -128,7 +124,7 @@
         "Acompanhamentos: paçoca, Ovomaltine, granulado, granulado colorido e leite em pó"
       ],
       "notes": [],
-      "channels": ["whatsapp", "ifood", "99"]
+      "channels": ["whatsapp"]
     },
     {
       "id": "milkshake-trufado",
@@ -139,12 +135,12 @@
       "image": "assets/img/produto-milkshake-sabores.png",
       "featured": true,
       "offer": false,
-      "priceLabel": "A partir de R$ 18,00",
+      "priceLabel": "A partir de R$ 16,00",
       "sizes": [
-        { "label": "300 ml", "price": 18.00 },
-        { "label": "400 ml", "price": 24.00 },
-        { "label": "500 ml", "price": 30.00 },
-        { "label": "700 ml", "price": 34.00 }
+        { "label": "300 ml", "price": 16.00 },
+        { "label": "400 ml", "price": 22.00 },
+        { "label": "500 ml", "price": 28.00 },
+        { "label": "700 ml", "price": 32.00 }
       ],
       "includes": [
         "1 cobertura incluída",
@@ -156,7 +152,7 @@
         "Coberturas e acompanhamentos extras + R$ 2,00 cada"
       ],
       "notes": [],
-      "channels": ["whatsapp", "ifood", "99"]
+      "channels": ["whatsapp"]
     },
     {
       "id": "sorvetes-e-picoles",
@@ -188,55 +184,46 @@
         "Chocolate branco com cookies"
       ],
       "extras": [],
-      "notes": ["Sabores sujeitos à disponibilidade na loja e nos aplicativos."],
-      "channels": ["whatsapp", "ifood", "99"]
+      "notes": ["Sabores sujeitos à disponibilidade na loja."],
+      "channels": ["whatsapp"]
     },
     {
-      "id": "acai-origem-15l",
+      "id": "batidao-acai-15l",
       "category": "familia",
-      "name": "Açaí Origem 1,5 L",
+      "name": "Batidão de Açaí",
       "shortName": "1,5 litro",
-      "description": "Uma opção prática para dividir em casa, montar suas combinações e deixar no freezer.",
+      "description": "Batidão de Açaí em embalagem de 1,5 L, uma opção prática para levar e dividir em casa.",
       "image": "assets/img/produtos/acai/acai-origem-garrafas.png",
       "featured": true,
       "offer": true,
-      "priceLabel": "R$ 49,99",
+      "priceLabel": "R$ 38,00",
       "sizes": [
-        { "label": "1,5 L", "price": 49.99 }
+        { "label": "1,5 L", "price": 38.00 }
       ],
       "includes": [],
-      "flavors": ["Açaí Origem"],
+      "flavors": ["Batidão de Açaí"],
       "extras": [],
       "notes": ["Consulte disponibilidade antes de pedir."],
-      "channels": ["whatsapp", "ifood"]
+      "channels": ["whatsapp"]
     },
     {
-      "id": "pote-premium-2l",
+      "id": "pote-2l-tradicional-mesclado",
       "category": "familia",
-      "name": "Pote Premium 2 L",
+      "name": "Pote 2 L Tradicional / Mesclado",
       "shortName": "Pote 2 L",
-      "description": "Potes premium para dividir, servir em casa ou garantir sobremesa para a família toda.",
+      "description": "Potes de sorvete de 2 L nas opções tradicional e mesclado, para levar e dividir.",
       "image": "assets/img/produtos/sorvetes/cone-supremo-caldas-escorrendo.png",
       "featured": false,
       "offer": false,
-      "priceLabel": "R$ 66,99",
+      "priceLabel": "A partir de R$ 38,00",
       "sizes": [
-        { "label": "2 L", "price": 66.99 }
+        { "label": "2 L", "price": 38.00 }
       ],
       "includes": [],
-      "flavors": [
-        "Camafeu ao Leite",
-        "Chocolate Maltado Crocante ao Leite",
-        "Delicielo de Avelã ao Leite",
-        "Iogurte com Amarena ao Leite",
-        "Leitinho Paris ao Leite",
-        "Leitinho Rochê ao Leite",
-        "Tentação de Leitinho ao Leite",
-        "Leitinho Trufado ao Leite"
-      ],
+      "flavors": ["Tradicional", "Mesclado"],
       "extras": [],
       "notes": ["Sabores sujeitos à disponibilidade."],
-      "channels": ["whatsapp", "ifood"]
+      "channels": ["whatsapp"]
     }
   ],
   "gallery": [

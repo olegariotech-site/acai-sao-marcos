@@ -1,7 +1,7 @@
 {
   "meta": {
     "brand": "Açaí do Dudu",
-    "updatedAt": "2026-08-11",
+    "updatedAt": "2026-08-13",
     "currency": "BRL",
     "whatsapp": "https://wa.me/5519991288849",
     "priceDisclaimer": "Preços e disponibilidade podem mudar. Consulte a loja pelo WhatsApp antes de concluir o pedido."
@@ -14,6 +14,34 @@
     { "id": "familia", "label": "Para levar" }
   ],
   "products": [
+    {
+      "id": "trio-do-dudu",
+      "category": "sorvetes",
+      "name": "Trio do Dudu",
+      "shortName": "Novidade · para viagem",
+      "description": "2 bolas de sorvete à sua escolha, casquinha e calda, preparadas em embalagem de isopor para levar. O desafio é chegar em casa sem provar.",
+      "image": "assets/img/produtos/sorvetes/trio-sobremesas-tropicais.png",
+      "video": "assets/video/trio-do-dudu.mp4",
+      "featured": true,
+      "offer": true,
+      "priceLabel": "R$ 15,00",
+      "sizes": [
+        { "label": "2 bolas + casquinha", "price": 15.00 }
+      ],
+      "includes": [
+        "2 bolas de sorvete",
+        "1 casquinha",
+        "Calda",
+        "Embalagem de isopor para viagem"
+      ],
+      "flavors": [],
+      "extras": [],
+      "notes": [
+        "Exclusivo para viagem.",
+        "Escolha os sabores disponíveis no dia."
+      ],
+      "channels": ["whatsapp"]
+    },
     {
       "id": "acai-natural",
       "category": "acai",

@@ -108,6 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
     modalWhatsapp: document.querySelector('[data-modal-whatsapp]')
   };
 
+  let modalVideo = null;
+
   const formatCurrency = (value) => new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL'
@@ -188,6 +190,25 @@ document.addEventListener('DOMContentLoaded', () => {
     return state.catalog.products.filter((product) => product.category === state.activeCategory);
   };
 
+  const productMediaTemplate = (product) => {
+    if (product.video) {
+      return `
+        <video
+          src="${escapeHTML(product.video)}"
+          aria-label="Vídeo de ${escapeHTML(product.name)}"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          style="width:100%;height:100%;object-fit:cover;"
+        ></video>
+      `;
+    }
+
+    return `<img src="${escapeHTML(product.image)}" alt="${escapeHTML(product.name)}" loading="lazy" decoding="async" />`;
+  };
+
   const productCardTemplate = (product) => `
     <article
       class="product-card"
@@ -198,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
       data-reveal
     >
       <div class="product-card-media">
-        <img src="${escapeHTML(product.image)}" alt="${escapeHTML(product.name)}" loading="lazy" decoding="async" />
+        ${productMediaTemplate(product)}
       </div>
       <div class="product-card-content">
         <span class="product-card-label">${escapeHTML(product.shortName || product.category)}</span>
@@ -245,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const firstSize = product.sizes?.[0];
       return `
         <button type="button" class="offer-card" data-offer-id="${escapeHTML(product.id)}">
-          <span>Preço em destaque</span>
+          <span>${product.id === 'trio-do-dudu' ? 'Novidade para viagem' : 'Preço em destaque'}</span>
           <div>
             <h3>${escapeHTML(product.name)}</h3>
             <strong class="offer-price">${firstSize ? formatCurrency(firstSize.price) : escapeHTML(product.priceLabel)}</strong>
@@ -283,6 +304,50 @@ document.addEventListener('DOMContentLoaded', () => {
     if (block) block.hidden = !visible;
   };
 
+  const ensureModalVideo = () => {
+    if (modalVideo || !elements.modalMedia?.parentElement) return modalVideo;
+
+    modalVideo = document.createElement('video');
+    modalVideo.setAttribute('data-modal-video', '');
+    modalVideo.muted = true;
+    modalVideo.loop = true;
+    modalVideo.playsInline = true;
+    modalVideo.controls = true;
+    modalVideo.preload = 'metadata';
+    modalVideo.hidden = true;
+    modalVideo.style.width = '100%';
+    modalVideo.style.height = '100%';
+    modalVideo.style.objectFit = 'cover';
+    modalVideo.style.background = '#31053f';
+    elements.modalMedia.parentElement.appendChild(modalVideo);
+    return modalVideo;
+  };
+
+  const setModalMedia = (product) => {
+    const video = ensureModalVideo();
+
+    if (product.video && video) {
+      elements.modalMedia.hidden = true;
+      elements.modalMedia.removeAttribute('src');
+      video.src = product.video;
+      video.hidden = false;
+      video.load();
+      video.play().catch(() => {});
+      return;
+    }
+
+    if (video) {
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+      video.hidden = true;
+    }
+
+    elements.modalMedia.hidden = false;
+    elements.modalMedia.src = product.image;
+    elements.modalMedia.alt = product.name;
+  };
+
   const openProduct = (productId, trigger) => {
     if (!state.catalog || !elements.modal) return;
     const product = state.catalog.products.find((item) => item.id === productId);
@@ -291,29 +356,33 @@ document.addEventListener('DOMContentLoaded', () => {
     state.activeProduct = product;
     state.lastFocused = trigger || document.activeElement;
 
-    elements.modalMedia.src = product.image;
-    elements.modalMedia.alt = product.name;
+    setModalMedia(product);
     elements.modalCategory.textContent = product.shortName || product.category;
     elements.modalTitle.textContent = product.name;
     elements.modalDescription.textContent = product.description;
 
-    elements.modalSizes.innerHTML = product.sizes.map((size) => `
+    elements.modalSizes.innerHTML = (product.sizes || []).map((size) => `
       <div class="size-item">
         <span>${escapeHTML(size.label)}</span>
         <strong>${formatCurrency(size.price)}</strong>
       </div>
     `).join('');
 
-    toggleBlock(elements.modalIncludesBlock, product.includes.length > 0);
-    elements.modalIncludes.innerHTML = product.includes.length ? listTemplate(product.includes) : '';
+    const includes = product.includes || [];
+    const flavors = product.flavors || [];
+    const extras = product.extras || [];
+    const productNotes = product.notes || [];
 
-    toggleBlock(elements.modalFlavorsBlock, product.flavors.length > 0);
-    elements.modalFlavors.innerHTML = product.flavors.length ? listTemplate(product.flavors, 'chip-list') : '';
+    toggleBlock(elements.modalIncludesBlock, includes.length > 0);
+    elements.modalIncludes.innerHTML = includes.length ? listTemplate(includes) : '';
 
-    toggleBlock(elements.modalExtrasBlock, product.extras.length > 0);
-    elements.modalExtras.innerHTML = product.extras.length ? listTemplate(product.extras) : '';
+    toggleBlock(elements.modalFlavorsBlock, flavors.length > 0);
+    elements.modalFlavors.innerHTML = flavors.length ? listTemplate(flavors, 'chip-list') : '';
 
-    const notes = [...product.notes, state.catalog.meta.priceDisclaimer].filter(Boolean);
+    toggleBlock(elements.modalExtrasBlock, extras.length > 0);
+    elements.modalExtras.innerHTML = extras.length ? listTemplate(extras) : '';
+
+    const notes = [...productNotes, state.catalog.meta.priceDisclaimer].filter(Boolean);
     elements.modalNotes.innerHTML = notes.map((note) => `<p>${escapeHTML(note)}</p>`).join('');
 
     elements.modalWhatsapp.href = buildWhatsAppUrl(product);
@@ -331,6 +400,11 @@ document.addEventListener('DOMContentLoaded', () => {
     elements.modal.classList.remove('open');
     elements.modal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('modal-open');
+
+    if (modalVideo) {
+      modalVideo.pause();
+    }
+
     state.lastFocused?.focus?.({ preventScroll: true });
     state.activeProduct = null;
   };

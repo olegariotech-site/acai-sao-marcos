@@ -1,10 +1,10 @@
 {
   "meta": {
     "brand": "Açaí do Dudu",
-    "updatedAt": "2026-08-13",
+    "updatedAt": "2026-08-14",
     "currency": "BRL",
     "whatsapp": "https://wa.me/5519991288849",
-    "priceDisclaimer": "Preços e disponibilidade podem mudar. Consulte a loja pelo WhatsApp antes de concluir o pedido."
+    "priceDisclaimer": "Preços e disponibilidade podem mudar. Confira as opções diretamente na loja."
   },
   "categories": [
     { "id": "destaques", "label": "Destaques" },
@@ -231,7 +231,7 @@
       "includes": [],
       "flavors": ["Batidão de Açaí"],
       "extras": [],
-      "notes": ["Consulte disponibilidade antes de pedir."],
+      "notes": ["Consulte a disponibilidade na loja."],
       "channels": ["whatsapp"]
     },
     {

@@ -26,6 +26,42 @@
   align-items: center;
 }
 
+/* Visual fallback: if the main hero image is late or fails, another local image remains behind it. */
+.hero-image-frame {
+  background-color: var(--purple-900);
+  background-image: url('../img/hero-copo-acai-morango.png?v=20260814-3');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.product-card-media,
+.modal-media,
+.gallery-item,
+.facade-image,
+.montagem-media {
+  background-color: var(--purple-900);
+}
+
+.hero-image-frame img,
+.product-card-media img,
+.gallery-item img,
+.facade-image img,
+.montagem-media img {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+@supports (-webkit-touch-callout: none) {
+  .hero-image-frame img,
+  .product-card-media img,
+  .gallery-item img,
+  .facade-image img,
+  .montagem-media img {
+    transform: translateZ(0);
+  }
+}
+
 @supports (padding: max(0px)) {
   .site-header {
     top: max(8px, env(safe-area-inset-top));

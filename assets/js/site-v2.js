@@ -57,6 +57,7 @@
       .modal-dialog {
         height: min(92dvh, 900px);
         max-height: 92dvh;
+        grid-template-rows: minmax(180px, 30dvh) minmax(0, 1fr);
       }
 
       .modal-content {

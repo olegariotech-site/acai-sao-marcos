@@ -153,8 +153,22 @@
     const revealRenderedFrame = () => {
       frameCallbackId = null;
       framePresented = true;
-      video.style.opacity = '1';
+      video.dataset.framePresented = '1';
       clearTimer();
+
+      if (video.matches('[data-modal-video]')) {
+        const modal = video.closest('.product-modal');
+        if (modal?.classList.contains('open')) {
+          window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+            if (video.dataset.mediaFallbackApplied !== '1' && modal.classList.contains('open')) {
+              video.style.opacity = '1';
+            }
+          }));
+        }
+        return;
+      }
+
+      video.style.opacity = '1';
     };
 
     const waitForRenderedFrame = () => {
@@ -192,6 +206,7 @@
       clearFrameCallback();
       started = false;
       framePresented = false;
+      delete video.dataset.framePresented;
       if (!hasSource()) return;
 
       delete video.dataset.mediaFallbackApplied;

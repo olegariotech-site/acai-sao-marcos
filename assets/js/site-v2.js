@@ -110,6 +110,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let modalVideo = null;
 
+  const waitForModalImage = (image, timeoutMs = 2500) => new Promise((resolve) => {
+    if (!(image instanceof HTMLImageElement)) {
+      resolve();
+      return;
+    }
+
+    let timeoutId;
+    const finish = () => {
+      window.clearTimeout(timeoutId);
+      image.removeEventListener('load', check);
+      image.removeEventListener('error', retry);
+      window.requestAnimationFrame(() => window.requestAnimationFrame(resolve));
+    };
+    const check = () => {
+      if (image.complete && image.naturalWidth > 0) finish();
+    };
+    const retry = () => window.setTimeout(check, 0);
+
+    if (image.complete && image.naturalWidth > 0) {
+      finish();
+      return;
+    }
+
+    image.addEventListener('load', check);
+    image.addEventListener('error', retry);
+    timeoutId = window.setTimeout(finish, timeoutMs);
+  });
+
   const formatCurrency = (value) => new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL'
@@ -382,7 +410,7 @@ document.addEventListener('DOMContentLoaded', () => {
     elements.modalMedia.alt = product.name;
   };
 
-  const openProduct = (productId, trigger) => {
+  const openProduct = async (productId, trigger) => {
     if (!state.catalog || !elements.modal) return;
     const product = state.catalog.products.find((item) => item.id === productId);
     if (!product) return;
@@ -421,10 +449,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     elements.modalWhatsapp.href = buildWhatsAppUrl(product);
 
+    await waitForModalImage(elements.modalMedia);
+    if (state.activeProduct !== product) return;
+
     elements.modal.classList.add('open');
     elements.modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
     window.setTimeout(() => elements.modalClose?.focus({ preventScroll: true }), 80);
+    window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+      if (
+        modalVideo?.dataset.framePresented === '1' &&
+        modalVideo.dataset.mediaFallbackApplied !== '1' &&
+        state.activeProduct === product
+      ) {
+        modalVideo.style.opacity = '1';
+      }
+    }));
 
     track('product_open', { product_id: product.id, product_name: product.name });
   };

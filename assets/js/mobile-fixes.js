@@ -3,6 +3,7 @@
   const FINAL_FALLBACK = 'assets/assetslogologo-acai-sao-marcos.png?v=20260815-1';
   const VIDEO_START_TIMEOUT_MS = 5500;
   const videoFallbackMap = new Map();
+  const videoFallbackControllers = new WeakMap();
 
   const normalizeMediaPath = (value = '') => String(value)
     .split('?')[0]
@@ -74,6 +75,21 @@
 
       try { video.pause(); } catch (_) {}
       video.hidden = true;
+      video.style.opacity = '0';
+      video.removeAttribute('src');
+      video.querySelectorAll('source').forEach((source) => source.removeAttribute('src'));
+      try { video.load(); } catch (_) {}
+      return;
+    }
+
+    const cardFallback = video.parentElement.querySelector('.product-video-fallback');
+    if (cardFallback instanceof HTMLImageElement) {
+      cardFallback.dataset.fallback = FINAL_FALLBACK;
+      cardFallback.src = fallbackSrc;
+      cardFallback.hidden = false;
+      try { video.pause(); } catch (_) {}
+      video.hidden = true;
+      video.style.opacity = '0';
       video.removeAttribute('src');
       video.querySelectorAll('source').forEach((source) => source.removeAttribute('src'));
       try { video.load(); } catch (_) {}
@@ -94,19 +110,31 @@
 
   const armVideoFallback = (video) => {
     if (!(video instanceof HTMLVideoElement)) return;
-    if (video.dataset.mediaFallbackBound === '1') return;
+
+    const existingController = videoFallbackControllers.get(video);
+    if (existingController) {
+      existingController.prepare();
+      return;
+    }
 
     video.dataset.mediaFallbackBound = '1';
+
+    const hasSource = () => Boolean(normalizeMediaPath(
+      video.currentSrc ||
+      video.getAttribute('src') ||
+      video.querySelector('source')?.getAttribute('src') ||
+      ''
+    ));
 
     const applyMappedFallback = () => {
       const fallbackSrc = getVideoFallback(video);
       video.dataset.fallback = fallbackSrc;
-      if (!video.getAttribute('poster')) video.setAttribute('poster', fallbackSrc);
+      if (video.getAttribute('poster') !== fallbackSrc) video.setAttribute('poster', fallbackSrc);
     };
 
-    applyMappedFallback();
-
     let started = false;
+    let framePresented = false;
+    let frameCallbackId = null;
     let timer = null;
 
     const clearTimer = () => {
@@ -116,37 +144,93 @@
       }
     };
 
+    const clearFrameCallback = () => {
+      if (frameCallbackId === null || typeof video.cancelVideoFrameCallback !== 'function') return;
+      try { video.cancelVideoFrameCallback(frameCallbackId); } catch (_) {}
+      frameCallbackId = null;
+    };
+
+    const revealRenderedFrame = () => {
+      frameCallbackId = null;
+      framePresented = true;
+      video.style.opacity = '1';
+      clearTimer();
+    };
+
+    const waitForRenderedFrame = () => {
+      if (typeof video.requestVideoFrameCallback !== 'function') {
+        revealRenderedFrame();
+        return;
+      }
+
+      clearFrameCallback();
+      try {
+        frameCallbackId = video.requestVideoFrameCallback(revealRenderedFrame);
+      } catch (_) {
+        revealRenderedFrame();
+      }
+    };
+
     const scheduleTimeoutFallback = () => {
       clearTimer();
+      if (!hasSource()) return;
+
       timer = window.setTimeout(() => {
         if (!video.isConnected || video.dataset.mediaFallbackApplied === '1') return;
 
         const hasRenderableFrame = video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA;
         const isActuallyPlaying = !video.paused && !video.ended;
 
-        if (!started || !hasRenderableFrame || !isActuallyPlaying) {
+        if (!started || !framePresented || !hasRenderableFrame || !isActuallyPlaying) {
           replaceBrokenVideo(video);
         }
       }, VIDEO_START_TIMEOUT_MS);
     };
 
-    video.addEventListener('loadedmetadata', applyMappedFallback, { once: true });
+    const prepare = () => {
+      clearTimer();
+      clearFrameCallback();
+      started = false;
+      framePresented = false;
+      if (!hasSource()) return;
+
+      delete video.dataset.mediaFallbackApplied;
+      if (
+        video.matches('[data-modal-video]') ||
+        video.parentElement?.querySelector('.product-video-fallback')
+      ) {
+        video.style.opacity = '0';
+      }
+      applyMappedFallback();
+      scheduleTimeoutFallback();
+    };
+
+    videoFallbackControllers.set(video, { prepare });
+
+    video.addEventListener('loadstart', prepare);
+    video.addEventListener('loadedmetadata', applyMappedFallback);
     video.addEventListener('playing', () => {
       started = true;
-      clearTimer();
-    }, { once: true });
+      waitForRenderedFrame();
+      if (!framePresented) scheduleTimeoutFallback();
+    });
     video.addEventListener('error', () => {
       clearTimer();
+      clearFrameCallback();
       replaceBrokenVideo(video);
-    }, { once: true });
+    });
     video.addEventListener('stalled', scheduleTimeoutFallback);
     video.addEventListener('waiting', scheduleTimeoutFallback);
     video.addEventListener('emptied', () => {
+      clearTimer();
+      clearFrameCallback();
+      started = false;
+      framePresented = false;
       if (video.matches('[data-modal-video]') && !document.body.classList.contains('modal-open')) return;
       scheduleTimeoutFallback();
     });
 
-    scheduleTimeoutFallback();
+    prepare();
   };
 
   const armMediaInScope = (scope = document) => {
@@ -199,7 +283,7 @@
         if (
           mutation.type === 'attributes' &&
           mutation.target instanceof HTMLVideoElement &&
-          ['src', 'poster'].includes(mutation.attributeName)
+          mutation.attributeName === 'src'
         ) {
           armVideoFallback(mutation.target);
         }
@@ -210,7 +294,7 @@
       childList: true,
       subtree: true,
       attributes: true,
-      attributeFilter: ['src', 'poster']
+      attributeFilter: ['src']
     });
   };
 

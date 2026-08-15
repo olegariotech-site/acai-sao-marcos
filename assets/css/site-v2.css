@@ -325,11 +325,14 @@ button {
   color: var(--white);
   background: linear-gradient(145deg, var(--purple-950), var(--purple-800));
   transform: translateY(-105%);
-  transition: transform .38s var(--ease);
+  visibility: hidden;
+  transition: transform .38s var(--ease), visibility 0s linear .38s;
 }
 
 body.menu-open .mobile-menu {
   transform: translateY(0);
+  visibility: visible;
+  transition-delay: 0s;
 }
 
 .mobile-menu-top {
@@ -722,6 +725,14 @@ body.menu-open .mobile-menu {
   height: 100%;
   object-fit: cover;
   transition: transform .55s var(--ease);
+}
+
+.product-card-media video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .product-card:hover .product-card-media img {
@@ -1198,11 +1209,16 @@ body.menu-open .mobile-menu {
 }
 
 .modal-media {
+  position: relative;
   min-height: 100%;
+  overflow: hidden;
   background: var(--purple-900);
 }
 
-.modal-media img {
+.modal-media img,
+.modal-media video {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;

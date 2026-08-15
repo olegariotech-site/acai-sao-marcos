@@ -57,6 +57,7 @@
       .modal-dialog {
         height: min(92dvh, 900px);
         max-height: 92dvh;
+        grid-template-rows: minmax(180px, 30dvh) minmax(0, 1fr);
       }
 
       .modal-content {
@@ -110,6 +111,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let modalVideo = null;
 
+  const waitForModalImage = (image, timeoutMs = 2500) => new Promise((resolve) => {
+    if (!(image instanceof HTMLImageElement)) {
+      resolve();
+      return;
+    }
+
+    let timeoutId;
+    const finish = () => {
+      window.clearTimeout(timeoutId);
+      image.removeEventListener('load', check);
+      image.removeEventListener('error', retry);
+      window.requestAnimationFrame(() => window.requestAnimationFrame(resolve));
+    };
+    const check = () => {
+      if (image.complete && image.naturalWidth > 0) finish();
+    };
+    const retry = () => window.setTimeout(check, 0);
+
+    if (image.complete && image.naturalWidth > 0) {
+      finish();
+      return;
+    }
+
+    image.addEventListener('load', check);
+    image.addEventListener('error', retry);
+    timeoutId = window.setTimeout(finish, timeoutMs);
+  });
+
   const formatCurrency = (value) => new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL'
@@ -127,13 +156,15 @@ document.addEventListener('DOMContentLoaded', () => {
     window.dataLayer.push({ event: eventName, ...payload });
   };
 
-  const setMenu = (open) => {
+  const setMenu = (open, { restoreFocus = true } = {}) => {
+    const wasOpen = document.body.classList.contains('menu-open');
     document.body.classList.toggle('menu-open', open);
     elements.mobileMenu?.setAttribute('aria-hidden', String(!open));
+    elements.mobileMenu?.toggleAttribute('inert', !open);
     elements.menuToggle?.setAttribute('aria-expanded', String(open));
     if (open) {
-      elements.menuClose?.focus({ preventScroll: true });
-    } else {
+      window.setTimeout(() => elements.menuClose?.focus({ preventScroll: true }), 400);
+    } else if (wasOpen && restoreFocus) {
       elements.menuToggle?.focus({ preventScroll: true });
     }
   };
@@ -148,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const target = document.querySelector(href);
       if (!target) return;
       event.preventDefault();
-      setMenu(false);
+      setMenu(false, { restoreFocus: false });
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
@@ -193,15 +224,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const productMediaTemplate = (product) => {
     if (product.video) {
       return `
+        <img
+          class="product-video-fallback"
+          src="${escapeHTML(product.image)}"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+        />
         <video
           src="${escapeHTML(product.video)}"
+          poster="${escapeHTML(product.image)}"
+          data-fallback="${escapeHTML(product.image)}"
           aria-label="Vídeo de ${escapeHTML(product.name)}"
           autoplay
           muted
           loop
           playsinline
           preload="metadata"
-          style="width:100%;height:100%;object-fit:cover;"
+          style="width:100%;height:100%;object-fit:cover;opacity:0;"
         ></video>
       `;
     }
@@ -315,10 +356,13 @@ document.addEventListener('DOMContentLoaded', () => {
     modalVideo.controls = true;
     modalVideo.preload = 'metadata';
     modalVideo.hidden = true;
+    modalVideo.style.position = 'absolute';
+    modalVideo.style.inset = '0';
     modalVideo.style.width = '100%';
     modalVideo.style.height = '100%';
     modalVideo.style.objectFit = 'cover';
     modalVideo.style.background = '#31053f';
+    modalVideo.style.opacity = '0';
     elements.modalMedia.parentElement.appendChild(modalVideo);
     return modalVideo;
   };
@@ -327,8 +371,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const video = ensureModalVideo();
 
     if (product.video && video) {
-      elements.modalMedia.hidden = true;
-      elements.modalMedia.removeAttribute('src');
+      video.pause();
+      video.hidden = true;
+      video.removeAttribute('src');
+      video.load();
+
+      elements.modalMedia.dataset.mediaFallbackStep = '0';
+      elements.modalMedia.dataset.fallback = 'assets/assetslogologo-acai-sao-marcos.png?v=20260815-1';
+      elements.modalMedia.src = product.image;
+      elements.modalMedia.alt = product.name;
+      elements.modalMedia.hidden = false;
+
+      delete video.dataset.mediaFallbackApplied;
+      video.dataset.fallback = product.image;
+      video.poster = product.image;
+      video.setAttribute('aria-label', `Vídeo de ${product.name}`);
+      video.style.opacity = '0';
       video.src = product.video;
       video.hidden = false;
       video.load();
@@ -341,14 +399,19 @@ document.addEventListener('DOMContentLoaded', () => {
       video.removeAttribute('src');
       video.load();
       video.hidden = true;
+      video.style.opacity = '0';
+      delete video.dataset.mediaFallbackApplied;
+      video.removeAttribute('poster');
+      delete video.dataset.fallback;
     }
 
+    elements.modalMedia.dataset.mediaFallbackStep = '0';
     elements.modalMedia.hidden = false;
     elements.modalMedia.src = product.image;
     elements.modalMedia.alt = product.name;
   };
 
-  const openProduct = (productId, trigger) => {
+  const openProduct = async (productId, trigger) => {
     if (!state.catalog || !elements.modal) return;
     const product = state.catalog.products.find((item) => item.id === productId);
     if (!product) return;
@@ -387,10 +450,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     elements.modalWhatsapp.href = buildWhatsAppUrl(product);
 
+    await waitForModalImage(elements.modalMedia);
+    if (state.activeProduct !== product) return;
+
     elements.modal.classList.add('open');
     elements.modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
     window.setTimeout(() => elements.modalClose?.focus({ preventScroll: true }), 80);
+    window.requestAnimationFrame(() => window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+      if (
+        modalVideo?.dataset.framePresented === '1' &&
+        modalVideo.dataset.mediaFallbackApplied !== '1' &&
+        state.activeProduct === product
+      ) {
+        modalVideo.style.opacity = '1';
+      }
+    })));
 
     track('product_open', { product_id: product.id, product_name: product.name });
   };
@@ -403,6 +478,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (modalVideo) {
       modalVideo.pause();
+      modalVideo.hidden = true;
+      modalVideo.style.opacity = '0';
+      modalVideo.removeAttribute('src');
+      modalVideo.load();
     }
 
     state.lastFocused?.focus?.({ preventScroll: true });
@@ -422,6 +501,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (event.key === 'Tab' && elements.modal?.classList.contains('open')) {
       const focusable = [...elements.modalDialog.querySelectorAll('button, a[href], [tabindex]:not([tabindex="-1"])')]
+        .filter((item) => !item.disabled && item.offsetParent !== null);
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    if (event.key === 'Tab' && document.body.classList.contains('menu-open')) {
+      const focusable = [...elements.mobileMenu.querySelectorAll('button, a[href], [tabindex]:not([tabindex="-1"])')]
         .filter((item) => !item.disabled && item.offsetParent !== null);
       if (!focusable.length) return;
       const first = focusable[0];

@@ -1,0 +1,28 @@
+name: Validar caminhos de mídia
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - site-premium-v2
+      - 'fix/**'
+      - 'feat/**'
+
+permissions:
+  contents: read
+
+jobs:
+  media-paths:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Validar referências de mídia
+        run: node tools/check-media-paths.mjs

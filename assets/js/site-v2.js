@@ -456,7 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
     elements.modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
     window.setTimeout(() => elements.modalClose?.focus({ preventScroll: true }), 80);
-    window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
       if (
         modalVideo?.dataset.framePresented === '1' &&
         modalVideo.dataset.mediaFallbackApplied !== '1' &&
@@ -464,7 +464,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ) {
         modalVideo.style.opacity = '1';
       }
-    }));
+    })));
 
     track('product_open', { product_id: product.id, product_name: product.name });
   };

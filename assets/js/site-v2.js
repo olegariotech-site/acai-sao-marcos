@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
     elements.mobileMenu?.toggleAttribute('inert', !open);
     elements.menuToggle?.setAttribute('aria-expanded', String(open));
     if (open) {
-      elements.menuClose?.focus({ preventScroll: true });
+      window.setTimeout(() => elements.menuClose?.focus({ preventScroll: true }), 400);
     } else if (wasOpen && restoreFocus) {
       elements.menuToggle?.focus({ preventScroll: true });
     }

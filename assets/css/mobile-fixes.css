@@ -1,4 +1,4 @@
-/* Mobile hardening: Android Chrome and iOS Safari */
+/* Cross-platform hardening: desktop, Android Chrome and iOS Safari */
 
 .button,
 .icon-button,
@@ -6,6 +6,7 @@
 .offer-card,
 .product-card,
 .whatsapp-float,
+.whatsapp-contact-float,
 .mobile-menu nav a {
   touch-action: manipulation;
 }
@@ -29,7 +30,7 @@
 /* Visual fallback: if the main hero image is late or fails, another local image remains behind it. */
 .hero-image-frame {
   background-color: var(--purple-900);
-  background-image: url('../img/hero-copo-acai-morango.png?v=20260814-3');
+  background-image: url('../img/hero-copo-acai-morango.png?v=20260816-2');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -52,11 +53,30 @@
   backface-visibility: hidden;
 }
 
-/* Keep product videos visible. Fallback is only applied on a real media error. */
-.product-card-media video,
-.modal-media video,
-[data-modal-video] {
+/* Product video stays above its poster; the poster remains available as a real fallback. */
+.product-card-media video {
   opacity: 1 !important;
+}
+
+/* Critical modal rule: never let an empty hidden video cover a normal product image. */
+.modal-media [data-modal-video][hidden],
+.modal-media [data-modal-video]:not([src]) {
+  display: none !important;
+  opacity: 0 !important;
+}
+
+.modal-media [data-modal-video]:not([hidden])[src] {
+  display: block !important;
+  opacity: 1 !important;
+}
+
+.modal-media [data-modal-media][hidden] {
+  display: none !important;
+}
+
+.modal-media [data-modal-media]:not([hidden]) {
+  display: block;
+  visibility: visible;
 }
 
 /* Keep the family bar fully outside the hero and visually connect it to offers. */
@@ -69,6 +89,66 @@
 /* The global section spacing is generous; offers need a tighter top rhythm after the quick bar. */
 .offers {
   padding-top: clamp(36px, 4.5vw, 56px) !important;
+}
+
+/* Two clear floating actions: route in purple, WhatsApp in green. */
+.whatsapp-float {
+  background: var(--purple-800) !important;
+  box-shadow: 0 18px 44px rgba(78, 15, 96, .28) !important;
+}
+
+.whatsapp-contact-float {
+  position: fixed;
+  right: 18px;
+  bottom: 88px;
+  z-index: 901;
+  min-height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 18px;
+  color: #fff;
+  background: #20c865;
+  border-radius: 999px;
+  box-shadow: 0 18px 44px rgba(32, 200, 101, .32);
+  font-size: .84rem;
+  font-weight: 900;
+  line-height: 1;
+  transition: transform .25s var(--ease), box-shadow .25s ease;
+}
+
+.whatsapp-contact-float:hover,
+.whatsapp-contact-float:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 50px rgba(32, 200, 101, .4);
+}
+
+.whatsapp-contact-float:focus-visible {
+  outline: 3px solid var(--yellow-500);
+  outline-offset: 3px;
+}
+
+.whatsapp-contact-float svg {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+}
+
+.button-whatsapp {
+  color: #fff !important;
+  background: #20c865 !important;
+  box-shadow: 0 14px 30px rgba(32, 200, 101, .2);
+}
+
+.button-whatsapp:hover,
+.button-whatsapp:focus-visible {
+  box-shadow: 0 18px 36px rgba(32, 200, 101, .3);
+}
+
+.modal-actions .button {
+  min-width: 0;
+  flex: 1 1 190px;
 }
 
 @supports (-webkit-touch-callout: none) {
@@ -98,6 +178,11 @@
     bottom: max(18px, calc(env(safe-area-inset-bottom) + 12px));
   }
 
+  .whatsapp-contact-float {
+    right: max(18px, calc(env(safe-area-inset-right) + 12px));
+    bottom: max(88px, calc(env(safe-area-inset-bottom) + 82px));
+  }
+
   @media (max-width: 760px) {
     .modal-actions {
       padding-bottom: max(22px, calc(env(safe-area-inset-bottom) + 14px)) !important;
@@ -114,9 +199,32 @@
   .offers {
     padding-top: 30px !important;
   }
+
+  .whatsapp-contact-float {
+    min-height: 52px;
+    padding: 0 15px;
+    font-size: .8rem;
+  }
+
+  .modal-dialog {
+    height: 92vh;
+    height: 92dvh;
+    max-height: 92vh;
+    max-height: 92dvh;
+  }
+
+  .modal-media {
+    min-height: 190px !important;
+    max-height: 30vh;
+    max-height: 30dvh;
+  }
+
+  .modal-actions {
+    gap: 8px;
+  }
 }
 
-@media (max-width: 390px) {
+@media (max-width: 520px) {
   .modal-actions {
     display: grid;
     grid-template-columns: 1fr;
@@ -124,5 +232,18 @@
 
   .modal-actions .button {
     width: 100%;
+  }
+
+  .whatsapp-contact-float {
+    max-width: calc(100vw - 96px);
+  }
+}
+
+@media (max-width: 390px) {
+  .whatsapp-contact-float span {
+    max-width: 118px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }

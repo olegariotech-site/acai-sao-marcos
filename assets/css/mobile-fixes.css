@@ -5,6 +5,8 @@
 .category-button,
 .offer-card,
 .product-card,
+.quick-item,
+.sergel-card,
 .whatsapp-float,
 .whatsapp-contact-float,
 .mobile-menu nav a {
@@ -84,6 +86,32 @@
   margin-top: 0 !important;
   padding-top: 18px;
   background: var(--cream-50);
+}
+
+/* Quick cards are real actions: visual behavior must match their click behavior. */
+.quick-item[role='button'] {
+  cursor: pointer;
+  transition: background .2s ease, transform .2s var(--ease), box-shadow .2s ease;
+}
+
+.quick-item[role='button']:hover {
+  background: rgba(78, 15, 96, .035);
+}
+
+.quick-item[role='button']:focus-visible,
+.sergel-card[role='link']:focus-visible {
+  position: relative;
+  z-index: 2;
+  outline: 3px solid var(--yellow-500);
+  outline-offset: -3px;
+}
+
+.sergel-card[role='link'] {
+  cursor: pointer;
+}
+
+.sergel-card[role='link']:focus-visible {
+  box-shadow: 0 20px 48px rgba(49, 5, 63, .2);
 }
 
 /* The global section spacing is generous; offers need a tighter top rhythm after the quick bar. */

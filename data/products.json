@@ -35,6 +35,27 @@
       "channels": ["whatsapp"]
     },
     {
+      "id": "agua-de-coco-gelada",
+      "category": "familia",
+      "name": "Água de Coco Gelada",
+      "shortName": "No coco ou para viagem",
+      "description": "Refrescante, gelada e com aquele sabor leve que combina com qualquer hora. Tome no coco ou leve para viagem em 500 ml ou 1 litro.",
+      "image": "assets/img/produtos/agua-de-coco-dudu-hero.png",
+      "featured": true,
+      "offer": true,
+      "priceLabel": "A partir de R$ 10,00",
+      "sizes": [
+        { "label": "No coco", "price": 10.00 },
+        { "label": "500 ml para viagem", "price": 10.00 },
+        { "label": "1 L para viagem", "price": 20.00 }
+      ],
+      "includes": [],
+      "flavors": [],
+      "extras": [],
+      "notes": ["Disponibilidade sujeita ao estoque do dia."],
+      "channels": ["whatsapp"]
+    },
+    {
       "id": "acai-natural",
       "category": "acai",
       "name": "Açaí Natural",

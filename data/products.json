@@ -56,6 +56,25 @@
       "channels": ["whatsapp"]
     },
     {
+      "id": "pote-tradicional-dudu-2l",
+      "category": "familia",
+      "name": "Pote Tradicional do Dudu",
+      "shortName": "2 Litros · da casa",
+      "description": "Dois litros para levar para casa e deixar a sobremesa garantida no freezer. Cremoso, caprichado e ideal para compartilhar.",
+      "image": "assets/img/produtos/pote-tradicional-dudu-2l-hero.png",
+      "featured": true,
+      "offer": true,
+      "priceLabel": "R$ 38,00",
+      "sizes": [
+        { "label": "2 L", "price": 38.00 }
+      ],
+      "includes": ["Pote de 2 litros", "Produto da casa", "Ideal para compartilhar e levar"],
+      "flavors": [],
+      "extras": [],
+      "notes": ["Consulte os sabores disponíveis na loja."],
+      "channels": ["whatsapp"]
+    },
+    {
       "id": "acai-natural",
       "category": "acai",
       "name": "Açaí Natural",

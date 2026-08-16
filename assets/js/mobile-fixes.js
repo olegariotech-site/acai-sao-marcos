@@ -134,7 +134,7 @@
 
   const replaceBrokenVideo = (video) => {
     if (!(video instanceof HTMLVideoElement)) return;
-    const fallbackSrc = video.getAttribute('poster') || video.dataset.fallback || PRIMARY_FALLBACK;
+    const fallbackSrc = video.dataset.fallback || video.getAttribute('poster') || PRIMARY_FALLBACK;
     try { video.pause(); } catch (_) {}
     video.dataset.mediaFallbackApplied = '1';
     video.hidden = true;

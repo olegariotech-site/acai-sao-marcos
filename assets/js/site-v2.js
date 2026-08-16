@@ -221,21 +221,27 @@ document.addEventListener('DOMContentLoaded', () => {
     return state.catalog.products.filter((product) => product.category === state.activeCategory);
   };
 
+  const productImageTemplate = (product, { alt = product.name, className = '', ariaHidden = false } = {}) => {
+    const fallback = product.imageFallback || product.image;
+    const sourceWidth = Number(product.imageWidth) || 0;
+    const mobileWidth = Number(product.imageMobileWidth) || 0;
+    const canUseResponsive = product.imageMobile && sourceWidth > 0 && mobileWidth > 0 && mobileWidth < sourceWidth;
+    const srcset = canUseResponsive
+      ? ` srcset="${escapeHTML(product.imageMobile)} ${mobileWidth}w, ${escapeHTML(product.image)} ${sourceWidth}w" sizes="(max-width: 760px) 92vw, (max-width: 1060px) 48vw, 32vw"`
+      : '';
+    const classAttr = className ? ` class="${escapeHTML(className)}"` : '';
+    const hiddenAttr = ariaHidden ? ' aria-hidden="true"' : '';
+    return `<img${classAttr} src="${escapeHTML(product.image)}"${srcset} data-fallback="${escapeHTML(fallback)}" alt="${escapeHTML(alt)}"${hiddenAttr} loading="lazy" decoding="async" />`;
+  };
+
   const productMediaTemplate = (product) => {
     if (product.video) {
       return `
-        <img
-          class="product-video-fallback"
-          src="${escapeHTML(product.image)}"
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          decoding="async"
-        />
+        ${productImageTemplate(product, { alt: '', className: 'product-video-fallback', ariaHidden: true })}
         <video
           src="${escapeHTML(product.video)}"
           poster="${escapeHTML(product.image)}"
-          data-fallback="${escapeHTML(product.image)}"
+          data-fallback="${escapeHTML(product.imageFallback || product.image)}"
           aria-label="Vídeo de ${escapeHTML(product.name)}"
           autoplay
           muted
@@ -247,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
     }
 
-    return `<img src="${escapeHTML(product.image)}" alt="${escapeHTML(product.name)}" loading="lazy" decoding="async" />`;
+    return productImageTemplate(product);
   };
 
   const productCardTemplate = (product) => `
@@ -324,11 +330,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const renderGallery = () => {
     if (!state.catalog || !elements.galleryGrid) return;
-    elements.galleryGrid.innerHTML = state.catalog.gallery.map((item) => `
-      <figure class="gallery-item" data-reveal>
-        <img src="${escapeHTML(item.src)}" alt="${escapeHTML(item.alt)}" loading="lazy" decoding="async" />
-      </figure>
-    `).join('');
+    elements.galleryGrid.innerHTML = state.catalog.gallery.map((item) => {
+      const sourceWidth = Number(item.width) || 0;
+      const mobileWidth = Number(item.mobileWidth) || 0;
+      const canUseResponsive = item.mobileSrc && sourceWidth > 0 && mobileWidth > 0 && mobileWidth < sourceWidth;
+      const srcset = canUseResponsive
+        ? ` srcset="${escapeHTML(item.mobileSrc)} ${mobileWidth}w, ${escapeHTML(item.src)} ${sourceWidth}w" sizes="(max-width: 760px) 92vw, 40vw"`
+        : '';
+      return `
+        <figure class="gallery-item" data-reveal>
+          <img src="${escapeHTML(item.src)}"${srcset} data-fallback="${escapeHTML(item.fallback || item.src)}" alt="${escapeHTML(item.alt)}" loading="lazy" decoding="async" />
+        </figure>
+      `;
+    }).join('');
     observeReveals(elements.galleryGrid);
   };
 
@@ -377,13 +391,13 @@ document.addEventListener('DOMContentLoaded', () => {
       video.load();
 
       elements.modalMedia.dataset.mediaFallbackStep = '0';
-      elements.modalMedia.dataset.fallback = 'assets/assetslogologo-acai-sao-marcos.png?v=20260815-1';
+      elements.modalMedia.dataset.fallback = product.imageFallback || 'assets/assetslogologo-acai-sao-marcos.png?v=20260815-1';
       elements.modalMedia.src = product.image;
       elements.modalMedia.alt = product.name;
       elements.modalMedia.hidden = false;
 
       delete video.dataset.mediaFallbackApplied;
-      video.dataset.fallback = product.image;
+      video.dataset.fallback = product.imageFallback || product.image;
       video.poster = product.image;
       video.setAttribute('aria-label', `Vídeo de ${product.name}`);
       video.style.opacity = '0';
@@ -406,6 +420,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     elements.modalMedia.dataset.mediaFallbackStep = '0';
+    elements.modalMedia.dataset.fallback = product.imageFallback || 'assets/assetslogologo-acai-sao-marcos.png?v=20260815-1';
     elements.modalMedia.hidden = false;
     elements.modalMedia.src = product.image;
     elements.modalMedia.alt = product.name;

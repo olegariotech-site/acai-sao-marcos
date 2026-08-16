@@ -9,6 +9,8 @@
     'acai-trufado': 'acai'
   };
 
+  const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
+
   const escapeSelector = (value = '') => {
     if (window.CSS && typeof window.CSS.escape === 'function') return window.CSS.escape(String(value));
     return String(value).replace(/[^a-zA-Z0-9_-]/g, '\\$&');
@@ -16,6 +18,92 @@
 
   const afterPaint = (callback) => {
     window.requestAnimationFrame(() => window.requestAnimationFrame(callback));
+  };
+
+  const installPremiumMotionStyles = () => {
+    if (document.getElementById('ot-premium-motion')) return;
+
+    const style = document.createElement('style');
+    style.id = 'ot-premium-motion';
+    style.textContent = `
+      :root {
+        --ease-silk: cubic-bezier(.22, .61, .36, 1);
+        --shadow-cinema: 0 32px 86px rgba(34, 4, 45, .24);
+        --shadow-glow: 0 14px 34px rgba(110, 36, 125, .22);
+      }
+
+      [data-reveal] {
+        transition-delay: var(--reveal-delay, 0ms);
+        transition-timing-function: var(--ease-silk);
+      }
+
+      .product-card,
+      .offer-card,
+      .sergel-card,
+      .button,
+      .category-button {
+        transition-timing-function: var(--ease-silk);
+      }
+
+      .product-card-cta {
+        transition: transform .35s var(--ease-silk), box-shadow .35s ease;
+      }
+
+      .product-card:hover .product-card-cta {
+        transform: rotate(90deg) scale(1.06);
+        box-shadow: var(--shadow-glow);
+      }
+
+      .category-button.active {
+        box-shadow: 0 10px 25px rgba(78, 15, 96, .2), 0 0 0 1px rgba(255, 255, 255, .16) inset;
+      }
+
+      :where(a, button, [role='button'], [role='link']):focus-visible {
+        outline: 3px solid var(--yellow-500);
+        outline-offset: 3px;
+      }
+
+      @keyframes ot-parallax-rise {
+        from { transform: translate3d(0, -3%, 0) scale(1.07); }
+        to { transform: translate3d(0, 4%, 0) scale(1.07); }
+      }
+
+      @supports (animation-timeline: view()) {
+        @media (prefers-reduced-motion: no-preference) {
+          .facade-image img {
+            animation: ot-parallax-rise linear both;
+            animation-timeline: view();
+            animation-range: cover 5% cover 95%;
+            transform-origin: center;
+          }
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto !important; }
+
+        [data-reveal] {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+
+        .product-card,
+        .offer-card,
+        .sergel-card,
+        .button,
+        .category-button,
+        .product-card-cta,
+        .hero-image-frame img,
+        .facade-image img,
+        .montagem-main-image {
+          animation: none !important;
+          transition: none !important;
+          transform: none;
+        }
+      }
+    `;
+    document.head.appendChild(style);
   };
 
   const applyImageFallback = (img) => {
@@ -89,6 +177,34 @@
     });
   };
 
+  const assignRevealDelays = (scope = document) => {
+    const containers = [];
+    if (scope instanceof Element && scope.matches('.product-grid, .gallery-grid, .sergel-grid')) containers.push(scope);
+    scope.querySelectorAll?.('.product-grid, .gallery-grid, .sergel-grid').forEach((container) => containers.push(container));
+
+    containers.forEach((container) => {
+      [...container.children].forEach((item, index) => {
+        if (!(item instanceof HTMLElement) || !item.matches('[data-reveal]')) return;
+        item.style.setProperty('--reveal-delay', `${(index % 3) * 80}ms`);
+      });
+    });
+  };
+
+  const enhanceAccessibility = (scope = document) => {
+    scope.querySelectorAll?.('.product-loading').forEach((status) => {
+      status.setAttribute('role', 'status');
+      status.setAttribute('aria-live', 'polite');
+      status.setAttribute('aria-atomic', 'true');
+    });
+
+    const modalDescription = document.querySelector('[data-modal-description]');
+    const modalDialog = document.querySelector('.modal-dialog');
+    if (modalDescription instanceof HTMLElement && modalDialog instanceof HTMLElement) {
+      modalDescription.id ||= 'modal-product-description';
+      modalDialog.setAttribute('aria-describedby', modalDescription.id);
+    }
+  };
+
   const watchDynamicMedia = () => {
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
@@ -96,6 +212,8 @@
           if (!(node instanceof Element)) return;
           if (node.matches('img') && node.complete && node.naturalWidth === 0) applyImageFallback(node);
           recoverBrokenImages(node);
+          assignRevealDelays(node.parentElement || node);
+          enhanceAccessibility(node.parentElement || node);
         });
       });
     });
@@ -134,6 +252,14 @@
     `[data-category="${escapeSelector(categoryId)}"]`
   );
 
+  const centerCategoryButton = (button) => {
+    if (!(button instanceof HTMLElement)) return;
+    const rail = button.closest('.category-rail');
+    if (!(rail instanceof HTMLElement)) return;
+    const left = button.offsetLeft - ((rail.clientWidth - button.offsetWidth) / 2);
+    rail.scrollTo({ left: Math.max(0, left), behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+  };
+
   const scrollToCatalogProducts = () => {
     const grid = document.querySelector('[data-product-grid]');
     const firstCard = grid?.querySelector('[data-product-id]');
@@ -145,9 +271,9 @@
     const offset = headerHeight + Math.min(categoryHeight, 72) + 36;
     const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - offset);
 
-    window.scrollTo({ top, behavior: 'smooth' });
+    window.scrollTo({ top, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
 
-    if (firstCard instanceof HTMLElement && typeof firstCard.animate === 'function') {
+    if (!prefersReducedMotion() && firstCard instanceof HTMLElement && typeof firstCard.animate === 'function') {
       firstCard.animate([
         { boxShadow: '0 0 0 0 rgba(110, 36, 125, 0)' },
         { boxShadow: '0 0 0 5px rgba(110, 36, 125, .22)' },
@@ -159,7 +285,7 @@
   const activateCategory = (categoryId, { scroll = true } = {}) => {
     const button = getCategoryButton(categoryId);
     if (!(button instanceof HTMLElement)) {
-      if (scroll) document.querySelector('#cardapio')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (scroll) document.querySelector('#cardapio')?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
       return false;
     }
 
@@ -225,6 +351,7 @@
         if (!activeButton?.classList.contains('active')) {
           console.warn(`[Açaí do Dudu] Categoria não ativada após clique: ${requestedCategory}`);
         }
+        centerCategoryButton(activeButton);
         scrollToCatalogProducts();
       });
     });
@@ -309,7 +436,10 @@
   };
 
   document.addEventListener('DOMContentLoaded', () => {
+    installPremiumMotionStyles();
     recoverBrokenImages();
+    assignRevealDelays();
+    enhanceAccessibility();
     watchDynamicMedia();
     installWhatsAppActions();
     installQuickRouting();

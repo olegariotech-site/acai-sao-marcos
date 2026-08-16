@@ -28,18 +28,10 @@
       "sizes": [
         { "label": "2 bolas + casquinha", "price": 15.00 }
       ],
-      "includes": [
-        "2 bolas de sorvete",
-        "1 casquinha",
-        "Calda",
-        "Embalagem de isopor para viagem"
-      ],
+      "includes": ["2 bolas de sorvete", "1 casquinha", "Calda", "Embalagem de isopor para viagem"],
       "flavors": [],
       "extras": [],
-      "notes": [
-        "Exclusivo para viagem.",
-        "Escolha os sabores disponíveis no dia."
-      ],
+      "notes": ["Exclusivo para viagem.", "Escolha os sabores disponíveis no dia."],
       "channels": ["whatsapp"]
     },
     {
@@ -58,19 +50,10 @@
         { "label": "500 ml", "price": 28.00 },
         { "label": "700 ml", "price": 32.00 }
       ],
-      "includes": [
-        "1 opção obrigatória de Açaí Natural",
-        "Até 2 frutas nas opções exibidas no cardápio",
-        "Acompanhamentos e caldas conforme a montagem escolhida"
-      ],
+      "includes": ["1 opção obrigatória de Açaí Natural", "Até 2 frutas nas opções exibidas no cardápio", "Acompanhamentos e caldas conforme a montagem escolhida"],
       "flavors": ["Morango", "Uva-verde sem semente", "Manga"],
-      "extras": [
-        "Skimo chocolate meio amargo + R$ 4,00",
-        "Skimo chocolate branco + R$ 4,00"
-      ],
-      "notes": [
-        "As opções e os limites de escolha podem variar por tamanho."
-      ],
+      "extras": ["Skimo chocolate meio amargo + R$ 4,00", "Skimo chocolate branco + R$ 4,00"],
+      "notes": ["As opções e os limites de escolha podem variar por tamanho."],
       "channels": ["whatsapp"]
     },
     {
@@ -89,25 +72,9 @@
         { "label": "500 ml", "price": 28.00 },
         { "label": "700 ml", "price": 32.00 }
       ],
-      "includes": [
-        "Escolha 1 base de açaí",
-        "Até 2 frutas nas opções exibidas",
-        "Acompanhamentos e caldas conforme a montagem escolhida"
-      ],
-      "flavors": [
-        "Açaí Natural",
-        "Trufado de Ninho",
-        "Trufado de Nutella",
-        "Trufado de Danone",
-        "Trufado de Maracujá",
-        "Açaí com Cupuaçu",
-        "Cupuaçu"
-      ],
-      "extras": [
-        "Nutella + R$ 10,00",
-        "Skimo chocolate meio amargo + R$ 4,00",
-        "Skimo chocolate branco + R$ 4,00"
-      ],
+      "includes": ["Escolha 1 base de açaí", "Até 2 frutas nas opções exibidas", "Acompanhamentos e caldas conforme a montagem escolhida"],
+      "flavors": ["Açaí Natural", "Trufado de Ninho", "Trufado de Nutella", "Trufado de Danone", "Trufado de Maracujá", "Açaí com Cupuaçu", "Cupuaçu"],
+      "extras": ["Nutella + R$ 10,00", "Skimo chocolate meio amargo + R$ 4,00", "Skimo chocolate branco + R$ 4,00"],
       "notes": [],
       "channels": ["whatsapp"]
     },
@@ -127,29 +94,9 @@
         { "label": "500 ml", "price": 28.00 },
         { "label": "700 ml", "price": 32.00 }
       ],
-      "includes": [
-        "1 cobertura incluída",
-        "1 acompanhamento incluído",
-        "Cada adicional extra custa R$ 2,00"
-      ],
-      "flavors": [
-        "Kinder Ovo",
-        "Chocolate",
-        "Morango",
-        "Ovomaltine",
-        "Algodão Doce",
-        "Prestígio",
-        "Laka",
-        "Menta",
-        "Maracujá",
-        "Abacaxi",
-        "Torta de Limão",
-        "Pistache"
-      ],
-      "extras": [
-        "Coberturas: chocolate, morango, caramelo, leite condensado, algodão doce, abacaxi, maracujá, menta e limão",
-        "Acompanhamentos: paçoca, Ovomaltine, granulado, granulado colorido e leite em pó"
-      ],
+      "includes": ["1 cobertura incluída", "1 acompanhamento incluído", "Cada adicional extra custa R$ 2,00"],
+      "flavors": ["Kinder Ovo", "Chocolate", "Morango", "Ovomaltine", "Algodão Doce", "Prestígio", "Laka", "Menta", "Maracujá", "Abacaxi", "Torta de Limão", "Pistache"],
+      "extras": ["Coberturas: chocolate, morango, caramelo, leite condensado, algodão doce, abacaxi, maracujá, menta e limão", "Acompanhamentos: paçoca, Ovomaltine, granulado, granulado colorido e leite em pó"],
       "notes": [],
       "channels": ["whatsapp"]
     },
@@ -162,22 +109,16 @@
       "image": "assets/img/produto-milkshake-sabores.png",
       "featured": true,
       "offer": false,
-      "priceLabel": "A partir de R$ 18,00",
+      "priceLabel": "A partir de R$ 16,00",
       "sizes": [
-        { "label": "300 ml", "price": 18.00 },
-        { "label": "400 ml", "price": 24.00 },
-        { "label": "500 ml", "price": 30.00 },
-        { "label": "700 ml", "price": 34.00 }
+        { "label": "300 ml", "price": 16.00 },
+        { "label": "400 ml", "price": 22.00 },
+        { "label": "500 ml", "price": 28.00 },
+        { "label": "700 ml", "price": 32.00 }
       ],
-      "includes": [
-        "1 cobertura incluída",
-        "1 acompanhamento incluído",
-        "Cada adicional extra custa R$ 2,00"
-      ],
+      "includes": ["1 cobertura incluída", "1 acompanhamento incluído", "Cada adicional extra custa R$ 2,00"],
       "flavors": ["Nutella", "Café", "Ninho", "Morango"],
-      "extras": [
-        "Coberturas e acompanhamentos extras + R$ 2,00 cada"
-      ],
+      "extras": ["Coberturas e acompanhamentos extras + R$ 2,00 cada"],
       "notes": [],
       "channels": ["whatsapp"]
     },
@@ -197,19 +138,7 @@
         { "label": "Sergel Máximo", "price": 16.99 }
       ],
       "includes": [],
-      "flavors": [
-        "Alegria de Coco",
-        "Encanto de Chocolate Branco",
-        "Maravilha de Chocolate",
-        "Torta de Limão",
-        "Chocolate Maltado",
-        "Caramelo",
-        "Brigadeiro",
-        "Baunilha",
-        "Pistache",
-        "Avelã",
-        "Chocolate branco com cookies"
-      ],
+      "flavors": ["Alegria de Coco", "Encanto de Chocolate Branco", "Maravilha de Chocolate", "Torta de Limão", "Chocolate Maltado", "Caramelo", "Brigadeiro", "Baunilha", "Pistache", "Avelã", "Chocolate branco com cookies"],
       "extras": [],
       "notes": ["Sabores sujeitos à disponibilidade na loja."],
       "channels": ["whatsapp"]
@@ -224,9 +153,7 @@
       "featured": true,
       "offer": true,
       "priceLabel": "R$ 38,00",
-      "sizes": [
-        { "label": "1,5 L", "price": 38.00 }
-      ],
+      "sizes": [{ "label": "1,5 L", "price": 38.00 }],
       "includes": [],
       "flavors": ["Batidão de Açaí"],
       "extras": [],
@@ -243,9 +170,7 @@
       "featured": false,
       "offer": false,
       "priceLabel": "A partir de R$ 38,00",
-      "sizes": [
-        { "label": "2 L", "price": 38.00 }
-      ],
+      "sizes": [{ "label": "2 L", "price": 38.00 }],
       "includes": [],
       "flavors": ["Tradicional", "Mesclado"],
       "extras": [],
@@ -254,21 +179,9 @@
     }
   ],
   "gallery": [
-    {
-      "src": "assets/img/produtos/galeria/waffle-bowl-acai-granola-uvas.png",
-      "alt": "Waffle bowl com açaí, granola e uvas"
-    },
-    {
-      "src": "assets/img/produtos/galeria/trio-colorido-sobremesas-especiais.png",
-      "alt": "Trio colorido de sobremesas especiais"
-    },
-    {
-      "src": "assets/img/produtos/sorvetes/cone-supremo-caldas-escorrendo.png",
-      "alt": "Cone supremo com sorvete e caldas"
-    },
-    {
-      "src": "assets/img/produtos/acai/acai-trufado-frutas-crocante-hero.png",
-      "alt": "Açaí trufado com frutas e crocantes"
-    }
+    { "src": "assets/img/produtos/galeria/waffle-bowl-acai-granola-uvas.png", "alt": "Waffle bowl com açaí, granola e uvas" },
+    { "src": "assets/img/produtos/galeria/trio-colorido-sobremesas-especiais.png", "alt": "Trio colorido de sobremesas especiais" },
+    { "src": "assets/img/produtos/sorvetes/cone-supremo-caldas-escorrendo.png", "alt": "Cone supremo com sorvete e caldas" },
+    { "src": "assets/img/produtos/acai/acai-trufado-frutas-crocante-hero.png", "alt": "Açaí trufado com frutas e crocantes" }
   ]
 }

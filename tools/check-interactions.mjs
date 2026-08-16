@@ -3,6 +3,7 @@ import fs from 'node:fs';
 const html = fs.readFileSync('index.html', 'utf8');
 const siteJs = fs.readFileSync('assets/js/site-v2.js', 'utf8');
 const mobileJs = fs.readFileSync('assets/js/mobile-fixes.js', 'utf8');
+const catalog = JSON.parse(fs.readFileSync('data/products.json', 'utf8'));
 
 const errors = [];
 const warnings = [];
@@ -31,9 +32,7 @@ for (const match of anchorTags) {
 
   if (href.startsWith('#')) {
     const target = decodeURIComponent(href.slice(1));
-    if (!ids.has(target)) {
-      errors.push(`Âncora interna sem alvo: ${href}`);
-    }
+    if (!ids.has(target)) errors.push(`Âncora interna sem alvo: ${href}`);
   }
 }
 
@@ -69,14 +68,75 @@ for (const [label, marker] of requiredSiteBindings) {
 }
 
 const requiredCompatibilityBindings = [
-  ['cards-resumo do topo', "querySelectorAll('.quick-item')"],
-  ['cards Sergel', "querySelectorAll('.sergel-card')"],
+  ['roteamento dos atalhos', 'installQuickRouting'],
+  ['roteamento das categorias', 'installCategoryRouting'],
+  ['rolagem até os produtos', 'scrollToCatalogProducts'],
+  ['cards Sergel', 'installSergelRouting'],
   ['WhatsApp flutuante', 'installWhatsAppActions'],
-  ['auditoria de âncoras internas', 'auditInternalTargets']
+  ['auditoria de âncoras internas', 'auditInternalTargets'],
+  ['bloqueio de fundo do modal', 'installModalScrollLock']
 ];
 
 for (const [label, marker] of requiredCompatibilityBindings) {
   if (!mobileJs.includes(marker)) errors.push(`Handler obrigatório ausente em mobile-fixes.js: ${label}`);
+}
+
+const categoryIds = catalog.categories.map((category) => category.id);
+const categoryIdSet = new Set(categoryIds);
+if (categoryIdSet.size !== categoryIds.length) errors.push('Há IDs de categoria duplicados em products.json.');
+if (!categoryIdSet.has('destaques')) errors.push('Categoria obrigatória "destaques" ausente.');
+
+const productIds = catalog.products.map((product) => product.id);
+const productIdSet = new Set(productIds);
+if (productIdSet.size !== productIds.length) errors.push('Há IDs de produto duplicados em products.json.');
+
+for (const product of catalog.products) {
+  if (!product.id || !product.name) errors.push(`Produto sem id/nome válido: ${JSON.stringify(product).slice(0, 180)}`);
+  if (!categoryIdSet.has(product.category)) errors.push(`Produto ${product.id} usa categoria inexistente: ${product.category}`);
+  if (!product.image || typeof product.image !== 'string') errors.push(`Produto ${product.id} não possui imagem válida.`);
+  if (!Array.isArray(product.sizes) || !product.sizes.length) errors.push(`Produto ${product.id} não possui tamanhos/preços.`);
+
+  for (const size of product.sizes || []) {
+    if (!size.label) errors.push(`Produto ${product.id} possui tamanho sem rótulo.`);
+    if (typeof size.price !== 'number' || !Number.isFinite(size.price) || size.price <= 0) {
+      errors.push(`Produto ${product.id} possui preço inválido em ${size.label || 'tamanho sem nome'}.`);
+    }
+  }
+}
+
+for (const category of catalog.categories) {
+  if (category.id === 'destaques') continue;
+  const count = catalog.products.filter((product) => product.category === category.id).length;
+  if (!count) errors.push(`Categoria ${category.id} não possui nenhum produto.`);
+}
+
+const quickProductIds = [...html.matchAll(/\bdata-quick-product=["']([^"']+)["']/g)].map((match) => match[1]);
+for (const productId of quickProductIds) {
+  if (!productIdSet.has(productId)) errors.push(`Atalho rápido aponta para produto inexistente: ${productId}`);
+}
+
+const quickCategoryIds = [...html.matchAll(/\bdata-quick-category=["']([^"']+)["']/g)].map((match) => match[1]);
+for (const categoryId of quickCategoryIds) {
+  if (!categoryIdSet.has(categoryId)) errors.push(`Atalho rápido aponta para categoria inexistente: ${categoryId}`);
+}
+
+const requiredCommercialProducts = {
+  'trio-do-dudu': [14],
+  'agua-de-coco-gelada': [10, 10, 20],
+  'pote-tradicional-dudu-2l': [38],
+  'milkshake-trufado': [18, 24, 30, 34]
+};
+
+for (const [productId, expectedPrices] of Object.entries(requiredCommercialProducts)) {
+  const product = catalog.products.find((item) => item.id === productId);
+  if (!product) {
+    errors.push(`Produto comercial obrigatório ausente: ${productId}`);
+    continue;
+  }
+  const actualPrices = product.sizes.map((size) => size.price);
+  if (actualPrices.length !== expectedPrices.length || actualPrices.some((price, index) => price !== expectedPrices[index])) {
+    errors.push(`Preços divergentes em ${productId}: esperado ${expectedPrices.join('/')}, atual ${actualPrices.join('/')}.`);
+  }
 }
 
 const externalLinks = anchorTags
@@ -87,19 +147,32 @@ if (!externalLinks.some((href) => href.includes('google.com/maps'))) {
   errors.push('Nenhum link de rota do Google Maps encontrado.');
 }
 
-if (!externalLinks.some((href) => href.includes('wa.me/'))) {
-  warnings.push('O WhatsApp principal é criado por JavaScript; confirme o WHATSAPP_BASE em mobile-fixes.js.');
+if (!externalLinks.some((href) => href.includes('wa.me/5519991288849'))) {
+  errors.push('WhatsApp público esperado não encontrado nos links estáticos.');
 }
 
 if (!mobileJs.includes("const WHATSAPP_BASE = 'https://wa.me/5519991288849'")) {
   errors.push('WHATSAPP_BASE esperado não encontrado em mobile-fixes.js.');
 }
 
+const backstageText = `${html}\n${JSON.stringify(catalog)}`.toLowerCase();
+const forbiddenBackstagePhrases = [
+  'pendente de confirmação',
+  'proposta conceitual desenvolvida',
+  'texto provisório',
+  'todo:'
+];
+for (const phrase of forbiddenBackstagePhrases) {
+  if (backstageText.includes(phrase)) errors.push(`Texto de bastidor encontrado no conteúdo público: "${phrase}".`);
+}
+
 if (errors.length) {
-  console.error('\nFalhas na auditoria de interações:');
+  console.error('\nFalhas na auditoria final de interações e catálogo:');
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
 
-console.log(`Auditoria de interações OK: ${anchorTags.length} links estáticos verificados e ${ids.size} IDs mapeados.`);
+console.log(
+  `Auditoria final OK: ${anchorTags.length} links, ${ids.size} IDs, ${catalog.categories.length} categorias e ${catalog.products.length} produtos verificados.`
+);
 for (const warning of warnings) console.warn(`Aviso: ${warning}`);

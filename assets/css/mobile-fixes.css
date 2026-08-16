@@ -59,11 +59,16 @@
   opacity: 1 !important;
 }
 
-/* The quick family bar must start after the hero instead of being pulled into it. */
+/* Keep the family bar fully outside the hero and visually connect it to offers. */
 .quick-bar {
   margin-top: 0 !important;
   padding-top: 18px;
   background: var(--cream-50);
+}
+
+/* The global section spacing is generous; offers need a tighter top rhythm after the quick bar. */
+.offers {
+  padding-top: clamp(36px, 4.5vw, 56px) !important;
 }
 
 @supports (-webkit-touch-callout: none) {
@@ -104,6 +109,10 @@
   .quick-bar {
     margin-top: 0 !important;
     padding-top: 14px;
+  }
+
+  .offers {
+    padding-top: 30px !important;
   }
 }
 

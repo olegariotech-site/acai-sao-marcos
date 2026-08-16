@@ -168,10 +168,120 @@
     }
   };
 
+  const installClickableCards = () => {
+    const scrollToCatalog = () => {
+      document.querySelector('#cardapio')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    const activateCategory = (categoryId, { scroll = true } = {}) => {
+      const button = document.querySelector(`[data-category="${categoryId}"]`);
+      if (!(button instanceof HTMLButtonElement)) {
+        if (scroll) scrollToCatalog();
+        return false;
+      }
+
+      button.click();
+      if (scroll) scrollToCatalog();
+      return true;
+    };
+
+    const openProduct = (productId) => {
+      const clickProduct = () => {
+        const card = document.querySelector(`[data-product-id="${productId}"]`);
+        if (!(card instanceof HTMLElement)) return false;
+        card.click();
+        return true;
+      };
+
+      if (clickProduct()) return;
+
+      activateCategory('acai', { scroll: false });
+      window.requestAnimationFrame(() => {
+        if (!clickProduct()) scrollToCatalog();
+      });
+    };
+
+    const quickActions = new Map([
+      ['Açaí Natural', () => openProduct('acai-natural')],
+      ['Açaí Trufado', () => openProduct('acai-trufado')],
+      ['Milk-shakes', () => activateCategory('milkshakes')],
+      ['Sorvetes', () => activateCategory('sorvetes')]
+    ]);
+
+    document.querySelectorAll('.quick-item').forEach((item) => {
+      if (!(item instanceof HTMLElement) || item.dataset.clickableBound === '1') return;
+      const label = item.querySelector('strong')?.textContent?.trim() || '';
+      const action = quickActions.get(label);
+      if (!action) return;
+
+      item.dataset.clickableBound = '1';
+      item.setAttribute('role', 'button');
+      item.setAttribute('tabindex', '0');
+      item.setAttribute('aria-label', `${label}: abrir no cardápio`);
+
+      item.addEventListener('click', action);
+      item.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        action();
+      });
+    });
+
+    document.querySelectorAll('.sergel-card').forEach((card) => {
+      if (!(card instanceof HTMLElement) || card.dataset.clickableBound === '1') return;
+      const cta = card.querySelector('.sergel-cta');
+      if (!(cta instanceof HTMLAnchorElement) || !cta.href) return;
+
+      card.dataset.clickableBound = '1';
+      card.setAttribute('role', 'link');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('aria-label', `${card.querySelector('h3')?.textContent?.trim() || 'Produto Sergel'}: ${cta.textContent?.trim() || 'abrir'}`);
+
+      card.addEventListener('click', (event) => {
+        if (event.target instanceof Element && event.target.closest('a, button')) return;
+        cta.click();
+      });
+
+      card.addEventListener('keydown', (event) => {
+        if (event.target !== card || (event.key !== 'Enter' && event.key !== ' ')) return;
+        event.preventDefault();
+        cta.click();
+      });
+    });
+  };
+
+  const auditInternalTargets = () => {
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      if (!(link instanceof HTMLAnchorElement)) return;
+      const href = link.getAttribute('href') || '';
+
+      // The modal WhatsApp starts as # in HTML and receives its real URL when a product opens.
+      if (href === '#' && link.matches('[data-modal-whatsapp]')) return;
+      if (!href || href === '#') {
+        console.warn('[Açaí do Dudu] Link sem destino:', link);
+        return;
+      }
+
+      try {
+        if (!document.querySelector(href)) {
+          console.warn(`[Açaí do Dudu] Âncora interna sem alvo: ${href}`, link);
+        }
+      } catch (_) {
+        console.warn(`[Açaí do Dudu] Âncora interna inválida: ${href}`, link);
+      }
+    });
+  };
+
   document.addEventListener('DOMContentLoaded', () => {
     recoverAlreadyBrokenMedia();
     watchDynamicMedia();
     installWhatsAppActions();
+    installClickableCards();
+    auditInternalTargets();
+
+    // Catalog cards are rendered asynchronously. Re-run bindings after they appear.
+    const interactionObserver = new MutationObserver(() => installClickableCards());
+    interactionObserver.observe(document.body, { childList: true, subtree: true });
 
     let lockedScrollY = 0;
     let modalScrollLocked = false;

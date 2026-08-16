@@ -1,4 +1,4 @@
-name: Validar caminhos de mídia
+name: Validar site
 
 on:
   pull_request:
@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  media-paths:
+  site-validation:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -26,3 +26,6 @@ jobs:
 
       - name: Validar referências de mídia
         run: node tools/check-media-paths.mjs
+
+      - name: Validar links e interações
+        run: node tools/check-interactions.mjs

@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!target) return;
       event.preventDefault();
       setMenu(false, { restoreFocus: false });
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      target.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
     });
   });
 
@@ -191,6 +191,56 @@ document.addEventListener('DOMContentLoaded', () => {
   updateHeader();
   window.addEventListener('scroll', updateHeader, { passive: true });
 
+  const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
+
+  const afterPaint = (callback) => {
+    window.requestAnimationFrame(() => window.requestAnimationFrame(callback));
+  };
+
+  const centerActiveCategory = () => {
+    const button = elements.categoryRail?.querySelector('.category-button.active');
+    if (!(button instanceof HTMLElement) || !(elements.categoryRail instanceof HTMLElement)) return;
+    const left = button.offsetLeft - ((elements.categoryRail.clientWidth - button.offsetWidth) / 2);
+    elements.categoryRail.scrollTo({
+      left: Math.max(0, left),
+      behavior: prefersReducedMotion() ? 'auto' : 'smooth'
+    });
+  };
+
+  const scrollToActiveProducts = () => {
+    const firstCard = elements.productGrid?.querySelector('[data-product-id]');
+    const target = firstCard || elements.productGrid || document.querySelector('#cardapio');
+    if (!(target instanceof HTMLElement)) return;
+
+    const headerHeight = elements.header?.getBoundingClientRect().height || 78;
+    const categoryHeight = document.querySelector('.category-rail-wrap')?.getBoundingClientRect().height || 60;
+    const offset = headerHeight + Math.min(categoryHeight, 72) + 28;
+    const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - offset);
+
+    window.scrollTo({
+      top,
+      behavior: prefersReducedMotion() ? 'auto' : 'smooth'
+    });
+  };
+
+  const selectCategory = (categoryId, { scroll = true } = {}) => {
+    if (!state.catalog || !categoryId) return false;
+    if (!state.catalog.categories.some((category) => category.id === categoryId)) return false;
+
+    state.activeCategory = categoryId;
+    renderCategories();
+    renderProducts();
+    track('catalog_category_select', { category: state.activeCategory });
+
+    if (scroll) {
+      afterPaint(() => {
+        centerActiveCategory();
+        scrollToActiveProducts();
+      });
+    }
+    return true;
+  };
+
   const renderCategories = () => {
     if (!state.catalog || !elements.categoryRail) return;
 
@@ -200,18 +250,18 @@ document.addEventListener('DOMContentLoaded', () => {
         class="category-button${category.id === state.activeCategory ? ' active' : ''}"
         data-category="${escapeHTML(category.id)}"
         aria-pressed="${category.id === state.activeCategory}"
+        ${category.id === state.activeCategory ? 'aria-current="true"' : ''}
       >${escapeHTML(category.label)}</button>
     `).join('');
-
-    elements.categoryRail.querySelectorAll('[data-category]').forEach((button) => {
-      button.addEventListener('click', () => {
-        state.activeCategory = button.dataset.category;
-        renderCategories();
-        renderProducts();
-        track('catalog_category_select', { category: state.activeCategory });
-      });
-    });
   };
+
+  elements.categoryRail?.addEventListener('click', (event) => {
+    const button = event.target instanceof Element
+      ? event.target.closest('.category-button[data-category]')
+      : null;
+    if (!(button instanceof HTMLButtonElement) || !elements.categoryRail?.contains(button)) return;
+    selectCategory(button.dataset.category);
+  });
 
   const getVisibleProducts = () => {
     if (!state.catalog) return [];

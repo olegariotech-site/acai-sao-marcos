@@ -3,6 +3,7 @@ import fs from 'node:fs';
 const html = fs.readFileSync('index.html', 'utf8');
 const siteJs = fs.readFileSync('assets/js/site-v2.js', 'utf8');
 const mobileJs = fs.readFileSync('assets/js/mobile-fixes.js', 'utf8');
+const mobileCss = fs.readFileSync('assets/css/mobile-fixes.css', 'utf8');
 const catalog = JSON.parse(fs.readFileSync('data/products.json', 'utf8'));
 
 const errors = [];
@@ -58,7 +59,9 @@ for (const [label, marker] of requiredHtmlMarkers) {
 const requiredSiteBindings = [
   ['cards de produto', "querySelectorAll('[data-product-id]')"],
   ['cards de oferta', "querySelectorAll('[data-offer-id]')"],
-  ['categorias', "querySelectorAll('[data-category]')"],
+  ['delegação do rail de categorias', "elements.categoryRail?.addEventListener('click'"],
+  ['seleção centralizada de categoria', 'selectCategory(button.dataset.category)'],
+  ['rolagem centralizada até produtos', 'scrollToActiveProducts'],
   ['fechar modal', "modalClose?.addEventListener('click'"],
   ['backdrop do modal', "event.target.matches('[data-modal-backdrop]')"]
 ];
@@ -69,8 +72,6 @@ for (const [label, marker] of requiredSiteBindings) {
 
 const requiredCompatibilityBindings = [
   ['roteamento dos atalhos', 'installQuickRouting'],
-  ['roteamento das categorias', 'installCategoryRouting'],
-  ['rolagem até os produtos', 'scrollToCatalogProducts'],
   ['cards Sergel', 'installSergelRouting'],
   ['WhatsApp flutuante', 'installWhatsAppActions'],
   ['auditoria de âncoras internas', 'auditInternalTargets'],
@@ -79,6 +80,20 @@ const requiredCompatibilityBindings = [
 
 for (const [label, marker] of requiredCompatibilityBindings) {
   if (!mobileJs.includes(marker)) errors.push(`Handler obrigatório ausente em mobile-fixes.js: ${label}`);
+}
+
+// A categoria deve ter um único dono. Reintroduzir installCategoryRouting cria
+// novamente duas camadas disputando o mesmo clique.
+if (mobileJs.includes('installCategoryRouting')) {
+  errors.push('Roteamento duplicado de categorias voltou a mobile-fixes.js; site-v2.js deve ser o único dono do clique.');
+}
+
+// Modal visualmente fechado não pode capturar cliques do conteúdo atrás dele.
+if (!mobileCss.includes(".product-modal[aria-hidden='true']") || !mobileCss.includes('pointer-events: none !important')) {
+  errors.push('Proteção contra modal invisível interceptando cliques está ausente em mobile-fixes.css.');
+}
+if (!mobileCss.includes('.product-modal.open .modal-media [data-modal-media]:not([hidden])')) {
+  errors.push('Visibilidade forçada da mídia do modal não está restrita ao estado .open.');
 }
 
 const categoryIds = catalog.categories.map((category) => category.id);

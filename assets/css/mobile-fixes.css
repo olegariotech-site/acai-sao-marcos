@@ -76,9 +76,20 @@
   display: none !important;
 }
 
-.modal-media [data-modal-media]:not([hidden]) {
+/* A mídia só pode forçar visibilidade quando o modal estiver realmente aberto. */
+.product-modal.open .modal-media [data-modal-media]:not([hidden]) {
   display: block;
   visibility: visible;
+}
+
+/* Modal fechado nunca pode virar uma camada invisível sobre os cliques da página. */
+.product-modal[aria-hidden='true'],
+.product-modal:not(.open) {
+  pointer-events: none !important;
+}
+
+.product-modal.open[aria-hidden='false'] {
+  pointer-events: auto;
 }
 
 /* Keep the family bar fully outside the hero and visually connect it to offers. */

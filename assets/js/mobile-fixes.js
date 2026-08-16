@@ -16,9 +16,6 @@
     return String(value).replace(/[^a-zA-Z0-9_-]/g, '\\$&');
   };
 
-  const afterPaint = (callback) => {
-    window.requestAnimationFrame(() => window.requestAnimationFrame(callback));
-  };
 
   const installPremiumMotionStyles = () => {
     if (document.getElementById('ot-premium-motion')) return;
@@ -252,13 +249,6 @@
     `[data-category="${escapeSelector(categoryId)}"]`
   );
 
-  const centerCategoryButton = (button) => {
-    if (!(button instanceof HTMLElement)) return;
-    const rail = button.closest('.category-rail');
-    if (!(rail instanceof HTMLElement)) return;
-    const left = button.offsetLeft - ((rail.clientWidth - button.offsetWidth) / 2);
-    rail.scrollTo({ left: Math.max(0, left), behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
-  };
 
   const scrollToCatalogProducts = () => {
     const grid = document.querySelector('[data-product-grid]');
@@ -289,8 +279,8 @@
       return false;
     }
 
+    // site-v2.js é o único responsável por renderizar e posicionar o grid.
     button.click();
-    if (scroll) afterPaint(scrollToCatalogProducts);
     return true;
   };
 
@@ -339,23 +329,6 @@
     }, true);
   };
 
-  const installCategoryRouting = () => {
-    document.addEventListener('click', (event) => {
-      const button = event.target instanceof Element ? event.target.closest('.category-button[data-category]') : null;
-      if (!(button instanceof HTMLElement)) return;
-      const requestedCategory = button.dataset.category;
-      if (!requestedCategory) return;
-
-      afterPaint(() => {
-        const activeButton = getCategoryButton(requestedCategory);
-        if (!activeButton?.classList.contains('active')) {
-          console.warn(`[Açaí do Dudu] Categoria não ativada após clique: ${requestedCategory}`);
-        }
-        centerCategoryButton(activeButton);
-        scrollToCatalogProducts();
-      });
-    });
-  };
 
   const installSergelRouting = () => {
     document.addEventListener('click', (event) => {
@@ -443,7 +416,6 @@
     watchDynamicMedia();
     installWhatsAppActions();
     installQuickRouting();
-    installCategoryRouting();
     installSergelRouting();
     installModalScrollLock();
     auditInternalTargets();

@@ -162,12 +162,12 @@
       "image": "assets/img/produto-milkshake-sabores.png",
       "featured": true,
       "offer": false,
-      "priceLabel": "A partir de R$ 16,00",
+      "priceLabel": "A partir de R$ 18,00",
       "sizes": [
-        { "label": "300 ml", "price": 16.00 },
-        { "label": "400 ml", "price": 22.00 },
-        { "label": "500 ml", "price": 28.00 },
-        { "label": "700 ml", "price": 32.00 }
+        { "label": "300 ml", "price": 18.00 },
+        { "label": "400 ml", "price": 24.00 },
+        { "label": "500 ml", "price": 30.00 },
+        { "label": "700 ml", "price": 34.00 }
       ],
       "includes": [
         "1 cobertura incluída",

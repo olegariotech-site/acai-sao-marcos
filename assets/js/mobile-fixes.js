@@ -1,6 +1,7 @@
 (() => {
-  const PRIMARY_FALLBACK = 'assets/img/hero-copo-acai-morango.png?v=20260816-1';
-  const FINAL_FALLBACK = 'assets/assetslogologo-acai-sao-marcos.png?v=20260816-1';
+  const PRIMARY_FALLBACK = 'assets/img/hero-copo-acai-morango.png?v=20260816-2';
+  const FINAL_FALLBACK = 'assets/assetslogologo-acai-sao-marcos.png?v=20260816-2';
+  const WHATSAPP_BASE = 'https://wa.me/5519991288849';
 
   const applyImageFallback = (img) => {
     if (!(img instanceof HTMLImageElement)) return;
@@ -31,18 +32,55 @@
     img.style.visibility = 'hidden';
   };
 
+  const getVideoFallback = (video) =>
+    video?.getAttribute('poster') || video?.dataset?.fallback || PRIMARY_FALLBACK;
+
   const replaceBrokenVideo = (video) => {
     if (!(video instanceof HTMLVideoElement) || !video.parentElement) return;
 
+    const fallbackSrc = getVideoFallback(video);
+
+    try { video.pause(); } catch (_) {}
+    video.dataset.mediaFallbackApplied = '1';
+    video.hidden = true;
+    video.style.display = 'none';
+    video.style.opacity = '0';
+
+    if (video.matches('[data-modal-video]')) {
+      const modalImage = document.querySelector('[data-modal-media]');
+      if (modalImage instanceof HTMLImageElement) {
+        modalImage.dataset.mediaFallbackStep = '0';
+        modalImage.dataset.fallback = FINAL_FALLBACK;
+        modalImage.src = fallbackSrc;
+        modalImage.alt = video.getAttribute('aria-label') || modalImage.alt || 'Produto do Açaí do Dudu';
+        modalImage.hidden = false;
+        modalImage.style.display = 'block';
+        modalImage.style.visibility = 'visible';
+      }
+      return;
+    }
+
+    const cardFallback = video.parentElement.querySelector('.product-video-fallback');
+    if (cardFallback instanceof HTMLImageElement) {
+      cardFallback.dataset.mediaFallbackStep = '0';
+      cardFallback.dataset.fallback = FINAL_FALLBACK;
+      cardFallback.src = fallbackSrc;
+      cardFallback.hidden = false;
+      cardFallback.style.display = 'block';
+      cardFallback.style.visibility = 'visible';
+      return;
+    }
+
     const img = document.createElement('img');
-    img.src = video.poster || video.dataset.fallback || PRIMARY_FALLBACK;
+    img.src = fallbackSrc;
+    img.dataset.fallback = FINAL_FALLBACK;
     img.alt = video.getAttribute('aria-label') || 'Produto do Açaí do Dudu';
     img.loading = 'lazy';
     img.decoding = 'async';
     img.style.width = '100%';
     img.style.height = '100%';
     img.style.objectFit = 'cover';
-    video.replaceWith(img);
+    video.insertAdjacentElement('afterend', img);
   };
 
   document.addEventListener('error', (event) => {
@@ -59,6 +97,19 @@
     });
   };
 
+  const normalizeModalVideoState = (video) => {
+    if (!(video instanceof HTMLVideoElement) || !video.matches('[data-modal-video]')) return;
+
+    const hasSource = Boolean(video.getAttribute('src'));
+    if (!video.hidden && hasSource) {
+      delete video.dataset.mediaFallbackApplied;
+      video.style.display = 'block';
+      video.style.opacity = '1';
+    } else if (video.hidden || !hasSource) {
+      video.style.display = 'none';
+    }
+  };
+
   const watchDynamicMedia = () => {
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
@@ -66,19 +117,61 @@
           if (!(node instanceof Element)) return;
           if (node.matches('img')) recoverAlreadyBrokenMedia(node.parentElement || node);
           recoverAlreadyBrokenMedia(node);
+          if (node.matches('video')) normalizeModalVideoState(node);
+          node.querySelectorAll?.('video').forEach(normalizeModalVideoState);
         });
+
+        if (
+          mutation.type === 'attributes' &&
+          mutation.target instanceof HTMLVideoElement &&
+          ['src', 'hidden'].includes(mutation.attributeName)
+        ) {
+          normalizeModalVideoState(mutation.target);
+        }
       });
     });
 
     observer.observe(document.body, {
       childList: true,
-      subtree: true
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['src', 'hidden']
     });
+  };
+
+  const installWhatsAppActions = () => {
+    const message = encodeURIComponent('Olá, Dudu! Vim pelo site e gostaria de tirar uma dúvida sobre o cardápio.');
+
+    if (!document.querySelector('.whatsapp-contact-float')) {
+      const link = document.createElement('a');
+      link.className = 'whatsapp-contact-float';
+      link.href = `${WHATSAPP_BASE}?text=${message}`;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.setAttribute('aria-label', 'Falar com o Dudu pelo WhatsApp');
+      link.setAttribute('data-track', 'floating_whatsapp');
+      link.innerHTML = `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M6.6 2.8c.5-.2 1.1 0 1.4.5l1.2 2.8c.2.5.1 1-.3 1.4L7.6 8.8c.9 1.8 2.3 3.2 4.1 4.1l1.3-1.3c.4-.4.9-.5 1.4-.3l2.8 1.2c.5.2.8.8.6 1.4l-.8 2.7c-.2.6-.7 1-1.3 1.1-1 .1-2 .1-3-.2A14.4 14.4 0 0 1 4.3 9c-.3-1-.4-2-.2-3 .1-.6.5-1.1 1.1-1.3l1.4-.5Z"/>
+        </svg>
+        <span>Falar com o Dudu</span>
+      `;
+      document.body.appendChild(link);
+    }
+
+    const modalWhatsapp = document.querySelector('[data-modal-whatsapp]');
+    if (modalWhatsapp instanceof HTMLAnchorElement) {
+      modalWhatsapp.hidden = false;
+      modalWhatsapp.classList.add('button', 'button-whatsapp');
+      modalWhatsapp.textContent = 'Falar com o Dudu';
+      modalWhatsapp.setAttribute('aria-label', 'Falar com o Dudu sobre este produto pelo WhatsApp');
+    }
   };
 
   document.addEventListener('DOMContentLoaded', () => {
     recoverAlreadyBrokenMedia();
     watchDynamicMedia();
+    installWhatsAppActions();
 
     let lockedScrollY = 0;
     let modalScrollLocked = false;

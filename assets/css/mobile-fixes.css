@@ -52,6 +52,20 @@
   backface-visibility: hidden;
 }
 
+/* Keep product videos visible. Fallback is only applied on a real media error. */
+.product-card-media video,
+.modal-media video,
+[data-modal-video] {
+  opacity: 1 !important;
+}
+
+/* The quick family bar must start after the hero instead of being pulled into it. */
+.quick-bar {
+  margin-top: 0 !important;
+  padding-top: 18px;
+  background: var(--cream-50);
+}
+
 @supports (-webkit-touch-callout: none) {
   .hero-image-frame img,
   .product-card-media img,
@@ -83,6 +97,13 @@
     .modal-actions {
       padding-bottom: max(22px, calc(env(safe-area-inset-bottom) + 14px)) !important;
     }
+  }
+}
+
+@media (max-width: 760px) {
+  .quick-bar {
+    margin-top: 0 !important;
+    padding-top: 14px;
   }
 }
 

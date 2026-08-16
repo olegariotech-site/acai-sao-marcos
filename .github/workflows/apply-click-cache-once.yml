@@ -1,0 +1,34 @@
+name: Aplicar correção de cache de cliques
+
+on:
+  push:
+    branches:
+      - fix/click-cache-live
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: fix/click-cache-live
+
+      - name: Aplicar cache-bust
+        run: python3 tools/apply-click-cache.py
+
+      - name: Commitar somente o index
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração para commitar"
+            exit 0
+          fi
+          git commit -m "Força atualização do CSS crítico de cliques"
+          git push origin HEAD:fix/click-cache-live

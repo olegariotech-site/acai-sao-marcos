@@ -1,7 +1,22 @@
 (() => {
-  const PRIMARY_FALLBACK = 'assets/img/hero-copo-acai-morango.png?v=20260816-2';
-  const FINAL_FALLBACK = 'assets/assetslogologo-acai-sao-marcos.png?v=20260816-2';
+  'use strict';
+
+  const PRIMARY_FALLBACK = 'assets/img/hero-copo-acai-morango.png?v=20260816-final-1';
+  const FINAL_FALLBACK = 'assets/assetslogologo-acai-sao-marcos.png?v=20260816-final-1';
   const WHATSAPP_BASE = 'https://wa.me/5519991288849';
+  const PRODUCT_CATEGORY = {
+    'acai-natural': 'acai',
+    'acai-trufado': 'acai'
+  };
+
+  const escapeSelector = (value = '') => {
+    if (window.CSS && typeof window.CSS.escape === 'function') return window.CSS.escape(String(value));
+    return String(value).replace(/[^a-zA-Z0-9_-]/g, '\\$&');
+  };
+
+  const afterPaint = (callback) => {
+    window.requestAnimationFrame(() => window.requestAnimationFrame(callback));
+  };
 
   const applyImageFallback = (img) => {
     if (!(img instanceof HTMLImageElement)) return;
@@ -10,6 +25,7 @@
       img.style.visibility = 'hidden';
       return;
     }
+
     const step = Number(img.dataset.mediaFallbackStep || '0');
     if (step === 0) {
       img.dataset.mediaFallbackStep = '1';
@@ -17,20 +33,20 @@
       img.src = img.dataset.fallback || PRIMARY_FALLBACK;
       return;
     }
+
     if (step === 1) {
       img.dataset.mediaFallbackStep = '2';
       img.removeAttribute('srcset');
       img.src = FINAL_FALLBACK;
       return;
     }
+
     img.style.visibility = 'hidden';
   };
 
-  const getVideoFallback = (video) => video?.getAttribute('poster') || video?.dataset?.fallback || PRIMARY_FALLBACK;
-
   const replaceBrokenVideo = (video) => {
-    if (!(video instanceof HTMLVideoElement) || !video.parentElement) return;
-    const fallbackSrc = getVideoFallback(video);
+    if (!(video instanceof HTMLVideoElement)) return;
+    const fallbackSrc = video.getAttribute('poster') || video.dataset.fallback || PRIMARY_FALLBACK;
     try { video.pause(); } catch (_) {}
     video.dataset.mediaFallbackApplied = '1';
     video.hidden = true;
@@ -43,7 +59,6 @@
         modalImage.dataset.mediaFallbackStep = '0';
         modalImage.dataset.fallback = FINAL_FALLBACK;
         modalImage.src = fallbackSrc;
-        modalImage.alt = video.getAttribute('aria-label') || modalImage.alt || 'Produto do Açaí do Dudu';
         modalImage.hidden = false;
         modalImage.style.display = 'block';
         modalImage.style.visibility = 'visible';
@@ -51,7 +66,7 @@
       return;
     }
 
-    const cardFallback = video.parentElement.querySelector('.product-video-fallback');
+    const cardFallback = video.parentElement?.querySelector('.product-video-fallback');
     if (cardFallback instanceof HTMLImageElement) {
       cardFallback.dataset.mediaFallbackStep = '0';
       cardFallback.dataset.fallback = FINAL_FALLBACK;
@@ -59,19 +74,7 @@
       cardFallback.hidden = false;
       cardFallback.style.display = 'block';
       cardFallback.style.visibility = 'visible';
-      return;
     }
-
-    const img = document.createElement('img');
-    img.src = fallbackSrc;
-    img.dataset.fallback = FINAL_FALLBACK;
-    img.alt = video.getAttribute('aria-label') || 'Produto do Açaí do Dudu';
-    img.loading = 'lazy';
-    img.decoding = 'async';
-    img.style.width = '100%';
-    img.style.height = '100%';
-    img.style.objectFit = 'cover';
-    video.insertAdjacentElement('afterend', img);
   };
 
   document.addEventListener('error', (event) => {
@@ -80,22 +83,10 @@
     if (target instanceof HTMLVideoElement) replaceBrokenVideo(target);
   }, true);
 
-  const recoverAlreadyBrokenMedia = (scope = document) => {
+  const recoverBrokenImages = (scope = document) => {
     scope.querySelectorAll?.('img').forEach((img) => {
       if (img.getAttribute('src') && img.complete && img.naturalWidth === 0) applyImageFallback(img);
     });
-  };
-
-  const normalizeModalVideoState = (video) => {
-    if (!(video instanceof HTMLVideoElement) || !video.matches('[data-modal-video]')) return;
-    const hasSource = Boolean(video.getAttribute('src'));
-    if (!video.hidden && hasSource) {
-      delete video.dataset.mediaFallbackApplied;
-      video.style.display = 'block';
-      video.style.opacity = '1';
-    } else if (video.hidden || !hasSource) {
-      video.style.display = 'none';
-    }
   };
 
   const watchDynamicMedia = () => {
@@ -103,21 +94,17 @@
       mutations.forEach((mutation) => {
         mutation.addedNodes.forEach((node) => {
           if (!(node instanceof Element)) return;
-          if (node.matches('img')) recoverAlreadyBrokenMedia(node.parentElement || node);
-          recoverAlreadyBrokenMedia(node);
-          if (node.matches('video')) normalizeModalVideoState(node);
-          node.querySelectorAll?.('video').forEach(normalizeModalVideoState);
+          if (node.matches('img') && node.complete && node.naturalWidth === 0) applyImageFallback(node);
+          recoverBrokenImages(node);
         });
-        if (mutation.type === 'attributes' && mutation.target instanceof HTMLVideoElement && ['src', 'hidden'].includes(mutation.attributeName)) {
-          normalizeModalVideoState(mutation.target);
-        }
       });
     });
-    observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['src', 'hidden'] });
+    observer.observe(document.body, { childList: true, subtree: true });
   };
 
   const installWhatsAppActions = () => {
     const message = encodeURIComponent('Olá, Dudu! Vim pelo site e gostaria de tirar uma dúvida sobre o cardápio.');
+
     if (!document.querySelector('.whatsapp-contact-float')) {
       const link = document.createElement('a');
       link.className = 'whatsapp-contact-float';
@@ -126,9 +113,14 @@
       link.rel = 'noopener';
       link.setAttribute('aria-label', 'Falar com o Dudu pelo WhatsApp');
       link.setAttribute('data-track', 'floating_whatsapp');
-      link.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 2.8c.5-.2 1.1 0 1.4.5l1.2 2.8c.2.5.1 1-.3 1.4L7.6 8.8c.9 1.8 2.3 3.2 4.1 4.1l1.3-1.3c.4-.4.9-.5 1.4-.3l2.8 1.2c.5.2.8.8.6 1.4l-.8 2.7c-.2.6-.7 1-1.3 1.1-1 .1-2 .1-3-.2A14.4 14.4 0 0 1 4.3 9c-.3-1-.4-2-.2-3 .1-.6.5-1.1 1.1-1.3l1.4-.5Z"/></svg><span>Falar com o Dudu</span>`;
+      link.innerHTML = '<span>Falar com o Dudu</span>';
+      link.addEventListener('click', () => {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'cta_click', cta: 'floating_whatsapp', destination: link.href });
+      });
       document.body.appendChild(link);
     }
+
     const modalWhatsapp = document.querySelector('[data-modal-whatsapp]');
     if (modalWhatsapp instanceof HTMLAnchorElement) {
       modalWhatsapp.hidden = false;
@@ -138,68 +130,132 @@
     }
   };
 
-  const installClickableCards = () => {
-    const scrollToCatalog = () => document.querySelector('#cardapio')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    const activateCategory = (categoryId, { scroll = true } = {}) => {
-      const button = document.querySelector(`[data-category="${categoryId}"]`);
-      if (!(button instanceof HTMLButtonElement)) {
-        if (scroll) scrollToCatalog();
-        return false;
+  const getCategoryButton = (categoryId) => document.querySelector(
+    `[data-category="${escapeSelector(categoryId)}"]`
+  );
+
+  const scrollToCatalogProducts = () => {
+    const grid = document.querySelector('[data-product-grid]');
+    const firstCard = grid?.querySelector('[data-product-id]');
+    const target = firstCard || grid || document.querySelector('#cardapio');
+    if (!(target instanceof HTMLElement)) return;
+
+    const headerHeight = document.querySelector('.site-header')?.getBoundingClientRect().height || 78;
+    const categoryHeight = document.querySelector('.category-rail-wrap')?.getBoundingClientRect().height || 60;
+    const offset = headerHeight + Math.min(categoryHeight, 72) + 36;
+    const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - offset);
+
+    window.scrollTo({ top, behavior: 'smooth' });
+
+    if (firstCard instanceof HTMLElement && typeof firstCard.animate === 'function') {
+      firstCard.animate([
+        { boxShadow: '0 0 0 0 rgba(110, 36, 125, 0)' },
+        { boxShadow: '0 0 0 5px rgba(110, 36, 125, .22)' },
+        { boxShadow: '0 0 0 0 rgba(110, 36, 125, 0)' }
+      ], { duration: 760, easing: 'ease-out' });
+    }
+  };
+
+  const activateCategory = (categoryId, { scroll = true } = {}) => {
+    const button = getCategoryButton(categoryId);
+    if (!(button instanceof HTMLElement)) {
+      if (scroll) document.querySelector('#cardapio')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return false;
+    }
+
+    button.click();
+    if (scroll) afterPaint(scrollToCatalogProducts);
+    return true;
+  };
+
+  const openRenderedProduct = (productId) => {
+    const card = document.querySelector(`[data-product-id="${escapeSelector(productId)}"]`);
+    if (!(card instanceof HTMLElement)) return false;
+    card.click();
+    return true;
+  };
+
+  const openProduct = (productId) => {
+    if (openRenderedProduct(productId)) return;
+
+    const categoryId = PRODUCT_CATEGORY[productId];
+    if (categoryId) activateCategory(categoryId, { scroll: false });
+
+    let attempts = 0;
+    const tryOpen = () => {
+      attempts += 1;
+      if (openRenderedProduct(productId)) return;
+      if (attempts < 10) {
+        window.requestAnimationFrame(tryOpen);
+      } else {
+        scrollToCatalogProducts();
       }
-      button.click();
-      if (scroll) scrollToCatalog();
-      return true;
     };
-    const openProduct = (productId) => {
-      const clickProduct = () => {
-        const card = document.querySelector(`[data-product-id="${productId}"]`);
-        if (!(card instanceof HTMLElement)) return false;
-        card.click();
-        return true;
-      };
-      if (clickProduct()) return;
-      activateCategory('acai', { scroll: false });
-      window.requestAnimationFrame(() => { if (!clickProduct()) scrollToCatalog(); });
-    };
-    const quickActions = new Map([
-      ['Açaí Natural', () => openProduct('acai-natural')],
-      ['Açaí Trufado', () => openProduct('acai-trufado')],
-      ['Milk-shakes', () => activateCategory('milkshakes')],
-      ['Sorvetes', () => activateCategory('sorvetes')]
-    ]);
-    document.querySelectorAll('.quick-item').forEach((item) => {
-      if (!(item instanceof HTMLElement) || item.dataset.clickableBound === '1') return;
-      const label = item.querySelector('strong')?.textContent?.trim() || '';
-      const action = quickActions.get(label);
-      if (!action) return;
-      item.dataset.clickableBound = '1';
-      item.setAttribute('role', 'button');
-      item.setAttribute('tabindex', '0');
-      item.setAttribute('aria-label', `${label}: abrir no cardápio`);
-      item.addEventListener('click', action);
-      item.addEventListener('keydown', (event) => {
-        if (event.key !== 'Enter' && event.key !== ' ') return;
-        event.preventDefault();
-        action();
+    window.requestAnimationFrame(tryOpen);
+  };
+
+  const installQuickRouting = () => {
+    document.addEventListener('click', (event) => {
+      const quick = event.target instanceof Element
+        ? event.target.closest('.quick-item[data-quick-product], .quick-item[data-quick-category]')
+        : null;
+      if (!(quick instanceof HTMLAnchorElement)) return;
+
+      const productId = quick.dataset.quickProduct;
+      const categoryId = quick.dataset.quickCategory;
+      if (!productId && !categoryId) return;
+
+      event.preventDefault();
+      event.stopImmediatePropagation();
+
+      if (productId) openProduct(productId);
+      else activateCategory(categoryId);
+    }, true);
+  };
+
+  const installCategoryRouting = () => {
+    document.addEventListener('click', (event) => {
+      const button = event.target instanceof Element ? event.target.closest('.category-button[data-category]') : null;
+      if (!(button instanceof HTMLElement)) return;
+      const requestedCategory = button.dataset.category;
+      if (!requestedCategory) return;
+
+      afterPaint(() => {
+        const activeButton = getCategoryButton(requestedCategory);
+        if (!activeButton?.classList.contains('active')) {
+          console.warn(`[Açaí do Dudu] Categoria não ativada após clique: ${requestedCategory}`);
+        }
+        scrollToCatalogProducts();
       });
     });
-    document.querySelectorAll('.sergel-card').forEach((card) => {
-      if (!(card instanceof HTMLElement) || card.dataset.clickableBound === '1') return;
+  };
+
+  const installSergelRouting = () => {
+    document.addEventListener('click', (event) => {
+      const card = event.target instanceof Element ? event.target.closest('.sergel-card') : null;
+      if (!(card instanceof HTMLElement)) return;
+      if (event.target instanceof Element && event.target.closest('a, button')) return;
+      const cta = card.querySelector('.sergel-cta');
+      if (cta instanceof HTMLAnchorElement && cta.href) cta.click();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      const card = event.target instanceof HTMLElement && event.target.matches('.sergel-card') ? event.target : null;
+      if (!card) return;
       const cta = card.querySelector('.sergel-cta');
       if (!(cta instanceof HTMLAnchorElement) || !cta.href) return;
-      card.dataset.clickableBound = '1';
+      event.preventDefault();
+      cta.click();
+    });
+
+    document.querySelectorAll('.sergel-card').forEach((card) => {
+      if (!(card instanceof HTMLElement)) return;
+      const cta = card.querySelector('.sergel-cta');
+      if (!(cta instanceof HTMLAnchorElement) || !cta.href) return;
       card.setAttribute('role', 'link');
       card.setAttribute('tabindex', '0');
       card.setAttribute('aria-label', `${card.querySelector('h3')?.textContent?.trim() || 'Produto Sergel'}: ${cta.textContent?.trim() || 'abrir'}`);
-      card.addEventListener('click', (event) => {
-        if (event.target instanceof Element && event.target.closest('a, button')) return;
-        cta.click();
-      });
-      card.addEventListener('keydown', (event) => {
-        if (event.target !== card || (event.key !== 'Enter' && event.key !== ' ')) return;
-        event.preventDefault();
-        cta.click();
-      });
     });
   };
 
@@ -220,17 +276,11 @@
     });
   };
 
-  document.addEventListener('DOMContentLoaded', () => {
-    recoverAlreadyBrokenMedia();
-    watchDynamicMedia();
-    installWhatsAppActions();
-    installClickableCards();
-    auditInternalTargets();
-    const interactionObserver = new MutationObserver(() => installClickableCards());
-    interactionObserver.observe(document.body, { childList: true, subtree: true });
+  const installModalScrollLock = () => {
     let lockedScrollY = 0;
     let modalScrollLocked = false;
-    const lockModalBackground = () => {
+
+    const sync = () => {
       const shouldLock = document.body.classList.contains('modal-open');
       if (shouldLock && !modalScrollLocked) {
         lockedScrollY = window.scrollY;
@@ -242,6 +292,7 @@
         document.body.style.width = '100%';
         return;
       }
+
       if (!shouldLock && modalScrollLocked) {
         modalScrollLocked = false;
         document.body.style.removeProperty('position');
@@ -252,114 +303,19 @@
         window.scrollTo(0, lockedScrollY);
       }
     };
-    new MutationObserver(lockModalBackground).observe(document.body, { attributes: true, attributeFilter: ['class'] });
-    lockModalBackground();
+
+    new MutationObserver(sync).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    sync();
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    recoverBrokenImages();
+    watchDynamicMedia();
+    installWhatsAppActions();
+    installQuickRouting();
+    installCategoryRouting();
+    installSergelRouting();
+    installModalScrollLock();
+    auditInternalTargets();
   });
-})();
-
-// Final deterministic navigation layer: quick cards open products/categories directly,
-// category tabs always move the viewport to the resulting product grid.
-(() => {
-  const PRODUCT_CATEGORY = { 'acai-natural': 'acai', 'acai-trufado': 'acai' };
-  const scrollToProducts = () => {
-    const target = document.querySelector('[data-product-grid]') || document.querySelector('#cardapio');
-    if (!target) return;
-    const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - 154);
-    window.scrollTo({ top, behavior: 'smooth' });
-  };
-  const activateCategory = (categoryId, { scroll = true } = {}) => {
-    const button = document.querySelector(`[data-category="${CSS.escape(categoryId)}"]`);
-    if (!(button instanceof HTMLElement)) {
-      document.querySelector('#cardapio')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      return false;
-    }
-    button.click();
-    if (scroll) window.requestAnimationFrame(() => window.requestAnimationFrame(scrollToProducts));
-    return true;
-  };
-  const openRenderedProduct = (productId) => {
-    const card = document.querySelector(`[data-product-id="${CSS.escape(productId)}"]`);
-    if (!(card instanceof HTMLElement)) return false;
-    card.click();
-    return true;
-  };
-  const openProduct = (productId) => {
-    if (openRenderedProduct(productId)) return;
-    const categoryId = PRODUCT_CATEGORY[productId];
-    if (categoryId) activateCategory(categoryId, { scroll: false });
-    let attempts = 0;
-    const tryOpen = () => {
-      attempts += 1;
-      if (openRenderedProduct(productId)) return;
-      if (attempts < 6) window.requestAnimationFrame(tryOpen);
-      else scrollToProducts();
-    };
-    window.requestAnimationFrame(tryOpen);
-  };
-  document.addEventListener('click', (event) => {
-    const quick = event.target instanceof Element ? event.target.closest('.quick-item') : null;
-    if (!(quick instanceof HTMLAnchorElement)) return;
-    const productId = quick.dataset.quickProduct;
-    const categoryId = quick.dataset.quickCategory;
-    if (!productId && !categoryId) return;
-    event.preventDefault();
-    event.stopImmediatePropagation();
-    if (productId) openProduct(productId);
-    else activateCategory(categoryId);
-  }, true);
-  document.addEventListener('click', (event) => {
-    const button = event.target instanceof Element ? event.target.closest('[data-category]') : null;
-    if (!(button instanceof HTMLElement)) return;
-    window.requestAnimationFrame(() => window.requestAnimationFrame(scrollToProducts));
-  });
-})();
-
-// Public-facing premium copy. Keeps operational/development language out of the customer experience.
-(() => {
-  const setText = (selector, text) => {
-    const node = document.querySelector(selector);
-    if (node) node.textContent = text;
-  };
-
-  const applyPremiumCopy = () => {
-    setText('.hero-copy > p', 'Açaí cremoso, opções trufadas, milk-shakes e sorvetes para montar do seu jeito. Escolha o tamanho, capriche na combinação e vem matar a vontade no São Marcos.');
-
-    setText('#ofertas .kicker', 'Favoritos para começar');
-    setText('#ofertas h2', 'Escolha com os olhos. Depois decide o tamanho.');
-    setText('#ofertas .section-heading > p', 'Alguns dos queridinhos do Dudu para você bater o olho, escolher rápido e abrir os detalhes antes de vir à loja.');
-
-    setText('#cardapio .kicker', 'Escolha sua vontade');
-    setText('#cardapio h2', 'Seu próximo favorito está aqui.');
-    setText('#cardapio .section-heading > p', 'Abra cada produto para ver tamanhos, sabores, acompanhamentos e tudo que pode deixar a sua escolha ainda mais gostosa.');
-
-    setText('#sergel .sergel-heading > div:last-child > p', 'Skimos para matar a vontade na hora e potes de 2 litros para levar. Escolha pelo sabor, leve pelo capricho e confira na loja o que está gelando no dia.');
-
-    setText('#monte h2', 'Escolha, combine e deixe o Dudu caprichar.');
-    setText('#monte .montagem-copy > p', 'No milk-shake, o tradicional já vem com 1 cobertura e 1 acompanhamento. Quer deixar mais carregado? Cada adicional extra custa R$ 2,00.');
-
-    setText('#galeria .kicker', 'Dá uma olhada');
-    setText('#galeria h2', 'A vontade começa antes da primeira colherada.');
-    setText('#galeria .section-heading > p', 'Cremoso, trufado, frutado, crocante ou bem gelado: aqui tem combinação para escolher primeiro com os olhos e depois com a colher.');
-
-    const facade = document.querySelector('#loja');
-    if (facade) {
-      setText('#loja .concept-label', 'Açaí do Dudu · São Marcos');
-      setText('#loja .kicker', 'Sabor, cor e personalidade');
-      setText('#loja h2', 'Um cantinho para chegar com vontade e sair querendo voltar.');
-      setText('#loja .facade-copy > p', 'No São Marcos, o Dudu junta açaí cremoso, milk-shakes, sorvetes e combinações montadas na hora em uma experiência simples: escolher bem, caprichar na montagem e curtir cada colherada.');
-      const facadeImage = facade.querySelector('.facade-image img');
-      if (facadeImage instanceof HTMLImageElement) {
-        facadeImage.alt = 'Identidade visual do Açaí do Dudu no São Marcos, em Valinhos';
-      }
-    }
-
-    setText('#localizacao h2', 'Sua próxima parada gostosa é no Dudu.');
-    setText('#localizacao .location-copy > p', 'No São Marcos, em Valinhos: chegou, escolheu, montou e levou. Simples do jeito que uma vontade bem resolvida tem que ser.');
-  };
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', applyPremiumCopy, { once: true });
-  } else {
-    applyPremiumCopy();
-  }
 })();

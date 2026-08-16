@@ -313,3 +313,53 @@
     window.requestAnimationFrame(() => window.requestAnimationFrame(scrollToProducts));
   });
 })();
+
+// Public-facing premium copy. Keeps operational/development language out of the customer experience.
+(() => {
+  const setText = (selector, text) => {
+    const node = document.querySelector(selector);
+    if (node) node.textContent = text;
+  };
+
+  const applyPremiumCopy = () => {
+    setText('.hero-copy > p', 'Açaí cremoso, opções trufadas, milk-shakes e sorvetes para montar do seu jeito. Escolha o tamanho, capriche na combinação e vem matar a vontade no São Marcos.');
+
+    setText('#ofertas .kicker', 'Favoritos para começar');
+    setText('#ofertas h2', 'Escolha com os olhos. Depois decide o tamanho.');
+    setText('#ofertas .section-heading > p', 'Alguns dos queridinhos do Dudu para você bater o olho, escolher rápido e abrir os detalhes antes de vir à loja.');
+
+    setText('#cardapio .kicker', 'Escolha sua vontade');
+    setText('#cardapio h2', 'Seu próximo favorito está aqui.');
+    setText('#cardapio .section-heading > p', 'Abra cada produto para ver tamanhos, sabores, acompanhamentos e tudo que pode deixar a sua escolha ainda mais gostosa.');
+
+    setText('#sergel .sergel-heading > div:last-child > p', 'Skimos para matar a vontade na hora e potes de 2 litros para levar. Escolha pelo sabor, leve pelo capricho e confira na loja o que está gelando no dia.');
+
+    setText('#monte h2', 'Escolha, combine e deixe o Dudu caprichar.');
+    setText('#monte .montagem-copy > p', 'No milk-shake, o tradicional já vem com 1 cobertura e 1 acompanhamento. Quer deixar mais carregado? Cada adicional extra custa R$ 2,00.');
+
+    setText('#galeria .kicker', 'Dá uma olhada');
+    setText('#galeria h2', 'A vontade começa antes da primeira colherada.');
+    setText('#galeria .section-heading > p', 'Cremoso, trufado, frutado, crocante ou bem gelado: aqui tem combinação para escolher primeiro com os olhos e depois com a colher.');
+
+    const facade = document.querySelector('#loja');
+    if (facade) {
+      setText('#loja .concept-label', 'Açaí do Dudu · São Marcos');
+      setText('#loja .kicker', 'Sabor, cor e personalidade');
+      setText('#loja h2', 'Um cantinho para chegar com vontade e sair querendo voltar.');
+      setText('#loja .facade-copy > p', 'No São Marcos, o Dudu junta açaí cremoso, milk-shakes, sorvetes e combinações montadas na hora em uma experiência simples: escolher bem, caprichar na montagem e curtir cada colherada.');
+      const facadeImage = facade.querySelector('.facade-image img');
+      if (facadeImage instanceof HTMLImageElement) {
+        facadeImage.alt = 'Identidade visual do Açaí do Dudu no São Marcos, em Valinhos';
+      }
+    }
+
+    setText('#localizacao h2', 'Sua próxima parada gostosa é no Dudu.');
+    setText('#localizacao .location-copy > p', 'No São Marcos, em Valinhos: chegou, escolheu, montou e levou. Simples do jeito que uma vontade bem resolvida tem que ser.');
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyPremiumCopy, { once: true });
+  } else {
+    applyPremiumCopy();
+  }
+})();

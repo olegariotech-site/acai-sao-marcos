@@ -4,7 +4,7 @@
     "updatedAt": "2026-08-16",
     "currency": "BRL",
     "whatsapp": "https://wa.me/5519991288849",
-    "priceDisclaimer": "Preços, sabores e disponibilidade podem variar conforme a montagem e as opções do dia."
+    "priceDisclaimer": "Preços do site são para atendimento presencial e podem variar em aplicativos. Sabores e disponibilidade podem mudar conforme as opções do dia."
   },
   "categories": [
     { "id": "destaques", "label": "Destaques" },
@@ -19,18 +19,18 @@
       "category": "sorvetes",
       "name": "Trio do Dudu",
       "shortName": "Novidade · para viagem",
-      "description": "Duas bolas de sorvete à sua escolha, casquinha e calda em uma combinação feita para levar. O desafio é chegar em casa sem provar pelo caminho.",
+      "description": "Duas bolas de sorvete à sua escolha, casquinha e 1 calda em uma combinação feita para levar. O desafio é chegar em casa sem provar pelo caminho.",
       "image": "assets/img/produtos/sorvetes/trio-sobremesas-tropicais.png",
       "video": "assets/video/trio-do-dudu.mp4",
       "featured": true,
       "offer": true,
-      "priceLabel": "R$ 15,00",
+      "priceLabel": "R$ 14,00",
       "sizes": [
-        { "label": "2 bolas + casquinha", "price": 15.00 }
+        { "label": "2 bolas + casquinha + 1 calda", "price": 14.00 }
       ],
-      "includes": ["2 bolas de sorvete", "1 casquinha", "Calda", "Embalagem de isopor para viagem"],
+      "includes": ["2 bolas de sorvete", "1 casquinha", "1 calda", "Embalagem de isopor para viagem"],
       "flavors": [],
-      "extras": [],
+      "extras": ["Complementos extras + R$ 2,00 cada"],
       "notes": ["Exclusivo para viagem.", "Escolha os sabores disponíveis no dia."],
       "channels": ["whatsapp"]
     },
@@ -50,10 +50,10 @@
         { "label": "500 ml", "price": 28.00 },
         { "label": "700 ml", "price": 32.00 }
       ],
-      "includes": ["1 opção obrigatória de Açaí Natural", "Até 2 frutas nas opções exibidas no cardápio", "Acompanhamentos e caldas conforme a montagem escolhida"],
+      "includes": ["Açaí Natural como base", "Frutas, caldas e acompanhamentos disponíveis na loja", "Montagem do copo conforme a sua combinação"],
       "flavors": ["Morango", "Uva-verde sem semente", "Manga"],
       "extras": ["Skimo chocolate meio amargo + R$ 4,00", "Skimo chocolate branco + R$ 4,00"],
-      "notes": ["As opções e os limites de escolha podem variar por tamanho."],
+      "notes": ["Na loja, o preço é fixo conforme o tamanho escolhido.", "A montagem deve respeitar o limite do copo."],
       "channels": ["whatsapp"]
     },
     {
@@ -72,10 +72,10 @@
         { "label": "500 ml", "price": 28.00 },
         { "label": "700 ml", "price": 32.00 }
       ],
-      "includes": ["Escolha 1 base de açaí", "Até 2 frutas nas opções exibidas", "Acompanhamentos e caldas conforme a montagem escolhida"],
+      "includes": ["Opções naturais e trufadas disponíveis na loja", "Frutas, caldas e acompanhamentos disponíveis", "Montagem do copo conforme a sua combinação"],
       "flavors": ["Açaí Natural", "Trufado de Ninho", "Trufado de Nutella", "Trufado de Danone", "Trufado de Maracujá", "Açaí com Cupuaçu", "Cupuaçu"],
       "extras": ["Nutella + R$ 10,00", "Skimo chocolate meio amargo + R$ 4,00", "Skimo chocolate branco + R$ 4,00"],
-      "notes": [],
+      "notes": ["Na loja, o preço é fixo conforme o tamanho escolhido.", "A montagem deve respeitar o limite do copo."],
       "channels": ["whatsapp"]
     },
     {
@@ -109,12 +109,12 @@
       "image": "assets/img/produto-milkshake-sabores.png",
       "featured": true,
       "offer": false,
-      "priceLabel": "A partir de R$ 16,00",
+      "priceLabel": "A partir de R$ 18,00",
       "sizes": [
-        { "label": "300 ml", "price": 16.00 },
-        { "label": "400 ml", "price": 22.00 },
-        { "label": "500 ml", "price": 28.00 },
-        { "label": "700 ml", "price": 32.00 }
+        { "label": "300 ml", "price": 18.00 },
+        { "label": "400 ml", "price": 24.00 },
+        { "label": "500 ml", "price": 30.00 },
+        { "label": "700 ml", "price": 34.00 }
       ],
       "includes": ["1 cobertura incluída", "1 acompanhamento incluído", "Cada adicional extra custa R$ 2,00"],
       "flavors": ["Nutella", "Café", "Ninho", "Morango"],
@@ -163,16 +163,16 @@
     {
       "id": "pote-2l-tradicional-mesclado",
       "category": "familia",
-      "name": "Pote 2 L Tradicional / Mesclado",
-      "shortName": "Pote 2 L",
-      "description": "Dois litros para levar para casa, dividir com a família e ter sobremesa gelada esperando no freezer.",
+      "name": "Pote 2 L Mesclado",
+      "shortName": "Mesclado · 2 L",
+      "description": "Dois litros de sorvete mesclado para levar para casa, dividir e deixar a sobremesa gelada garantida no freezer.",
       "image": "assets/img/produtos/sorvetes/cone-supremo-caldas-escorrendo.png",
       "featured": false,
       "offer": false,
-      "priceLabel": "A partir de R$ 38,00",
-      "sizes": [{ "label": "2 L", "price": 38.00 }],
+      "priceLabel": "R$ 48,00",
+      "sizes": [{ "label": "2 L", "price": 48.00 }],
       "includes": [],
-      "flavors": ["Tradicional", "Mesclado"],
+      "flavors": ["Mesclado"],
       "extras": [],
       "notes": ["Sabores sujeitos à disponibilidade."],
       "channels": ["whatsapp"]

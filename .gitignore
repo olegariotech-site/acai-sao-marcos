@@ -1,0 +1,19 @@
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+credentials*.json
+secrets*.json
+
+# Local tooling / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+node_modules/

@@ -1,0 +1,30 @@
+name: Testar capa social publicada
+
+on:
+  push:
+    branches:
+      - fix/social-preview-whatsapp
+
+permissions:
+  contents: read
+
+jobs:
+  live-social-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: fix/social-preview-whatsapp
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar Pillow
+        run: pip install pillow
+
+      - name: Validar produção como crawler de preview
+        run: python tools/check-live-social-preview.py

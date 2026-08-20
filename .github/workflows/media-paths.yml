@@ -29,3 +29,6 @@ jobs:
 
       - name: Validar links e interações
         run: node tools/check-interactions.mjs
+
+      - name: Validar capa social
+        run: node tools/check-social-preview.mjs

@@ -1,8 +1,10 @@
 import fs from 'node:fs';
 
 const html = fs.readFileSync('index.html', 'utf8');
+const privacyHtml = fs.readFileSync('privacidade.html', 'utf8');
 const siteJs = fs.readFileSync('assets/js/site-v2.js', 'utf8');
 const mobileJs = fs.readFileSync('assets/js/mobile-fixes.js', 'utf8');
+const analyticsJs = fs.readFileSync('assets/js/analytics-consent.js', 'utf8');
 const mobileCss = fs.readFileSync('assets/css/mobile-fixes.css', 'utf8');
 const catalog = JSON.parse(fs.readFileSync('data/products.json', 'utf8'));
 
@@ -24,6 +26,11 @@ for (const match of anchorTags) {
     continue;
   }
 
+  if (/^javascript:/i.test(href)) {
+    errors.push(`Link javascript: não permitido: ${tag.slice(0, 140)}`);
+    continue;
+  }
+
   if (href === '#') {
     if (!/data-modal-whatsapp/i.test(tag)) {
       errors.push(`Link visível com destino vazio (#): ${tag.slice(0, 140)}`);
@@ -35,6 +42,19 @@ for (const match of anchorTags) {
     const target = decodeURIComponent(href.slice(1));
     if (!ids.has(target)) errors.push(`Âncora interna sem alvo: ${href}`);
   }
+}
+
+const allPublicHtml = `${html}\n${privacyHtml}`;
+for (const match of allPublicHtml.matchAll(/<a\b[^>]*\btarget=["']_blank["'][^>]*>/gi)) {
+  const tag = match[0];
+  const rel = tag.match(/\brel=["']([^"']*)["']/i)?.[1]?.toLowerCase() || '';
+  if (!rel.split(/\s+/).includes('noopener')) {
+    errors.push(`Link target=_blank sem rel=noopener: ${tag.slice(0, 160)}`);
+  }
+}
+
+if (/\son(?:click|load|error|mouseover|focus)\s*=/i.test(allPublicHtml)) {
+  errors.push('Handler JavaScript inline encontrado no HTML público; manter eventos nos arquivos JS.');
 }
 
 const requiredIds = ['inicio', 'cardapio', 'sergel', 'monte', 'loja', 'localizacao'];
@@ -82,18 +102,41 @@ for (const [label, marker] of requiredCompatibilityBindings) {
   if (!mobileJs.includes(marker)) errors.push(`Handler obrigatório ausente em mobile-fixes.js: ${label}`);
 }
 
-// A categoria deve ter um único dono. Reintroduzir installCategoryRouting cria
-// novamente duas camadas disputando o mesmo clique.
 if (mobileJs.includes('installCategoryRouting')) {
   errors.push('Roteamento duplicado de categorias voltou a mobile-fixes.js; site-v2.js deve ser o único dono do clique.');
 }
 
-// Modal visualmente fechado não pode capturar cliques do conteúdo atrás dele.
 if (!mobileCss.includes(".product-modal[aria-hidden='true']") || !mobileCss.includes('pointer-events: none !important')) {
   errors.push('Proteção contra modal invisível interceptando cliques está ausente em mobile-fixes.css.');
 }
 if (!mobileCss.includes('.product-modal.open .modal-media [data-modal-media]:not([hidden])')) {
   errors.push('Visibilidade forçada da mídia do modal não está restrita ao estado .open.');
+}
+if (!mobileCss.includes('env(safe-area-inset-bottom)') || !mobileCss.includes('(pointer: coarse)')) {
+  errors.push('Hardening esperado para iOS/Android (safe-area e pointer coarse) está ausente.');
+}
+
+const sourceJs = `${siteJs}\n${mobileJs}\n${analyticsJs}`;
+const forbiddenJsPatterns = [
+  [/\beval\s*\(/, 'eval()'],
+  [/\bnew\s+Function\s*\(/, 'new Function()'],
+  [/\bdocument\.write\s*\(/, 'document.write()']
+];
+for (const [pattern, label] of forbiddenJsPatterns) {
+  if (pattern.test(sourceJs)) errors.push(`Construção JavaScript insegura encontrada: ${label}.`);
+}
+
+if (!analyticsJs.includes("const GA_MEASUREMENT_ID = 'G-EET73MQB7L'")) {
+  errors.push('ID do Google Analytics esperado não encontrado.');
+}
+if (!analyticsJs.includes("readConsent() !== 'granted'")) {
+  errors.push('Google Analytics não está claramente condicionado ao consentimento concedido.');
+}
+if (!analyticsJs.includes('allow_google_signals: false') || !analyticsJs.includes('allow_ad_personalization_signals: false')) {
+  errors.push('Hardening de privacidade do GA4 está incompleto.');
+}
+if (!privacyHtml.includes('Google Analytics') || !privacyHtml.includes('Cookies opcionais')) {
+  errors.push('Política de Privacidade não documenta Analytics e cookies opcionais.');
 }
 
 const categoryIds = catalog.categories.map((category) => category.id);
@@ -104,6 +147,7 @@ if (!categoryIdSet.has('destaques')) errors.push('Categoria obrigatória "destaq
 const productIds = catalog.products.map((product) => product.id);
 const productIdSet = new Set(productIds);
 if (productIdSet.size !== productIds.length) errors.push('Há IDs de produto duplicados em products.json.');
+if (productIdSet.has('sorvetes-e-picoles')) errors.push('Card genérico antigo "sorvetes-e-picoles" voltou ao catálogo.');
 
 for (const product of catalog.products) {
   if (!product.id || !product.name) errors.push(`Produto sem id/nome válido: ${JSON.stringify(product).slice(0, 180)}`);
@@ -139,7 +183,10 @@ const requiredCommercialProducts = {
   'trio-do-dudu': [14],
   'agua-de-coco-gelada': [10, 10, 20],
   'pote-tradicional-dudu-2l': [38],
-  'milkshake-trufado': [18, 24, 30, 34]
+  'milkshake-trufado': [18, 24, 30, 34],
+  'batidao-acai-15l': [10, 16, 22],
+  'picoles-do-dudu': [1.99],
+  'picoles-sergel': [4.8]
 };
 
 for (const [productId, expectedPrices] of Object.entries(requiredCommercialProducts)) {
@@ -152,6 +199,15 @@ for (const [productId, expectedPrices] of Object.entries(requiredCommercialProdu
   if (actualPrices.length !== expectedPrices.length || actualPrices.some((price, index) => price !== expectedPrices[index])) {
     errors.push(`Preços divergentes em ${productId}: esperado ${expectedPrices.join('/')}, atual ${actualPrices.join('/')}.`);
   }
+}
+
+const duduPopsicle = catalog.products.find((item) => item.id === 'picoles-do-dudu');
+const sergelPopsicle = catalog.products.find((item) => item.id === 'picoles-sergel');
+if (duduPopsicle?.image !== 'assets/img/produtos/picoles-do-dudu-card.png') {
+  errors.push('Picolés do Dudu não aponta para a arte final aprovada.');
+}
+if (sergelPopsicle?.image !== 'assets/img/produtos/picoles-sergel-card.png') {
+  errors.push('Picolés Sergel não aponta para a arte final aprovada.');
 }
 
 const externalLinks = anchorTags
@@ -182,7 +238,7 @@ for (const phrase of forbiddenBackstagePhrases) {
 }
 
 if (errors.length) {
-  console.error('\nFalhas na auditoria final de interações e catálogo:');
+  console.error('\nFalhas na auditoria final de segurança, interações e catálogo:');
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }

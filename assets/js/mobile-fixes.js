@@ -421,3 +421,10 @@
     auditInternalTargets();
   });
 })();
+
+(() => {
+  const script = document.createElement('script');
+  script.src = 'assets/js/analytics-consent.js?v=20260821-ga4-1';
+  script.defer = true;
+  document.head.appendChild(script);
+})();

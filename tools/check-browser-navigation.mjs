@@ -95,13 +95,18 @@ const runProfile = async ({ name, browserType, context: contextOptions, touch })
     }
   });
 
+  // O objetivo do smoke test é validar integralmente os recursos locais. Recursos externos
+  // (Google Fonts, Maps etc.) não devem tornar o CI flakey nem mascarar erros do site.
   await page.route('**/*', async (route) => {
     const url = route.request().url();
     if (url.startsWith(BASE_URL) || url.startsWith('data:') || url.startsWith('blob:')) {
       await route.continue();
-    } else {
-      await route.abort('blockedbyclient');
+      return;
     }
+
+    const resourceType = route.request().resourceType();
+    const contentType = resourceType === 'stylesheet' ? 'text/css; charset=utf-8' : 'text/plain; charset=utf-8';
+    await route.fulfill({ status: 200, contentType, body: resourceType === 'stylesheet' ? '/* external resource stubbed by CI */' : '' });
   });
 
   try {

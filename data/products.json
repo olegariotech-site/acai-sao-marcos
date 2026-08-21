@@ -7,26 +7,11 @@
     "priceDisclaimer": "Preços do site são para atendimento presencial e podem variar em aplicativos. Sabores e disponibilidade podem mudar conforme as opções do dia."
   },
   "categories": [
-    {
-      "id": "destaques",
-      "label": "Destaques"
-    },
-    {
-      "id": "acai",
-      "label": "Açaí"
-    },
-    {
-      "id": "milkshakes",
-      "label": "Milk-shakes"
-    },
-    {
-      "id": "sorvetes",
-      "label": "Sorvetes e picolés"
-    },
-    {
-      "id": "familia",
-      "label": "Para levar"
-    }
+    { "id": "destaques", "label": "Destaques" },
+    { "id": "acai", "label": "Açaí" },
+    { "id": "milkshakes", "label": "Milk-shakes" },
+    { "id": "sorvetes", "label": "Sorvetes e picolés" },
+    { "id": "familia", "label": "Para levar" }
   ],
   "products": [
     {
@@ -41,10 +26,7 @@
       "offer": true,
       "priceLabel": "R$ 14,00",
       "sizes": [
-        {
-          "label": "2 bolas + casquinha + 1 calda",
-          "price": 14.0
-        }
+        { "label": "2 bolas + casquinha + 1 calda", "price": 14.0 }
       ],
       "includes": [
         "2 bolas de sorvete",
@@ -53,16 +35,9 @@
         "Embalagem de isopor para viagem"
       ],
       "flavors": [],
-      "extras": [
-        "Complementos extras + R$ 2,00 cada"
-      ],
-      "notes": [
-        "Exclusivo para viagem.",
-        "Escolha os sabores disponíveis no dia."
-      ],
-      "channels": [
-        "whatsapp"
-      ],
+      "extras": ["Complementos extras + R$ 2,00 cada"],
+      "notes": ["Exclusivo para viagem.", "Escolha os sabores disponíveis no dia."],
+      "channels": ["whatsapp"],
       "imageFallback": "assets/img/produtos/sorvetes/trio-sobremesas-tropicais.png",
       "imageMobile": "assets/img/produtos/sorvetes/trio-sobremesas-tropicais-960.webp",
       "imageWidth": 1122,
@@ -79,28 +54,15 @@
       "offer": true,
       "priceLabel": "A partir de R$ 10,00",
       "sizes": [
-        {
-          "label": "No coco",
-          "price": 10.0
-        },
-        {
-          "label": "500 ml para viagem",
-          "price": 10.0
-        },
-        {
-          "label": "1 L para viagem",
-          "price": 20.0
-        }
+        { "label": "No coco", "price": 10.0 },
+        { "label": "500 ml para viagem", "price": 10.0 },
+        { "label": "1 L para viagem", "price": 20.0 }
       ],
       "includes": [],
       "flavors": [],
       "extras": [],
-      "notes": [
-        "Disponibilidade sujeita ao estoque do dia."
-      ],
-      "channels": [
-        "whatsapp"
-      ],
+      "notes": ["Disponibilidade sujeita ao estoque do dia."],
+      "channels": ["whatsapp"],
       "imageFallback": "assets/img/produtos/agua-de-coco-dudu-hero.png",
       "imageMobile": "assets/img/produtos/agua-de-coco-dudu-hero-960.webp",
       "imageWidth": 1254,
@@ -116,25 +78,12 @@
       "featured": true,
       "offer": true,
       "priceLabel": "R$ 38,00",
-      "sizes": [
-        {
-          "label": "2 L",
-          "price": 38.0
-        }
-      ],
-      "includes": [
-        "Pote de 2 litros",
-        "Produto da casa",
-        "Ideal para compartilhar e levar"
-      ],
+      "sizes": [{ "label": "2 L", "price": 38.0 }],
+      "includes": ["Pote de 2 litros", "Produto da casa", "Ideal para compartilhar e levar"],
       "flavors": [],
       "extras": [],
-      "notes": [
-        "Consulte os sabores disponíveis na loja."
-      ],
-      "channels": [
-        "whatsapp"
-      ],
+      "notes": ["Consulte os sabores disponíveis na loja."],
+      "channels": ["whatsapp"],
       "imageFallback": "assets/img/produtos/pote-tradicional-dudu-2l-hero.png",
       "imageMobile": "assets/img/produtos/pote-tradicional-dudu-2l-hero-960.webp",
       "imageWidth": 1055,
@@ -151,44 +100,20 @@
       "offer": true,
       "priceLabel": "A partir de R$ 16,00",
       "sizes": [
-        {
-          "label": "300 ml",
-          "price": 16.0
-        },
-        {
-          "label": "400 ml",
-          "price": 22.0
-        },
-        {
-          "label": "500 ml",
-          "price": 28.0
-        },
-        {
-          "label": "700 ml",
-          "price": 32.0
-        }
+        { "label": "300 ml", "price": 16.0 },
+        { "label": "400 ml", "price": 22.0 },
+        { "label": "500 ml", "price": 28.0 },
+        { "label": "700 ml", "price": 32.0 }
       ],
       "includes": [
         "Açaí Natural como base",
         "Frutas, caldas e acompanhamentos disponíveis na loja",
         "Montagem do copo conforme a sua combinação"
       ],
-      "flavors": [
-        "Morango",
-        "Uva-verde sem semente",
-        "Manga"
-      ],
-      "extras": [
-        "Skimo chocolate meio amargo + R$ 4,00",
-        "Skimo chocolate branco + R$ 4,00"
-      ],
-      "notes": [
-        "Na loja, o preço é fixo conforme o tamanho escolhido.",
-        "A montagem deve respeitar o limite do copo."
-      ],
-      "channels": [
-        "whatsapp"
-      ],
+      "flavors": ["Morango", "Uva-verde sem semente", "Manga"],
+      "extras": ["Skimo chocolate meio amargo + R$ 4,00", "Skimo chocolate branco + R$ 4,00"],
+      "notes": ["Na loja, o preço é fixo conforme o tamanho escolhido.", "A montagem deve respeitar o limite do copo."],
+      "channels": ["whatsapp"],
       "imageFallback": "assets/img/produtos/acai/acai-duplo-tropical-destaque.png",
       "imageMobile": "assets/img/produtos/acai/acai-duplo-tropical-destaque-960.webp",
       "imageWidth": 1122,
@@ -205,22 +130,10 @@
       "offer": true,
       "priceLabel": "A partir de R$ 16,00",
       "sizes": [
-        {
-          "label": "300 ml",
-          "price": 16.0
-        },
-        {
-          "label": "400 ml",
-          "price": 22.0
-        },
-        {
-          "label": "500 ml",
-          "price": 28.0
-        },
-        {
-          "label": "700 ml",
-          "price": 32.0
-        }
+        { "label": "300 ml", "price": 16.0 },
+        { "label": "400 ml", "price": 22.0 },
+        { "label": "500 ml", "price": 28.0 },
+        { "label": "700 ml", "price": 32.0 }
       ],
       "includes": [
         "Opções naturais e trufadas disponíveis na loja",
@@ -236,18 +149,9 @@
         "Açaí com Cupuaçu",
         "Cupuaçu"
       ],
-      "extras": [
-        "Nutella + R$ 10,00",
-        "Skimo chocolate meio amargo + R$ 4,00",
-        "Skimo chocolate branco + R$ 4,00"
-      ],
-      "notes": [
-        "Na loja, o preço é fixo conforme o tamanho escolhido.",
-        "A montagem deve respeitar o limite do copo."
-      ],
-      "channels": [
-        "whatsapp"
-      ],
+      "extras": ["Nutella + R$ 10,00", "Skimo chocolate meio amargo + R$ 4,00", "Skimo chocolate branco + R$ 4,00"],
+      "notes": ["Na loja, o preço é fixo conforme o tamanho escolhido.", "A montagem deve respeitar o limite do copo."],
+      "channels": ["whatsapp"],
       "imageFallback": "assets/img/produtos/acai/acai-trufado-frutas-crocante-hero.png",
       "imageMobile": "assets/img/produtos/acai/acai-trufado-frutas-crocante-hero-960.webp",
       "imageWidth": 1122,
@@ -264,50 +168,22 @@
       "offer": true,
       "priceLabel": "A partir de R$ 16,00",
       "sizes": [
-        {
-          "label": "300 ml",
-          "price": 16.0
-        },
-        {
-          "label": "400 ml",
-          "price": 22.0
-        },
-        {
-          "label": "500 ml",
-          "price": 28.0
-        },
-        {
-          "label": "700 ml",
-          "price": 32.0
-        }
+        { "label": "300 ml", "price": 16.0 },
+        { "label": "400 ml", "price": 22.0 },
+        { "label": "500 ml", "price": 28.0 },
+        { "label": "700 ml", "price": 32.0 }
       ],
-      "includes": [
-        "1 cobertura incluída",
-        "1 acompanhamento incluído",
-        "Cada adicional extra custa R$ 2,00"
-      ],
+      "includes": ["1 cobertura incluída", "1 acompanhamento incluído", "Cada adicional extra custa R$ 2,00"],
       "flavors": [
-        "Kinder Ovo",
-        "Chocolate",
-        "Morango",
-        "Ovomaltine",
-        "Algodão Doce",
-        "Prestígio",
-        "Laka",
-        "Menta",
-        "Maracujá",
-        "Abacaxi",
-        "Torta de Limão",
-        "Pistache"
+        "Kinder Ovo", "Chocolate", "Morango", "Ovomaltine", "Algodão Doce", "Prestígio",
+        "Laka", "Menta", "Maracujá", "Abacaxi", "Torta de Limão", "Pistache"
       ],
       "extras": [
         "Coberturas: chocolate, morango, caramelo, leite condensado, algodão doce, abacaxi, maracujá, menta e limão",
         "Acompanhamentos: paçoca, Ovomaltine, granulado, granulado colorido e leite em pó"
       ],
       "notes": [],
-      "channels": [
-        "whatsapp"
-      ],
+      "channels": ["whatsapp"],
       "imageFallback": "assets/img/produtos/milkshake/trio-acai-e-milkshake-destaque.png",
       "imageMobile": "assets/img/produtos/milkshake/trio-acai-e-milkshake-destaque-960.webp",
       "imageWidth": 1122,
@@ -324,95 +200,58 @@
       "offer": false,
       "priceLabel": "A partir de R$ 18,00",
       "sizes": [
-        {
-          "label": "300 ml",
-          "price": 18.0
-        },
-        {
-          "label": "400 ml",
-          "price": 24.0
-        },
-        {
-          "label": "500 ml",
-          "price": 30.0
-        },
-        {
-          "label": "700 ml",
-          "price": 34.0
-        }
+        { "label": "300 ml", "price": 18.0 },
+        { "label": "400 ml", "price": 24.0 },
+        { "label": "500 ml", "price": 30.0 },
+        { "label": "700 ml", "price": 34.0 }
       ],
-      "includes": [
-        "1 cobertura incluída",
-        "1 acompanhamento incluído",
-        "Cada adicional extra custa R$ 2,00"
-      ],
-      "flavors": [
-        "Nutella",
-        "Café",
-        "Ninho",
-        "Morango"
-      ],
-      "extras": [
-        "Coberturas e acompanhamentos extras + R$ 2,00 cada"
-      ],
+      "includes": ["1 cobertura incluída", "1 acompanhamento incluído", "Cada adicional extra custa R$ 2,00"],
+      "flavors": ["Nutella", "Café", "Ninho", "Morango"],
+      "extras": ["Coberturas e acompanhamentos extras + R$ 2,00 cada"],
       "notes": [],
-      "channels": [
-        "whatsapp"
-      ],
+      "channels": ["whatsapp"],
       "imageFallback": "assets/img/produto-milkshake-sabores.png",
       "imageMobile": "assets/img/produto-milkshake-sabores-960.webp",
       "imageWidth": 941,
       "imageMobileWidth": 941
     },
     {
-      "id": "sorvetes-e-picoles",
+      "id": "picoles-do-dudu",
       "category": "sorvetes",
-      "name": "Sorvetes e Picolés",
-      "shortName": "Gelados",
-      "description": "Do Skimo ao sorvete cremoso: opções para matar a vontade na hora ou levar para casa e deixar o freezer mais feliz.",
-      "image": "assets/img/produtos/sorvetes/trio-sobremesas-tropicais.webp",
+      "name": "Picolés do Dudu",
+      "shortName": "Da casa · sabores do dia",
+      "description": "Opções geladas, gostosas e econômicas para refrescar o dia. Consulte os sabores disponíveis na loja.",
+      "image": "assets/img/produtos/picoles-do-dudu-card.png",
       "featured": false,
       "offer": false,
-      "priceLabel": "A partir de R$ 9,80",
-      "sizes": [
-        {
-          "label": "Skimo",
-          "price": 9.8
-        },
-        {
-          "label": "Skimo Premium",
-          "price": 12.5
-        },
-        {
-          "label": "Sergel Máximo",
-          "price": 16.99
-        }
-      ],
+      "priceLabel": "A partir de R$ 1,99",
+      "sizes": [{ "label": "Tradicionais", "price": 1.99 }],
       "includes": [],
-      "flavors": [
-        "Alegria de Coco",
-        "Encanto de Chocolate Branco",
-        "Maravilha de Chocolate",
-        "Torta de Limão",
-        "Chocolate Maltado",
-        "Caramelo",
-        "Brigadeiro",
-        "Baunilha",
-        "Pistache",
-        "Avelã",
-        "Chocolate branco com cookies"
-      ],
+      "flavors": [],
       "extras": [],
-      "notes": [
-        "Sabores sujeitos à disponibilidade na loja."
-      ],
-      "channels": [
-        "whatsapp"
-      ],
-      "imageFallback": "assets/img/produtos/sorvetes/trio-sobremesas-tropicais.png",
-      "imageMobile": "assets/img/produtos/sorvetes/trio-sobremesas-tropicais-960.webp",
-      "imageWidth": 1122,
-      "imageMobileWidth": 960
+      "notes": ["Sabores sujeitos à disponibilidade na loja.", "Imagem ilustrativa."],
+      "channels": ["whatsapp"],
+      "imageFallback": "assets/img/produtos/picoles-do-dudu-card.png",
+      "imageWidth": 1055
+    },
+    {
+      "id": "picoles-sergel",
+      "category": "sorvetes",
+      "name": "Picolés Sergel",
+      "shortName": "Sergel · várias linhas",
+      "description": "Tradicionais, feitos com leite ou água, Light, Skimo, Skimo Premium e Máximo. Consulte os sabores e linhas disponíveis no dia.",
+      "image": "assets/img/produtos/picoles-sergel-card.png",
+      "featured": false,
+      "offer": false,
+      "priceLabel": "A partir de R$ 4,80",
+      "sizes": [{ "label": "Linha Sergel", "price": 4.8 }],
+      "includes": [],
+      "flavors": ["Tradicionais", "Feitos com leite", "Feitos com água", "Light", "Skimo", "Skimo Premium", "Máximo"],
+      "extras": [],
+      "notes": ["Sabores, linhas e disponibilidade variam conforme o estoque da loja."],
+      "channels": ["whatsapp"],
+      "imageFallback": "assets/img/produtos/picoles-sergel-card.png",
+      "imageWidth": 1024
     },
     {
       "id": "batidao-acai-15l",
@@ -425,35 +264,19 @@
       "offer": true,
       "priceLabel": "A partir de R$ 10,00",
       "sizes": [
-        {
-          "label": "300 ml",
-          "price": 10.0
-        },
-        {
-          "label": "500 ml",
-          "price": 16.0
-        },
-        {
-          "label": "1 L",
-          "price": 22.0
-        }
+        { "label": "300 ml", "price": 10.0 },
+        { "label": "500 ml", "price": 16.0 },
+        { "label": "1 L", "price": 22.0 }
       ],
-      "includes": [
-        "Açaí batido com água como base",
-        "Garrafa no tamanho escolhido"
-      ],
+      "includes": ["Açaí batido com água como base", "Garrafa no tamanho escolhido"],
       "flavors": [],
-      "extras": [
-        "Adicionais e complementos disponíveis com acréscimo"
-      ],
+      "extras": ["Adicionais e complementos disponíveis com acréscimo"],
       "notes": [
         "Os valores acima correspondem ao Batidão base.",
         "Adicionais são cobrados à parte.",
         "Imagem ilustrativa. Consulte as opções disponíveis na loja."
       ],
-      "channels": [
-        "whatsapp"
-      ],
+      "channels": ["whatsapp"],
       "imageFallback": "assets/img/produtos/acai/acai-origem-garrafas.png",
       "imageMobile": "assets/img/produtos/acai/acai-origem-garrafas-960.webp",
       "imageWidth": 1122,
@@ -469,23 +292,12 @@
       "featured": false,
       "offer": false,
       "priceLabel": "R$ 48,00",
-      "sizes": [
-        {
-          "label": "2 L",
-          "price": 48.0
-        }
-      ],
+      "sizes": [{ "label": "2 L", "price": 48.0 }],
       "includes": [],
-      "flavors": [
-        "Mesclado"
-      ],
+      "flavors": ["Mesclado"],
       "extras": [],
-      "notes": [
-        "Sabores sujeitos à disponibilidade."
-      ],
-      "channels": [
-        "whatsapp"
-      ],
+      "notes": ["Sabores sujeitos à disponibilidade."],
+      "channels": ["whatsapp"],
       "imageFallback": "assets/img/produtos/sorvetes/cone-supremo-caldas-escorrendo.png",
       "imageMobile": "assets/img/produtos/sorvetes/cone-supremo-caldas-escorrendo-960.webp",
       "imageWidth": 1122,

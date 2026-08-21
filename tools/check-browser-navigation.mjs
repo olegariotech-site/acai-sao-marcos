@@ -85,9 +85,13 @@ const runProfile = async ({ name, browserType, context: contextOptions, touch })
   });
   page.on('pageerror', (error) => consoleErrors.push(error.message));
   page.on('requestfailed', (request) => {
-    if (request.url().startsWith(BASE_URL)) {
-      localNetworkErrors.push(`${request.method()} ${request.url()} — ${request.failure()?.errorText || 'falhou'}`);
-    }
+    if (!request.url().startsWith(BASE_URL)) return;
+
+    const failureText = request.failure()?.errorText || 'falhou';
+    const isExpectedMediaCancellation = request.resourceType() === 'media' && /cancel/i.test(failureText);
+    if (isExpectedMediaCancellation) return;
+
+    localNetworkErrors.push(`${request.method()} ${request.url()} — ${failureText}`);
   });
   page.on('response', (response) => {
     if (response.url().startsWith(BASE_URL) && response.status() >= 400) {

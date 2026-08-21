@@ -14,7 +14,9 @@ permissions:
 
 jobs:
   site-validation:
+    name: Validação estática
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,11 +26,43 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Validar referências de mídia
+      - name: Validar sintaxe JavaScript
+        run: |
+          node --check assets/js/site-v2.js
+          node --check assets/js/mobile-fixes.js
+          node --check assets/js/analytics-consent.js
+          node --check tools/check-media-paths.mjs
+          node --check tools/check-interactions.mjs
+          node --check tools/check-social-preview.mjs
+          node --check tools/check-browser-navigation.mjs
+
+      - name: Validar referências de mídia e catálogo
         run: node tools/check-media-paths.mjs
 
-      - name: Validar links e interações
+      - name: Validar segurança, links e interações
         run: node tools/check-interactions.mjs
 
       - name: Validar capa social
         run: node tools/check-social-preview.mjs
+
+  browser-smoke:
+    name: Chromium + Android + iOS WebKit
+    needs: site-validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Instalar Playwright para o smoke test
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium webkit
+
+      - name: Testar notebook, Android Chrome e iOS Safari WebKit
+        run: node tools/check-browser-navigation.mjs

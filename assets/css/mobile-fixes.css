@@ -130,7 +130,31 @@
   padding-top: clamp(36px, 4.5vw, 56px) !important;
 }
 
-/* Two clear floating actions: Google Maps-style route and WhatsApp contact. */
+/*
+ * Floating CTAs:
+ * - Desktop/notebook: compact, round brand icons by default; CTA expands only on hover/focus.
+ * - iOS/Android/touch: always stays circular so it never covers the site.
+ */
+.whatsapp-float,
+.whatsapp-contact-float {
+  width: 58px;
+  min-width: 58px;
+  height: 58px;
+  min-height: 58px;
+  justify-content: flex-start;
+  gap: 0;
+  padding: 0 15px !important;
+  overflow: hidden;
+  white-space: nowrap;
+  border-radius: 50%;
+  transition:
+    width .32s var(--ease),
+    border-radius .32s var(--ease),
+    transform .25s var(--ease),
+    box-shadow .25s ease,
+    opacity .2s ease;
+}
+
 .whatsapp-float {
   color: var(--purple-950) !important;
   background: #fff !important;
@@ -155,7 +179,7 @@
   background-size: contain;
 }
 
-/* Multicolor map pin gives the route action an immediately recognizable Maps identity. */
+/* Multicolor Google Maps pin: recognizable even with the CTA collapsed. */
 .whatsapp-float::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='%23EA4335' d='M24 4C15.7 4 9 10.7 9 19c0 10.7 15 25 15 25s15-14.3 15-25C39 10.7 32.3 4 24 4z'/%3E%3Cpath fill='%23FBBC04' d='M9 19c0 5.1 3.4 11 7.2 15.9L24 19 12.3 11.2A14.9 14.9 0 0 0 9 19z'/%3E%3Cpath fill='%2334A853' d='M24 44s7.8-7.5 12-15.3L24 19l-7.8 15.9C20.1 40.1 24 44 24 44z'/%3E%3Cpath fill='%234285F4' d='M35.7 10.5A14.9 14.9 0 0 0 24 4a14.9 14.9 0 0 0-11.7 6.5L24 19l11.7-8.5z'/%3E%3Ccircle cx='24' cy='19' r='5.2' fill='white'/%3E%3C/svg%3E");
 }
@@ -165,31 +189,56 @@
   right: 18px;
   bottom: 88px;
   z-index: 901;
-  min-height: 56px;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 0 18px;
   color: #fff;
   background: #25D366;
-  border-radius: 999px;
   box-shadow: 0 18px 44px rgba(37, 211, 102, .32);
   font-size: .84rem;
   font-weight: 900;
   line-height: 1;
-  transition: transform .25s var(--ease), box-shadow .25s ease, opacity .2s ease;
 }
 
-/* WhatsApp-like speech bubble + handset icon, kept crisp without external assets. */
+/* WhatsApp brand-style speech bubble + handset icon, local and crisp. */
 .whatsapp-contact-float::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='white' d='M16 3.5A12.4 12.4 0 0 0 5.4 22.3L4 28.5l6.4-1.7A12.4 12.4 0 1 0 16 3.5zm0 2.4a10 10 0 1 1-5.1 18.6l-.5-.3-3.5.9.9-3.4-.3-.5A10 10 0 0 1 16 5.9z'/%3E%3Cpath fill='white' d='M11.1 9.8c-.3-.7-.7-.7-1-.7h-.8c-.3 0-.8.1-1.2.6-.4.5-1.5 1.5-1.5 3.6s1.6 4.2 1.8 4.5c.2.3 3.1 4.8 7.6 6.5 3.8 1.5 4.5 1.2 5.3 1.1.8-.1 2.6-1.1 3-2.1.4-1 .4-1.9.3-2.1-.1-.2-.4-.3-.8-.5l-2.8-1.3c-.4-.2-.7-.3-1 .3l-1.3 1.6c-.2.3-.5.3-.9.1-2.4-1.2-4-2.1-5.6-4.8-.4-.7.4-.7 1.2-2.3.1-.3.1-.6 0-.8z'/%3E%3C/svg%3E");
 }
 
-.whatsapp-contact-float:hover,
-.whatsapp-contact-float:focus-visible {
-  transform: translateY(-4px);
-  box-shadow: 0 22px 50px rgba(37, 211, 102, .4);
+.whatsapp-float span,
+.whatsapp-contact-float span {
+  max-width: 0;
+  margin-left: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-width .32s var(--ease),
+    margin-left .32s var(--ease),
+    opacity .18s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .whatsapp-float:hover,
+  .whatsapp-float:focus-visible {
+    width: 168px;
+    border-radius: 999px;
+  }
+
+  .whatsapp-contact-float:hover,
+  .whatsapp-contact-float:focus-visible {
+    width: 190px;
+    border-radius: 999px;
+    transform: translateY(-4px);
+    box-shadow: 0 22px 50px rgba(37, 211, 102, .4);
+  }
+
+  .whatsapp-float:hover span,
+  .whatsapp-float:focus-visible span,
+  .whatsapp-contact-float:hover span,
+  .whatsapp-contact-float:focus-visible span {
+    max-width: 140px;
+    margin-left: 10px;
+    opacity: 1;
+  }
 }
 
 .whatsapp-contact-float:focus-visible,
@@ -270,7 +319,7 @@ body.modal-open .whatsapp-contact-float {
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 760px), (hover: none), (pointer: coarse) {
   .quick-bar {
     margin-top: 0 !important;
     padding-top: 14px;
@@ -280,17 +329,17 @@ body.modal-open .whatsapp-contact-float {
     padding-top: 30px !important;
   }
 
-  /* Mobile: compact icon-only actions stop the CTAs from covering text or stealing scroll space. */
+  /* Touch devices: keep both CTAs icon-only and circular at all times. */
   .whatsapp-float,
   .whatsapp-contact-float {
     width: 50px;
     min-width: 50px;
     height: 50px;
     min-height: 50px;
-    padding: 0 !important;
+    padding: 0 11.5px !important;
     gap: 0;
     border-radius: 50%;
-    justify-content: center;
+    justify-content: flex-start;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -342,6 +391,7 @@ body.modal-open .whatsapp-contact-float {
     min-width: 46px;
     height: 46px;
     min-height: 46px;
+    padding: 0 9.5px !important;
   }
 
   .whatsapp-contact-float {

@@ -1,7 +1,7 @@
 {
   "meta": {
     "brand": "Açaí do Dudu",
-    "updatedAt": "2026-08-16",
+    "updatedAt": "2026-08-21",
     "currency": "BRL",
     "whatsapp": "https://wa.me/5519991288849",
     "priceDisclaimer": "Preços do site são para atendimento presencial e podem variar em aplicativos. Sabores e disponibilidade podem mudar conforme as opções do dia."
@@ -418,25 +418,38 @@
       "id": "batidao-acai-15l",
       "category": "familia",
       "name": "Batidão de Açaí",
-      "shortName": "1,5 litro",
-      "description": "Um litro e meio de açaí para levar, dividir e deixar a sobremesa de casa resolvida sem complicação.",
+      "shortName": "300 ml • 500 ml • 1 L",
+      "description": "Açaí batido com água, servido na garrafa. Escolha 300 ml, 500 ml ou 1 litro e personalize com os adicionais disponíveis.",
       "image": "assets/img/produtos/acai/acai-origem-garrafas.webp",
       "featured": true,
       "offer": true,
-      "priceLabel": "R$ 38,00",
+      "priceLabel": "A partir de R$ 10,00",
       "sizes": [
         {
-          "label": "1,5 L",
-          "price": 38.0
+          "label": "300 ml",
+          "price": 10.0
+        },
+        {
+          "label": "500 ml",
+          "price": 16.0
+        },
+        {
+          "label": "1 L",
+          "price": 22.0
         }
       ],
-      "includes": [],
-      "flavors": [
-        "Batidão de Açaí"
+      "includes": [
+        "Açaí batido com água como base",
+        "Garrafa no tamanho escolhido"
       ],
-      "extras": [],
+      "flavors": [],
+      "extras": [
+        "Adicionais e complementos disponíveis com acréscimo"
+      ],
       "notes": [
-        "Consulte a disponibilidade na loja."
+        "Os valores acima correspondem ao Batidão base.",
+        "Adicionais são cobrados à parte.",
+        "Imagem ilustrativa. Consulte as opções disponíveis na loja."
       ],
       "channels": [
         "whatsapp"

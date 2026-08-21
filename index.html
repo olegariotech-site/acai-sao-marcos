@@ -59,6 +59,24 @@
   <link rel="stylesheet" href="assets/css/site-v2.css?v=20260816-premium-1" />
   <link rel="stylesheet" href="assets/css/mobile-fixes.css?v=20260816-clickfix-2" />
   <link rel="stylesheet" href="assets/css/sergel-premium.css?v=20260816-premium-1" />
+  <style>
+    /* Vitrine Picolés + Sergel · 2026-08-21 */
+    @media (min-width: 981px) {
+      .sergel-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .sergel-card:nth-child(2) .sergel-price strong { font-size: clamp(1.5rem, 2.8vw, 2.1rem); }
+      .sergel-card:nth-child(3) .sergel-price strong,
+      .sergel-card:nth-child(4) .sergel-price strong { font-size: 1.28rem; }
+    }
+    @media (max-width: 980px) {
+      .sergel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .sergel-card:first-child { display: flex; grid-column: auto; }
+      .sergel-card:first-child .sergel-card-media { min-height: 0; aspect-ratio: 4 / 5; }
+      .sergel-card:nth-child(2) .sergel-price strong { font-size: clamp(1.5rem, 4vw, 2.1rem); }
+    }
+    @media (max-width: 720px) {
+      .sergel-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
@@ -75,7 +93,7 @@
 
       <nav class="desktop-nav" aria-label="Navegação principal">
         <a href="#cardapio">Cardápio</a>
-        <a href="#sergel">Sergel</a>
+        <a href="#sergel">Picolés &amp; Sergel</a>
         <a href="#monte">Monte do seu jeito</a>
         <a href="#loja">Nossa loja</a>
         <a href="#localizacao">Onde estamos</a>
@@ -105,7 +123,7 @@
     </div>
     <nav aria-label="Menu móvel">
       <a href="#cardapio">Cardápio</a>
-      <a href="#sergel">Sergel</a>
+      <a href="#sergel">Picolés &amp; Sergel</a>
       <a href="#monte">Monte do seu jeito</a>
       <a href="#loja">Nossa loja</a>
       <a href="#localizacao">Onde estamos</a>
@@ -209,15 +227,15 @@
       <div class="sergel-shell">
         <div class="sergel-heading" data-reveal>
           <div>
-            <span class="kicker">Tem Sergel no Dudu</span>
-            <h2 id="sergel-title">Gelado de respeito. <em>Escolhido pelo Açaí do Dudu.</em></h2>
+            <span class="kicker">Picolés e Sergel no Dudu</span>
+            <h2 id="sergel-title">Do econômico ao premium. <em>Escolha com os olhos.</em></h2>
           </div>
           <div>
-            <p>Skimos para matar a vontade na hora e potes de 2 litros para levar. Escolha pelo sabor, leve pelo capricho e confira na loja o que está gelando no dia.</p>
-            <div class="sergel-trust" aria-label="Destaques da linha Sergel">
-              <span>Sabores selecionados</span>
+            <p>Tem picolé da casa a partir de R$ 1,99, linhas Sergel a partir de R$ 4,80 e potes premium de 2 litros para levar. A vitrine é do Dudu; você escolhe o que combina com a vontade do dia.</p>
+            <div class="sergel-trust" aria-label="Destaques dos picolés e sorvetes do Açaí do Dudu">
+              <span>Picolés do Dudu</span>
+              <span>Linhas Sergel</span>
               <span>Potes 2 L na loja</span>
-              <span>Sujeito à disponibilidade</span>
             </div>
           </div>
         </div>
@@ -225,16 +243,32 @@
         <div class="sergel-grid">
           <article class="sergel-card" data-reveal>
             <div class="sergel-card-media">
-              <span class="sergel-badge">A partir de R$ 9,80</span>
-              <img src="assets/img/produtos/sorvetes/sergel-skimo-85g-sabores-selecionados.webp" srcset="assets/img/produtos/sorvetes/sergel-skimo-85g-sabores-selecionados-960.webp 960w, assets/img/produtos/sorvetes/sergel-skimo-85g-sabores-selecionados.webp 1122w" sizes="(max-width: 760px) 92vw, 30vw" data-fallback="assets/img/produtos/sorvetes/sergel-skimo-85g-sabores-selecionados.png" alt="Skimo Sergel 85g em sabores selecionados no Açaí do Dudu" loading="lazy" decoding="async" />
+              <span class="sergel-badge">A partir de R$ 1,99</span>
+              <img src="assets/img/produtos/picoles-do-dudu-card.png" data-fallback="assets/assetslogologo-acai-sao-marcos.png" alt="Picolés do Dudu em sabores variados, disponíveis no Açaí do Dudu" loading="lazy" decoding="async" />
             </div>
             <div class="sergel-card-content">
-              <span class="sergel-card-eyebrow">Sergel · 85 g</span>
-              <h3>Skimo Sergel</h3>
-              <p>Coco, chocolate branco, morango e chocolate em uma seleção para escolher na hora. Consulte mais sabores diretamente na loja.</p>
+              <span class="sergel-card-eyebrow">Da casa · sabores do dia</span>
+              <h3>Picolés do Dudu</h3>
+              <p>Opções geladas, gostosas e econômicas para refrescar o dia. Consulte os sabores disponíveis na loja.</p>
               <div class="sergel-price-row">
-                <div class="sergel-price"><small>A partir de</small><strong>R$ 9,80</strong></div>
-                <a class="sergel-cta" href="https://www.google.com/maps/search/?api=1&query=Rua%20Claudemires%20dos%20Santos%2086%20S%C3%A3o%20Marcos%20Valinhos%20SP" target="_blank" rel="noopener" data-track="sergel_skimo_route">Ver sabores na loja</a>
+                <div class="sergel-price"><small>A partir de</small><strong>R$ 1,99</strong></div>
+                <a class="sergel-cta" href="https://wa.me/5519991288849?text=Ol%C3%A1%2C%20Dudu%21%20Vim%20pelo%20site%20e%20quero%20saber%20quais%20sabores%20dos%20Picol%C3%A9s%20do%20Dudu%20est%C3%A3o%20dispon%C3%ADveis%20hoje." target="_blank" rel="noopener" data-track="picoles_dudu_whatsapp">Ver opções na loja</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="sergel-card" data-reveal>
+            <div class="sergel-card-media">
+              <span class="sergel-badge">A partir de R$ 4,80</span>
+              <img src="assets/img/produtos/picoles-sergel-card.png" data-fallback="assets/assetslogologo-acai-sao-marcos.png" alt="Linhas de picolés Sergel disponíveis na vitrine do Açaí do Dudu" loading="lazy" decoding="async" />
+            </div>
+            <div class="sergel-card-content">
+              <span class="sergel-card-eyebrow">Sergel · várias linhas</span>
+              <h3>Picolés Sergel</h3>
+              <p>Tradicionais, feitos com leite ou água, Light, Skimo, Skimo Premium e Máximo. Consulte os sabores e linhas disponíveis no dia.</p>
+              <div class="sergel-price-row">
+                <div class="sergel-price"><small>A partir de</small><strong>R$ 4,80</strong></div>
+                <a class="sergel-cta" href="https://wa.me/5519991288849?text=Ol%C3%A1%2C%20Dudu%21%20Vim%20pelo%20site%20e%20quero%20saber%20quais%20linhas%20e%20sabores%20de%20picol%C3%A9s%20Sergel%20est%C3%A3o%20dispon%C3%ADveis%20hoje." target="_blank" rel="noopener" data-track="picoles_sergel_whatsapp">Ver linhas disponíveis</a>
               </div>
             </div>
           </article>
@@ -272,7 +306,7 @@
           </article>
         </div>
 
-        <p class="sergel-footnote">Potes mesclados de 2 litros: R$ 48,00. Linha Premium de 2 litros: R$ 56,00. Sabores e disponibilidade podem variar na loja.</p>
+        <p class="sergel-footnote">Picolés do Dudu a partir de R$ 1,99. Linha de picolés Sergel a partir de R$ 4,80. Potes mesclados de 2 litros: R$ 48,00. Linha Premium de 2 litros: R$ 56,00. Sabores, linhas e disponibilidade podem variar na loja.</p>
       </div>
     </section>
 

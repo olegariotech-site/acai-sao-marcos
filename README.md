@@ -74,8 +74,6 @@ O projeto é estático e não possui backend, login, banco de dados ou processam
 - sinais de publicidade e personalização do GA4 desativados;
 - Política de Privacidade pública em `/privacidade.html`.
 
-> O arquivo `netlify.toml` é legado e não controla os headers da publicação atual no GitHub Pages.
-
 ## Analytics
 
 Google Analytics 4: `G-EET73MQB7L`.

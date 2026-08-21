@@ -3,246 +3,85 @@
     "desktop": 89,
     "mobile": 87
   },
-  "assets": [
+  "optimizedAssets": [
     {
       "source": "assets/img/produtos/acai/acai-trufado-frutas-crocante-hero.png",
-      "sourceBytes": 2027680,
-      "width": 1122,
-      "height": 1402,
-      "mode": "RGB",
       "webp": "assets/img/produtos/acai/acai-trufado-frutas-crocante-hero.webp",
-      "webpBytes": 158418,
-      "mobileWebp": "assets/img/produtos/acai/acai-trufado-frutas-crocante-hero-960.webp",
-      "mobileWidth": 960,
-      "mobileHeight": 1200,
-      "mobileBytes": 115222,
-      "webpSavingPercent": 92.2,
-      "mobileSavingPercent": 94.3
+      "mobileWebp": "assets/img/produtos/acai/acai-trufado-frutas-crocante-hero-960.webp"
     },
     {
       "source": "assets/img/produtos/agua-de-coco-dudu-hero.png",
-      "sourceBytes": 2469460,
-      "width": 1254,
-      "height": 1254,
-      "mode": "RGB",
       "webp": "assets/img/produtos/agua-de-coco-dudu-hero.webp",
-      "webpBytes": 291754,
-      "mobileWebp": "assets/img/produtos/agua-de-coco-dudu-hero-960.webp",
-      "mobileWidth": 960,
-      "mobileHeight": 960,
-      "mobileBytes": 178286,
-      "webpSavingPercent": 88.2,
-      "mobileSavingPercent": 92.8
+      "mobileWebp": "assets/img/produtos/agua-de-coco-dudu-hero-960.webp"
     },
     {
       "source": "assets/img/produtos/pote-tradicional-dudu-2l-hero.png",
-      "sourceBytes": 2420910,
-      "width": 1055,
-      "height": 1491,
-      "mode": "RGB",
       "webp": "assets/img/produtos/pote-tradicional-dudu-2l-hero.webp",
-      "webpBytes": 275856,
-      "mobileWebp": "assets/img/produtos/pote-tradicional-dudu-2l-hero-960.webp",
-      "mobileWidth": 960,
-      "mobileHeight": 1357,
-      "mobileBytes": 215422,
-      "webpSavingPercent": 88.6,
-      "mobileSavingPercent": 91.1
+      "mobileWebp": "assets/img/produtos/pote-tradicional-dudu-2l-hero-960.webp"
     },
     {
       "source": "assets/img/produtos/acai/acai-duplo-tropical-destaque.png",
-      "sourceBytes": 2281336,
-      "width": 1122,
-      "height": 1402,
-      "mode": "RGB",
       "webp": "assets/img/produtos/acai/acai-duplo-tropical-destaque.webp",
-      "webpBytes": 252150,
-      "mobileWebp": "assets/img/produtos/acai/acai-duplo-tropical-destaque-960.webp",
-      "mobileWidth": 960,
-      "mobileHeight": 1200,
-      "mobileBytes": 181016,
-      "webpSavingPercent": 88.9,
-      "mobileSavingPercent": 92.1
+      "mobileWebp": "assets/img/produtos/acai/acai-duplo-tropical-destaque-960.webp"
     },
     {
       "source": "assets/img/produtos/milkshake/trio-acai-e-milkshake-destaque.png",
-      "sourceBytes": 2082061,
-      "width": 1122,
-      "height": 1402,
-      "mode": "RGB",
       "webp": "assets/img/produtos/milkshake/trio-acai-e-milkshake-destaque.webp",
-      "webpBytes": 197170,
-      "mobileWebp": "assets/img/produtos/milkshake/trio-acai-e-milkshake-destaque-960.webp",
-      "mobileWidth": 960,
-      "mobileHeight": 1200,
-      "mobileBytes": 144270,
-      "webpSavingPercent": 90.5,
-      "mobileSavingPercent": 93.1
+      "mobileWebp": "assets/img/produtos/milkshake/trio-acai-e-milkshake-destaque-960.webp"
     },
     {
       "source": "assets/img/produto-milkshake-sabores.png",
-      "sourceBytes": 2185408,
-      "width": 941,
-      "height": 1672,
-      "mode": "RGB",
       "webp": "assets/img/produto-milkshake-sabores.webp",
-      "webpBytes": 209032,
-      "mobileWebp": "assets/img/produto-milkshake-sabores-960.webp",
-      "mobileWidth": 941,
-      "mobileHeight": 1672,
-      "mobileBytes": 186848,
-      "webpSavingPercent": 90.4,
-      "mobileSavingPercent": 91.5
+      "mobileWebp": "assets/img/produto-milkshake-sabores-960.webp"
     },
     {
       "source": "assets/img/produtos/sorvetes/trio-sobremesas-tropicais.png",
-      "sourceBytes": 2275320,
-      "width": 1122,
-      "height": 1402,
-      "mode": "RGB",
       "webp": "assets/img/produtos/sorvetes/trio-sobremesas-tropicais.webp",
-      "webpBytes": 255230,
-      "mobileWebp": "assets/img/produtos/sorvetes/trio-sobremesas-tropicais-960.webp",
-      "mobileWidth": 960,
-      "mobileHeight": 1200,
-      "mobileBytes": 185392,
-      "webpSavingPercent": 88.8,
-      "mobileSavingPercent": 91.9
+      "mobileWebp": "assets/img/produtos/sorvetes/trio-sobremesas-tropicais-960.webp"
     },
     {
       "source": "assets/img/produtos/acai/acai-origem-garrafas.png",
-      "sourceBytes": 2234358,
-      "width": 1122,
-      "height": 1402,
-      "mode": "RGB",
       "webp": "assets/img/produtos/acai/acai-origem-garrafas.webp",
-      "webpBytes": 211432,
-      "mobileWebp": "assets/img/produtos/acai/acai-origem-garrafas-960.webp",
-      "mobileWidth": 960,
-      "mobileHeight": 1200,
-      "mobileBytes": 153374,
-      "webpSavingPercent": 90.5,
-      "mobileSavingPercent": 93.1
+      "mobileWebp": "assets/img/produtos/acai/acai-origem-garrafas-960.webp"
     },
     {
       "source": "assets/img/produtos/sorvetes/cone-supremo-caldas-escorrendo.png",
-      "sourceBytes": 2005215,
-      "width": 1122,
-      "height": 1402,
-      "mode": "RGB",
       "webp": "assets/img/produtos/sorvetes/cone-supremo-caldas-escorrendo.webp",
-      "webpBytes": 152596,
-      "mobileWebp": "assets/img/produtos/sorvetes/cone-supremo-caldas-escorrendo-960.webp",
-      "mobileWidth": 960,
-      "mobileHeight": 1200,
-      "mobileBytes": 110428,
-      "webpSavingPercent": 92.4,
-      "mobileSavingPercent": 94.5
+      "mobileWebp": "assets/img/produtos/sorvetes/cone-supremo-caldas-escorrendo-960.webp"
     },
     {
       "source": "assets/img/produtos/galeria/trio-colorido-sobremesas-especiais.png",
-      "sourceBytes": 2137395,
-      "width": 1122,
-      "height": 1402,
-      "mode": "RGB",
       "webp": "assets/img/produtos/galeria/trio-colorido-sobremesas-especiais.webp",
-      "webpBytes": 205456,
-      "mobileWebp": "assets/img/produtos/galeria/trio-colorido-sobremesas-especiais-960.webp",
-      "mobileWidth": 960,
-      "mobileHeight": 1200,
-      "mobileBytes": 145156,
-      "webpSavingPercent": 90.4,
-      "mobileSavingPercent": 93.2
+      "mobileWebp": "assets/img/produtos/galeria/trio-colorido-sobremesas-especiais-960.webp"
     },
     {
       "source": "assets/img/produtos/galeria/waffle-bowl-acai-granola-uvas.png",
-      "sourceBytes": 2038653,
-      "width": 1122,
-      "height": 1402,
-      "mode": "RGB",
       "webp": "assets/img/produtos/galeria/waffle-bowl-acai-granola-uvas.webp",
-      "webpBytes": 178840,
-      "mobileWebp": "assets/img/produtos/galeria/waffle-bowl-acai-granola-uvas-960.webp",
-      "mobileWidth": 960,
-      "mobileHeight": 1200,
-      "mobileBytes": 130426,
-      "webpSavingPercent": 91.2,
-      "mobileSavingPercent": 93.6
+      "mobileWebp": "assets/img/produtos/galeria/waffle-bowl-acai-granola-uvas-960.webp"
     },
     {
       "source": "assets/img/fachada/fachada-acai-do-dudu-proposta-ot.png",
-      "sourceBytes": 2422510,
-      "width": 1677,
-      "height": 938,
-      "mode": "RGB",
       "webp": "assets/img/fachada/fachada-acai-do-dudu-proposta-ot.webp",
-      "webpBytes": 256138,
-      "mobileWebp": "assets/img/fachada/fachada-acai-do-dudu-proposta-ot-960.webp",
-      "mobileWidth": 960,
-      "mobileHeight": 537,
-      "mobileBytes": 80308,
-      "webpSavingPercent": 89.4,
-      "mobileSavingPercent": 96.7
+      "mobileWebp": "assets/img/fachada/fachada-acai-do-dudu-proposta-ot-960.webp"
     },
     {
       "source": "assets/img/produtos/adicionais/acompanhamentos-extras-2-reais.png",
-      "sourceBytes": 2394026,
-      "width": 1122,
-      "height": 1402,
-      "mode": "RGB",
       "webp": "assets/img/produtos/adicionais/acompanhamentos-extras-2-reais.webp",
-      "webpBytes": 247406,
-      "mobileWebp": "assets/img/produtos/adicionais/acompanhamentos-extras-2-reais-960.webp",
-      "mobileWidth": 960,
-      "mobileHeight": 1200,
-      "mobileBytes": 176732,
-      "webpSavingPercent": 89.7,
-      "mobileSavingPercent": 92.6
-    },
-    {
-      "source": "assets/img/produtos/sorvetes/sergel-skimo-85g-sabores-selecionados.png",
-      "sourceBytes": 2304689,
-      "width": 1122,
-      "height": 1402,
-      "mode": "RGB",
-      "webp": "assets/img/produtos/sorvetes/sergel-skimo-85g-sabores-selecionados.webp",
-      "webpBytes": 291010,
-      "mobileWebp": "assets/img/produtos/sorvetes/sergel-skimo-85g-sabores-selecionados-960.webp",
-      "mobileWidth": 960,
-      "mobileHeight": 1200,
-      "mobileBytes": 218510,
-      "webpSavingPercent": 87.4,
-      "mobileSavingPercent": 90.5
+      "mobileWebp": "assets/img/produtos/adicionais/acompanhamentos-extras-2-reais-960.webp"
     },
     {
       "source": "assets/img/produtos/sorvetes/sergel-2l-iogurte-com-amarena.png",
-      "sourceBytes": 2259667,
-      "width": 1122,
-      "height": 1402,
-      "mode": "RGB",
       "webp": "assets/img/produtos/sorvetes/sergel-2l-iogurte-com-amarena.webp",
-      "webpBytes": 237398,
-      "mobileWebp": "assets/img/produtos/sorvetes/sergel-2l-iogurte-com-amarena-960.webp",
-      "mobileWidth": 960,
-      "mobileHeight": 1200,
-      "mobileBytes": 173134,
-      "webpSavingPercent": 89.5,
-      "mobileSavingPercent": 92.3
+      "mobileWebp": "assets/img/produtos/sorvetes/sergel-2l-iogurte-com-amarena-960.webp"
     },
     {
       "source": "assets/img/produtos/sorvetes/sergel-2l-chocolate-com-pedacos.png",
-      "sourceBytes": 2241800,
-      "width": 1122,
-      "height": 1402,
-      "mode": "RGB",
       "webp": "assets/img/produtos/sorvetes/sergel-2l-chocolate-com-pedacos.webp",
-      "webpBytes": 235294,
-      "mobileWebp": "assets/img/produtos/sorvetes/sergel-2l-chocolate-com-pedacos-960.webp",
-      "mobileWidth": 960,
-      "mobileHeight": 1200,
-      "mobileBytes": 174620,
-      "webpSavingPercent": 89.5,
-      "mobileSavingPercent": 92.2
+      "mobileWebp": "assets/img/produtos/sorvetes/sergel-2l-chocolate-com-pedacos-960.webp"
     }
+  ],
+  "currentPngOnlyAssets": [
+    "assets/img/produtos/picoles-do-dudu-card.png",
+    "assets/img/produtos/picoles-sergel-card.png"
   ]
 }

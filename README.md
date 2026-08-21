@@ -105,3 +105,5 @@ O arquivo `CNAME` deve permanecer com `acaidodudu.com.br`.
 ## Regra comercial
 
 Preços e disponibilidade exibidos no site devem refletir a informação mais recente aprovada pelo cliente. Sabores, linhas e estoque podem variar e devem ser confirmados na loja ou pelo WhatsApp.
+
+<!-- branch temporária usada exclusivamente para validar os checks finais de entrega -->

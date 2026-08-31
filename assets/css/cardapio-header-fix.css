@@ -27,7 +27,195 @@
 }
 
 @media (max-width: 640px) {
-  .menu-page .brand-copy small { display: none; }
-  .menu-header-back { font-size: .76rem; }
-  .menu-page .brand img { width: 48px; height: 48px; }
+  .menu-page {
+    --header-height: 64px;
+  }
+
+  .menu-page .header-inner {
+    min-height: 64px;
+    padding: 5px 0;
+    gap: 10px;
+  }
+
+  .menu-page .brand {
+    gap: 8px;
+  }
+
+  .menu-page .brand-copy small {
+    display: none;
+  }
+
+  .menu-page .brand-copy strong {
+    font-size: .95rem;
+    white-space: nowrap;
+  }
+
+  .menu-header-back {
+    gap: 5px;
+    font-size: .72rem;
+    white-space: nowrap;
+  }
+
+  .menu-header-back svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .menu-page .brand img {
+    width: 42px;
+    height: 42px;
+  }
+
+  /* O link chega pelo WhatsApp: produto precisa aparecer cedo, sem um hero enorme. */
+  .menu-hero {
+    padding: 22px 0 20px;
+  }
+
+  .menu-hero-inner {
+    gap: 0;
+  }
+
+  .menu-hero-copy h1 {
+    font-size: clamp(2.25rem, 12vw, 3.35rem);
+    line-height: .94;
+  }
+
+  .menu-hero-copy p {
+    max-width: 34ch;
+    margin-top: 10px;
+    font-size: .92rem;
+    line-height: 1.45;
+  }
+
+  /* Os mesmos atalhos já aparecem imediatamente na barra de categorias. */
+  .menu-hero-actions {
+    display: none;
+  }
+
+  .menu-category-wrap {
+    top: 64px;
+    padding: 8px 0;
+  }
+
+  .menu-category-rail {
+    gap: 7px;
+    padding: 1px 0 3px;
+  }
+
+  .menu-category-link {
+    min-height: 40px;
+    padding: 0 13px;
+    font-size: .76rem;
+    box-shadow: 0 5px 14px rgba(48, 8, 61, .05);
+  }
+
+  /* Evita o hover persistente de telas touch deixar mais de uma categoria amarela. */
+  .menu-category-link:hover:not(.is-active) {
+    color: var(--purple-800);
+    background: var(--white);
+    border-color: rgba(78, 15, 96, .13);
+    transform: none;
+  }
+
+  .menu-main {
+    padding-top: 4px;
+    padding-bottom: 92px;
+  }
+
+  /* Instrução redundante no celular: a própria barra de categorias já ensina a navegação. */
+  .menu-intro {
+    display: none;
+  }
+
+  .menu-section {
+    scroll-margin-top: 122px;
+    padding: 28px 0 6px;
+  }
+
+  .menu-section-head {
+    margin-bottom: 14px;
+  }
+
+  .menu-section-head h2 {
+    font-size: clamp(1.9rem, 9vw, 2.55rem);
+    line-height: .98;
+  }
+
+  .menu-section-head p {
+    max-width: 34ch;
+    margin-top: 6px;
+    font-size: .84rem;
+    line-height: 1.45;
+  }
+
+  .product-rail {
+    grid-auto-columns: min(88vw, 360px);
+    gap: 12px;
+    padding-bottom: 14px;
+  }
+
+  .product-card {
+    border-radius: 22px;
+  }
+
+  .product-body {
+    padding: 16px;
+  }
+
+  .product-title-row h3 {
+    font-size: 1.32rem;
+  }
+
+  .product-description {
+    margin-top: 9px;
+    font-size: .84rem;
+    line-height: 1.48;
+  }
+
+  /* Dois tamanhos por linha: leitura mais rápida e card bem menos comprido. */
+  .size-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+    margin-top: 13px;
+  }
+
+  .size-item {
+    padding: 9px 10px;
+    font-size: .72rem;
+  }
+
+  .product-details {
+    margin-top: 12px;
+  }
+
+  .product-details summary {
+    min-height: 42px;
+    font-size: .73rem;
+  }
+
+  .product-note {
+    margin-top: 10px;
+    padding: 9px 10px;
+    font-size: .7rem;
+  }
+
+  /* Mantém as ações acessíveis sem cobrir tanta área útil da tela. */
+  .menu-mobile-actions {
+    bottom: max(6px, env(safe-area-inset-bottom));
+    width: calc(100% - 18px);
+    gap: 5px;
+    padding: 5px;
+    border-radius: 14px;
+  }
+
+  .menu-mobile-actions a {
+    min-height: 38px;
+    padding: 0 8px;
+    border-radius: 10px;
+    font-size: .7rem;
+  }
+
+  .menu-page-footer {
+    padding-bottom: 94px;
+  }
 }

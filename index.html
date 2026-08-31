@@ -76,6 +76,92 @@
     @media (max-width: 720px) {
       .sergel-grid { grid-template-columns: 1fr; }
     }
+
+    /* CTA de avaliações Google · 2026-08-31 */
+    .footer-review {
+      width: var(--container);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin: 36px auto 0;
+      padding: 22px 24px;
+      color: var(--white);
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 22px;
+    }
+    .footer-review-copy {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .footer-review-stars {
+      flex: 0 0 auto;
+      color: var(--yellow-500);
+      font-size: 1.22rem;
+      letter-spacing: .08em;
+      line-height: 1;
+    }
+    .footer-review-copy strong {
+      display: block;
+      color: var(--white);
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.18rem;
+    }
+    .footer-review-copy p {
+      margin-top: 3px;
+      color: rgba(255, 255, 255, .68);
+      font-size: .84rem;
+    }
+    .footer-review-button {
+      min-height: 48px;
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 19px;
+      color: var(--purple-950);
+      background: linear-gradient(135deg, var(--yellow-400), var(--yellow-500));
+      border-radius: 999px;
+      box-shadow: 0 16px 38px rgba(255, 210, 31, .18);
+      font-size: .88rem;
+      font-weight: 800;
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+    }
+    .footer-review-button:hover,
+    .footer-review-button:focus-visible {
+      transform: translateY(-3px);
+      box-shadow: 0 21px 44px rgba(255, 210, 31, .28);
+    }
+    .footer-review-button:focus-visible {
+      outline: 3px solid var(--yellow-500);
+      outline-offset: 3px;
+    }
+    .footer-review-button svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+    }
+    @media (max-width: 720px) {
+      .footer-review {
+        align-items: stretch;
+        flex-direction: column;
+        padding: 20px;
+      }
+      .footer-review-copy {
+        align-items: flex-start;
+      }
+      .footer-review-stars {
+        margin-top: 4px;
+        font-size: 1rem;
+      }
+      .footer-review-button {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -427,6 +513,23 @@
         <a href="https://wa.me/5519991288849" target="_blank" rel="noopener">WhatsApp para dúvidas</a>
       </div>
     </div>
+
+    <div class="footer-review" aria-label="Avalie o Açaí do Dudu no Google">
+      <div class="footer-review-copy">
+        <span class="footer-review-stars" aria-hidden="true">★★★★★</span>
+        <div>
+          <strong>Gostou do Açaí do Dudu?</strong>
+          <p>Conte como foi sua experiência. Sua avaliação ajuda outras pessoas a conhecerem o Dudu.</p>
+        </div>
+      </div>
+      <a class="footer-review-button" href="https://g.page/r/CcB8I0Upfvp_EAE/review" target="_blank" rel="noopener" data-track="footer_google_review" aria-label="Avaliar o Açaí do Dudu no Google">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m12 2.9 2.77 5.61 6.2.9-4.49 4.38 1.06 6.18L12 17.05l-5.54 2.92 1.06-6.18L3.03 9.41l6.2-.9L12 2.9Z" fill="currentColor" />
+        </svg>
+        Avaliar no Google
+      </a>
+    </div>
+
     <div class="footer-bottom">
       Açaí do Dudu · Site desenvolvido por <a href="https://olegariotech.com.br" target="_blank" rel="noopener">Olegario Tech</a>
     </div>

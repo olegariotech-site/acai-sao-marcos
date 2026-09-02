@@ -5,19 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Cardápio Oficial | Açaí do Dudu em Valinhos</title>
   <meta name="description" content="Cardápio oficial do Açaí do Dudu em Valinhos. Açaí, milk-shakes, Trio do Dudu, Batidão, sorvetes, picolés e água de coco." />
-  <meta name="theme-color" content="#3b064a" />
+  <meta name="theme-color" content="#31043d" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://acaidodudu.com.br/cardapio/" />
   <link rel="icon" href="/assets/assetslogologo-acai-sao-marcos.png" type="image/png" />
-
   <meta property="og:locale" content="pt_BR" />
   <meta property="og:site_name" content="Açaí do Dudu" />
   <meta property="og:title" content="Cardápio Oficial | Açaí do Dudu" />
   <meta property="og:description" content="Veja o cardápio completo: açaí, milk-shakes, sorvetes, picolés e muito mais." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://acaidodudu.com.br/cardapio/" />
-  <meta property="og:image" content="https://acaidodudu.com.br/assets/img/acai-do-dudu-link-preview-1200x630-v2.jpg?v=20260902-full" />
-  <meta property="og:image:secure_url" content="https://acaidodudu.com.br/assets/img/acai-do-dudu-link-preview-1200x630-v2.jpg?v=20260902-full" />
+  <meta property="og:image" content="https://acaidodudu.com.br/assets/img/acai-do-dudu-link-preview-1200x630-v2.jpg?v=20260902-premium" />
+  <meta property="og:image:secure_url" content="https://acaidodudu.com.br/assets/img/acai-do-dudu-link-preview-1200x630-v2.jpg?v=20260902-premium" />
   <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -25,287 +24,80 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Cardápio Oficial | Açaí do Dudu" />
   <meta name="twitter:description" content="Veja o cardápio completo do Açaí do Dudu." />
-  <meta name="twitter:image" content="https://acaidodudu.com.br/assets/img/acai-do-dudu-link-preview-1200x630-v2.jpg?v=20260902-full" />
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Menu",
-    "name":"Cardápio Oficial Açaí do Dudu",
-    "url":"https://acaidodudu.com.br/cardapio/",
-    "hasMenuSection":[
-      {"@type":"MenuSection","name":"Açaí"},
-      {"@type":"MenuSection","name":"Milk-shakes"},
-      {"@type":"MenuSection","name":"Trio do Dudu"},
-      {"@type":"MenuSection","name":"Batidão de Açaí"},
-      {"@type":"MenuSection","name":"Sorvetes e para levar"},
-      {"@type":"MenuSection","name":"Picolés e água de coco"}
-    ]
-  }
-  </script>
-
+  <meta name="twitter:image" content="https://acaidodudu.com.br/assets/img/acai-do-dudu-link-preview-1200x630-v2.jpg?v=20260902-premium" />
   <style>
     :root{
-      --p950:#210129;--p900:#30043c;--p800:#500661;--p700:#681379;
-      --yellow:#ffd21f;--green:#7cab18;--ink:#2d1238;--paper:#fffdf8;
-      --line:#d7c59f;--safe-top:max(7px,env(safe-area-inset-top));
-      --safe-bottom:max(7px,env(safe-area-inset-bottom));
+      --p950:#210129;--p900:#31043d;--p800:#520563;--p700:#6d117d;
+      --yellow:#ffd21f;--green:#83b423;--paper:#fffdf8;--ink:#2d1238;--line:#d9c9a8;
+      --safe-top:max(8px,env(safe-area-inset-top));--safe-bottom:max(8px,env(safe-area-inset-bottom));
+      --ui-h:42px;
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--p950)}
+    *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#130018}
     body{font-family:Arial,Helvetica,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;overscroll-behavior:none}
-    button,a{-webkit-tap-highlight-color:transparent}
-    button{font:inherit}
-
+    button,a{-webkit-tap-highlight-color:transparent}button{font:inherit}
     .book{width:100vw;height:100dvh;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;touch-action:pan-x}
     .book::-webkit-scrollbar{display:none}
-    .page{position:relative;flex:0 0 100vw;width:100vw;height:100dvh;overflow:hidden;scroll-snap-align:start;scroll-snap-stop:always;background:var(--paper)}
-    .sheet{width:min(100%,520px);height:100dvh;margin:0 auto;overflow:hidden;background:linear-gradient(180deg,var(--p900) 0 22%,var(--paper) 22% 100%);box-shadow:0 0 34px rgba(0,0,0,.15);padding:48px 10px 45px}
-    .page:nth-child(even) .sheet{background:linear-gradient(180deg,#3a0647 0 22%,var(--paper) 22% 100%)}
-
-    .topbar{position:fixed;z-index:30;top:var(--safe-top);left:8px;right:8px;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
-    .topbar a,.counter{pointer-events:auto;display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:32px;padding:6px 10px;border:1px solid rgba(255,255,255,.24);border-radius:999px;background:rgba(34,1,43,.84);color:#fff;text-decoration:none;font-size:12px;font-weight:900;backdrop-filter:blur(8px)}
-    .topbar svg{width:15px;height:15px}.counter{min-width:48px}
-
-    .head{height:92px;display:grid;grid-template-columns:54px 1fr;align-items:center;gap:9px;color:#fff;padding:0 4px 8px}
-    .head .logo{width:54px;height:54px;object-fit:contain}
-    .head .eyebrow{display:block;margin-bottom:2px;color:#fff;font-size:10px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;opacity:.9}
-    .head h1,.head h2{margin:0;font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;font-size:clamp(27px,8vw,38px);line-height:.93;letter-spacing:.3px;text-transform:uppercase;color:var(--yellow)}
-    .head p{margin:4px 0 0;color:#b8db58;font-size:11px;font-weight:800}
-
-    .content{position:relative}
-    .panel{border:1.5px solid #5b206a;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 5px 15px rgba(61,12,72,.05)}
-    .panel+.panel{margin-top:6px}
-    .panel-head{min-height:29px;display:flex;align-items:center;gap:5px;padding:4px 7px;background:linear-gradient(90deg,var(--p800),var(--p700));color:#fff;font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;font-size:clamp(11px,3vw,15px);line-height:1.05;letter-spacing:.2px;text-transform:uppercase;overflow-wrap:anywhere}
-    .num{flex:0 0 20px;width:20px;height:20px;display:grid;place-items:center;border-radius:50%;background:var(--yellow);color:var(--p950);font:900 11px Arial}
-    .panel-body{padding:6px 7px}
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-    .grid3{display:grid;grid-template-columns:.82fr 1.24fr 1fr;gap:5px;margin-top:6px}
-    .grid2>.panel,.grid3>.panel{margin-top:0}
-
-    .price-list,.plain-list,.check-list{margin:0;padding:0;list-style:none}
-    .price-list li{display:flex;justify-content:space-between;align-items:center;gap:5px;min-height:23px;padding:2px 0;border-bottom:1px dotted var(--line);font-size:12px}
-    .price-list li:last-child{border-bottom:0}
-    .price-list strong{color:var(--p800);font-size:12px;white-space:nowrap}
-    .plain-list li{position:relative;padding:1px 0 1px 9px;font-size:10.5px;line-height:1.17}
+    .page{flex:0 0 100vw;width:100vw;height:100dvh;overflow:hidden;scroll-snap-align:start;scroll-snap-stop:always;background:#130018}
+    .sheet{position:relative;width:min(100%,540px);height:100dvh;margin:auto;overflow:hidden;background:var(--paper);display:grid;grid-template-rows:var(--hero,25%) minmax(0,1fr);padding-bottom:calc(var(--ui-h) + var(--safe-bottom));box-shadow:0 0 40px rgba(0,0,0,.2)}
+    .hero{position:relative;overflow:hidden;background:radial-gradient(circle at 90% 20%,#65146f 0,#3d064a 38%,#25012e 100%);color:#fff;padding:calc(var(--safe-top) + 42px) 16px 10px;display:flex;align-items:flex-end}
+    .hero:after{content:"";position:absolute;left:-3%;right:-3%;bottom:-12px;height:24px;background:var(--yellow);border-radius:50% 50% 0 0/100% 100% 0 0;opacity:.95}
+    .hero-copy{position:relative;z-index:2;max-width:62%;padding-left:58px;padding-bottom:8px}
+    .hero-logo{position:absolute;z-index:3;left:14px;bottom:22px;width:64px;height:64px;object-fit:contain;filter:drop-shadow(0 8px 12px rgba(0,0,0,.25))}
+    .hero-art{position:absolute;z-index:1;right:-2%;bottom:0;width:43%;height:88%;object-fit:contain;filter:drop-shadow(0 10px 16px rgba(0,0,0,.28))}
+    .eyebrow{display:block;font-weight:900;font-size:clamp(8px,1.15vh,12px);letter-spacing:1.1px;text-transform:uppercase}
+    .hero h1,.hero h2{margin:2px 0 1px;font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;font-size:clamp(28px,5.3vh,48px);line-height:.92;letter-spacing:.3px;text-transform:uppercase;color:var(--yellow)}
+    .hero p{margin:4px 0 0;color:#b9df55;font-size:clamp(9px,1.25vh,13px);font-weight:900}
+    .body{min-height:0;padding:10px 12px 8px;display:grid;gap:7px;background:linear-gradient(180deg,#fffdf8,#fffaf1)}
+    .panel{min-height:0;border:1.7px solid #5f176d;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 5px 14px rgba(61,12,72,.05);display:flex;flex-direction:column}
+    .panel-head{flex:0 0 auto;min-height:26px;display:flex;align-items:center;gap:6px;padding:4px 7px;background:linear-gradient(90deg,var(--p800),var(--p700));color:#fff;font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;font-size:clamp(10px,1.45vh,15px);line-height:1.05;text-transform:uppercase;letter-spacing:.25px}
+    .num{flex:0 0 21px;width:21px;height:21px;display:grid;place-items:center;border-radius:50%;background:var(--yellow);color:var(--p950);font:900 clamp(9px,1.2vh,12px) Arial}
+    .panel-body{min-height:0;flex:1;padding:6px 8px;overflow:hidden}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:7px;min-height:0}.grid3{display:grid;grid-template-columns:.82fr 1.25fr 1fr;gap:6px;min-height:0}
+    .price-list,.plain-list,.check-list{margin:0;padding:0;list-style:none;height:100%}
+    .price-list{display:flex;flex-direction:column;justify-content:space-evenly}
+    .price-list li{display:flex;justify-content:space-between;gap:5px;padding:1px 0;border-bottom:1px dotted var(--line);font-size:clamp(8.8px,1.32vh,13px)}
+    .price-list li:last-child{border-bottom:0}.price-list strong{color:var(--p800);white-space:nowrap}
+    .plain-list{display:flex;flex-direction:column;justify-content:flex-start;gap:1px}
+    .plain-list li{position:relative;padding-left:9px;font-size:clamp(8px,1.14vh,11.5px);line-height:1.15}
     .plain-list li:before{content:'•';position:absolute;left:0;color:var(--p700);font-weight:900}
-    .extras{display:grid;grid-template-columns:1fr auto;gap:5px;padding:3px 0;border-bottom:1px dotted var(--line);font-size:10.5px}
+    .extras{display:grid;grid-template-columns:1fr auto;gap:6px;padding:2px 0;border-bottom:1px dotted var(--line);font-size:clamp(8px,1.12vh,11px)}
     .extras:last-child{border-bottom:0}.extras strong{color:var(--p700);white-space:nowrap}
-    .ribbon{margin-top:6px;padding:6px 8px;border-radius:12px;background:linear-gradient(90deg,var(--p800),var(--p950),var(--p800));color:#fff;text-align:center;font-size:10.5px;font-weight:900}
-    .ribbon span{color:var(--yellow)}
-
-    .hero-acai{position:absolute;right:1px;top:-84px;width:90px;height:90px;object-fit:contain;filter:drop-shadow(0 9px 9px rgba(24,0,29,.18))}
-    .product-visual{width:100%;height:75px;object-fit:contain;display:block;margin:-3px auto 2px;filter:drop-shadow(0 6px 6px rgba(30,0,35,.13))}
-    .section-label{display:block;margin:0 0 3px;color:var(--p800);font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;font-size:12px;text-transform:uppercase}
-    .tags{display:flex;flex-wrap:wrap;gap:3px}.tag{padding:2px 5px;border-radius:999px;background:#f4ecd9;border:1px solid #eadcb9;font-size:9px;font-weight:700}
-    .note{margin:4px 0 0;color:#6b5a70;font-size:9px;line-height:1.2}
-
-    .trio-layout,.batidao-layout{display:grid;grid-template-columns:1fr 1fr;gap:7px;align-items:center}
-    .trio-layout .product-visual,.batidao-layout .product-visual{height:150px;margin:0}
-    .big-price{display:inline-flex;align-items:baseline;gap:4px;padding:7px 10px;border:2px solid var(--yellow);border-radius:13px;background:var(--p800);color:#fff}
-    .big-price small{font-size:9px;font-weight:900;text-transform:uppercase}.big-price strong{font-size:28px;color:var(--yellow);line-height:1}
-    .promo-copy{margin:7px 0 0;color:#5b206a;font-size:11px;font-weight:800;line-height:1.25}
-    .check-list li{position:relative;padding:3px 0 3px 19px;border-bottom:1px dotted #d8c8ad;font-size:10.5px;line-height:1.18}
-    .check-list li:last-child{border-bottom:0}
-    .check-list li:before{content:'✓';position:absolute;left:0;top:2px;width:14px;height:14px;display:grid;place-items:center;border:1.5px solid var(--green);border-radius:50%;color:var(--green);font-size:8px;font-weight:900}
-
-    .product-row{display:grid;grid-template-columns:82px 1fr;gap:7px;align-items:center;padding:5px 0;border-bottom:1px dotted var(--line)}
-    .product-row:last-child{border-bottom:0}.product-row img{width:82px;height:70px;object-fit:contain}
-    .product-row h3{margin:0 0 2px;color:var(--p800);font-size:14px;line-height:1.08}
-    .product-row .price{color:var(--p800);font-size:20px;font-weight:900}.product-row .price small{font-size:9px;color:var(--green)}
-    .premium{display:grid;grid-template-columns:88px 1fr;gap:7px;align-items:center}.premium img{width:88px;height:78px;object-fit:contain}.premium .price{color:var(--p800);font-size:22px;font-weight:900}
-    .coco{display:grid;grid-template-columns:90px 1fr;gap:7px;align-items:center}.coco img{width:90px;height:92px;object-fit:contain}
-
-    .nav{position:fixed;z-index:31;top:50%;width:36px;height:52px;border:0;border-radius:13px;display:grid;place-items:center;background:rgba(36,1,45,.62);color:#fff;backdrop-filter:blur(6px);transform:translateY(-50%);cursor:pointer}
-    .nav:disabled{opacity:0;pointer-events:none}.nav svg{width:20px;height:20px}.prev{left:6px}.next{right:6px}
-    .pager{position:fixed;z-index:32;left:50%;bottom:var(--safe-bottom);transform:translateX(-50%);display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;background:rgba(35,1,43,.84);backdrop-filter:blur(8px)}
-    .dot{width:7px;height:7px;padding:0;border:0;border-radius:999px;background:rgba(255,255,255,.42)}.dot.active{width:20px;background:var(--yellow)}
-
-    @media(max-width:410px){
-      .sheet{padding-left:8px;padding-right:8px}
-      .head{grid-template-columns:48px 1fr;height:86px;gap:7px}.head .logo{width:48px;height:48px}
-      .head h1,.head h2{font-size:27px}
-      .panel-head{font-size:11px;padding:4px 5px}.num{width:19px;height:19px;flex-basis:19px;font-size:10px}
-      .grid3{grid-template-columns:.8fr 1.27fr .98fr;gap:4px}
-      .plain-list li{font-size:9.8px}.price-list li,.price-list strong{font-size:11.5px}
-      .extras{font-size:10px}.hero-acai{width:82px;height:82px;top:-78px}
-    }
-    @media(max-height:720px){
-      .sheet{padding-top:43px;padding-bottom:40px;background:linear-gradient(180deg,var(--p900) 0 20%,var(--paper) 20% 100%)}
-      .page:nth-child(even) .sheet{background:linear-gradient(180deg,#3a0647 0 20%,var(--paper) 20% 100%)}
-      .head{height:76px;grid-template-columns:43px 1fr}.head .logo{width:43px;height:43px}.head h1,.head h2{font-size:24px}.head p{font-size:10px;margin-top:2px}.head .eyebrow{font-size:8.5px}
-      .panel-head{min-height:24px;font-size:10px;padding:3px 5px}.num{width:18px;height:18px;flex-basis:18px;font-size:9px}
-      .panel-body{padding:4px 6px}.price-list li{min-height:19px;padding:1px 0;font-size:10.5px}.price-list strong{font-size:10.5px}
-      .plain-list li{font-size:9px;line-height:1.1;padding-top:0;padding-bottom:0}.extras{padding:2px 0;font-size:9px}
-      .grid3{margin-top:4px}.panel+.panel{margin-top:4px}.ribbon{margin-top:4px;padding:5px 7px;font-size:9px}
-      .hero-acai{top:-69px;width:70px;height:70px}.product-visual{height:60px;margin:-5px auto 1px}
-      .tags{gap:2px}.tag{padding:1px 4px;font-size:8px}.note{font-size:8px;margin-top:2px}
-      .trio-layout .product-visual,.batidao-layout .product-visual{height:128px}.big-price{padding:5px 8px}.big-price strong{font-size:24px}.promo-copy{font-size:9.5px;margin-top:5px}
-      .check-list li{font-size:9px;padding:2px 0 2px 17px}.check-list li:before{width:12px;height:12px;font-size:7px}
-      .product-row{grid-template-columns:70px 1fr;padding:3px 0}.product-row img{width:70px;height:58px}.product-row h3{font-size:12px}.product-row .price{font-size:18px}
-      .premium{grid-template-columns:76px 1fr}.premium img{width:76px;height:65px}.premium .price{font-size:20px}.coco{grid-template-columns:78px 1fr}.coco img{width:78px;height:78px}
-      .nav{width:34px;height:48px}.pager{padding:6px 9px}
-    }
-    @media(max-height:620px){
-      .sheet{padding-top:39px;padding-bottom:36px}
-      .head{height:66px;grid-template-columns:38px 1fr}.head .logo{width:38px;height:38px}.head h1,.head h2{font-size:21px}.head p{display:none}
-      .panel-head{font-size:9px;min-height:21px}.panel-body{padding:3px 5px}
-      .plain-list li{font-size:8.2px}.price-list li,.price-list strong{font-size:9.5px}.price-list li{min-height:17px}
-      .product-visual{height:49px}.trio-layout .product-visual,.batidao-layout .product-visual{height:110px}
-      .ribbon{font-size:8px;padding:4px}.product-row img{height:50px}.premium img{height:56px}.coco img{height:67px}
-    }
-    @media(min-width:700px){.prev{left:calc(50% - 300px)}.next{right:calc(50% - 300px)}}
+    .section-label{display:block;margin-bottom:3px;color:var(--p800);font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;font-size:clamp(10px,1.35vh,14px);text-transform:uppercase}
+    .tags{display:flex;flex-wrap:wrap;gap:3px;align-content:flex-start}.tag{padding:2px 5px;border-radius:999px;background:#f5eddc;border:1px solid #e5d7b5;font-size:clamp(7.4px,1.02vh,10px);font-weight:800}
+    .note{margin:3px 0 0;color:#6b5a70;font-size:clamp(7.2px,.98vh,9.5px);line-height:1.18}
+    .ribbon{display:grid;place-items:center;min-height:27px;padding:4px 8px;border-radius:12px;background:linear-gradient(90deg,var(--p800),var(--p950),var(--p800));color:#fff;text-align:center;font-size:clamp(8px,1.12vh,11px);font-weight:900}.ribbon span{color:var(--yellow)}
+    .topbar{position:fixed;z-index:40;top:var(--safe-top);left:max(8px,calc(50% - 262px));right:max(8px,calc(50% - 262px));display:flex;justify-content:space-between;pointer-events:none}
+    .topbar a,.counter{pointer-events:auto;display:inline-flex;align-items:center;gap:5px;min-height:32px;padding:6px 11px;border:1px solid rgba(255,255,255,.28);border-radius:999px;background:rgba(34,1,43,.82);color:#fff;text-decoration:none;font-size:12px;font-weight:900;backdrop-filter:blur(8px)}
+    .topbar svg{width:15px;height:15px}.counter{min-width:50px;justify-content:center}
+    .nav{position:fixed;z-index:42;bottom:calc(var(--safe-bottom) + 3px);width:35px;height:35px;border:1px solid rgba(255,255,255,.25);border-radius:50%;display:grid;place-items:center;background:rgba(35,1,43,.82);color:#fff;backdrop-filter:blur(8px);cursor:pointer}.nav:disabled{opacity:0;pointer-events:none}.nav svg{width:17px;height:17px}.prev{left:max(10px,calc(50% - 255px))}.next{right:max(10px,calc(50% - 255px))}
+    .pager{position:fixed;z-index:43;left:50%;bottom:calc(var(--safe-bottom) + 4px);transform:translateX(-50%);display:flex;gap:6px;padding:8px 11px;border-radius:999px;background:rgba(35,1,43,.84);backdrop-filter:blur(8px)}
+    .dot{width:7px;height:7px;padding:0;border:0;border-radius:999px;background:rgba(255,255,255,.4)}.dot.active{width:22px;background:var(--yellow)}
+    .acai{--hero:27%}.acai .body{grid-template-rows:1fr 1.15fr .62fr auto}.acai .hero-art{width:37%;height:82%;right:0}.acai .hero-copy{max-width:66%}
+    .milk{--hero:30%}.milk .body{grid-template-rows:1fr 1fr auto}.milk .hero-art{width:46%;height:91%;right:-4%}.milk .hero-copy{max-width:58%}
+    .milk-card .panel-body{display:grid;grid-template-columns:.88fr 1.12fr;gap:8px}.milk-card .price-list li{font-size:clamp(8.6px,1.22vh,12px)}
+    .trio{--hero:22%}.trio .body{grid-template-rows:1.45fr .9fr auto}.trio-main{display:grid;grid-template-columns:1.15fr .85fr;gap:8px;min-height:0}.trio-photo{width:100%;height:100%;object-fit:cover;border-radius:15px;border:1.7px solid #5f176d}.trio-price{display:flex;flex-direction:column;justify-content:center;gap:8px;padding:10px;border-radius:15px;background:linear-gradient(145deg,#4e075e,#27012f);color:#fff;border:2px solid var(--yellow)}.trio-price small{font-weight:900;text-transform:uppercase}.trio-price strong{font-size:clamp(30px,5.1vh,47px);line-height:.92;color:var(--yellow)}.trio-price p{margin:0;font-size:clamp(9px,1.2vh,12px);font-weight:800;line-height:1.3}.trio-info{display:grid;grid-template-columns:1fr 1fr;gap:7px;min-height:0}.check-list{display:flex;flex-direction:column;justify-content:space-evenly}.check-list li{position:relative;padding:2px 0 2px 19px;border-bottom:1px dotted var(--line);font-size:clamp(8.2px,1.15vh,11.5px);line-height:1.16}.check-list li:last-child{border-bottom:0}.check-list li:before{content:'✓';position:absolute;left:0;top:1px;width:14px;height:14px;display:grid;place-items:center;border:1.5px solid var(--green);border-radius:50%;color:var(--green);font-size:8px;font-weight:900}
+    .batidao{--hero:43%}.batidao .hero-art{height:98%;width:51%;right:-3%}.batidao .hero-copy{max-width:53%;padding-left:55px}.batidao .body{grid-template-rows:1fr .92fr auto}.batidao-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:7px;min-height:0}.batidao-photo{width:100%;height:100%;object-fit:cover;border-radius:15px;border:1.7px solid #5f176d}
+    .potes{--hero:22%}.potes .body{grid-template-rows:1fr 1fr 1.08fr auto}.potes .hero-art{width:36%;height:80%}.product-card{display:grid;grid-template-columns:40% 1fr;gap:8px;align-items:center;min-height:0;padding:6px 8px;border:1.7px solid #5f176d;border-radius:15px;background:#fff;overflow:hidden}.product-card img{width:100%;height:100%;max-height:120px;object-fit:contain}.product-card h3{margin:0 0 3px;color:var(--p800);font-size:clamp(11px,1.65vh,17px);line-height:1.05}.product-card .litros{color:var(--green);font-weight:900;font-size:clamp(9px,1.15vh,12px)}.product-card .price{display:block;margin-top:2px;color:var(--p800);font-size:clamp(20px,3.1vh,32px);font-weight:900}.sergel-images{display:flex;gap:4px;height:100%;min-height:0}.sergel-images img{width:50%;height:100%;object-fit:contain}.mesclado-art{height:100%;min-height:70px;border-radius:10px;background:linear-gradient(135deg,#4d075d 0 48%,#fff3cf 48% 52%,#6b1078 52%);display:grid;place-items:center}.mesclado-art img{width:58%;height:58%;object-fit:contain;filter:drop-shadow(0 6px 9px rgba(0,0,0,.25))}
+    .picoles{--hero:27%}.picoles .body{grid-template-rows:1.08fr .92fr auto}.picoles .hero-art{width:39%;height:88%}.picole-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;min-height:0}.picole-item{display:grid;grid-template-rows:1fr auto;min-height:0;text-align:center}.picole-item img{width:100%;height:100%;min-height:0;object-fit:contain}.picole-item h3{margin:2px 0;color:var(--p800);font-size:clamp(11px,1.55vh,16px)}.picole-item .price{color:var(--p800);font-size:clamp(20px,3.1vh,31px);font-weight:900}.picole-item .price small{display:block;color:var(--green);font-size:clamp(8px,1.05vh,11px)}.coco-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:8px;min-height:0}.coco-grid img{width:100%;height:100%;object-fit:cover;border-radius:10px}
+    @media(max-width:380px){.body{padding-left:8px;padding-right:8px;gap:5px}.hero{padding-left:10px;padding-right:10px}.hero-logo{left:10px;width:56px;height:56px}.hero-copy{padding-left:52px}.panel-head{padding-left:5px;padding-right:5px}.grid3{gap:4px}.product-card{gap:5px;padding:5px}.nav{width:32px;height:32px}}
+    @media(max-height:690px){.sheet{padding-bottom:calc(39px + var(--safe-bottom))}.hero{padding-top:calc(var(--safe-top) + 38px)}.hero-logo{width:52px;height:52px}.hero-copy{padding-left:48px}.hero h1,.hero h2{font-size:clamp(24px,5vh,36px)}.body{padding-top:7px;padding-bottom:5px;gap:5px}.panel-head{min-height:22px}.num{width:18px;height:18px;flex-basis:18px}.panel-body{padding:4px 6px}.ribbon{min-height:23px}.acai{--hero:25%}.milk{--hero:27%}.trio{--hero:20%}.batidao{--hero:39%}.potes{--hero:20%}.picoles{--hero:24%}}
+    @media(min-width:700px){.nav.prev{left:calc(50% - 300px)}.nav.next{right:calc(50% - 300px)}}
     @media(prefers-reduced-motion:reduce){.book{scroll-behavior:auto}}
   </style>
 </head>
 <body>
-  <nav class="topbar" aria-label="Navegação do cardápio">
-    <a href="/" aria-label="Voltar ao site do Açaí do Dudu">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Site
-    </a>
-    <span class="counter"><span data-current>1</span>/6</span>
-  </nav>
-
+  <nav class="topbar" aria-label="Navegação do cardápio"><a href="/" aria-label="Voltar ao site"><svg viewBox="0 0 24 24"><path d="M19 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Site</a><span class="counter"><span data-current>1</span>/6</span></nav>
   <main class="book" data-book aria-label="Cardápio do Açaí do Dudu">
-    <section class="page" data-page="Açaí">
-      <div class="sheet">
-        <header class="head">
-          <img class="logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt="Açaí do Dudu"/>
-          <div><span class="eyebrow">Cardápio Oficial</span><h1>Açaí</h1><p>Monte do seu jeito.</p></div>
-        </header>
-        <div class="content">
-          <img class="hero-acai" src="/assets/img/produtos/acai/acai-trufado-frutas-crocante-hero-960.webp" alt="Copo de açaí montado com frutas"/>
-          <div class="grid2">
-            <article class="panel"><div class="panel-head"><span class="num">1</span>Tamanhos</div><div class="panel-body"><ul class="price-list">
-              <li><span>300 ml</span><strong>R$ 16,00</strong></li><li><span>400 ml</span><strong>R$ 22,00</strong></li><li><span>500 ml</span><strong>R$ 28,00</strong></li><li><span>700 ml</span><strong>R$ 32,00</strong></li>
-            </ul></div></article>
-            <article class="panel"><div class="panel-head"><span class="num">2</span>Escolha seu açaí</div><div class="panel-body"><ul class="plain-list">
-              <li>Açaí Natural</li><li>Trufado de Ninho</li><li>Trufado de Nutella</li><li>Trufado de Danone</li><li>Trufado de Maracujá</li><li>Açaí com Cupuaçu</li><li>Cupuaçu</li>
-            </ul></div></article>
-          </div>
-          <div class="grid3">
-            <article class="panel"><div class="panel-head"><span class="num">3</span>Frutas</div><div class="panel-body"><ul class="plain-list"><li>Morango</li><li>Manga</li><li>Uva-verde sem semente</li></ul></div></article>
-            <article class="panel"><div class="panel-head"><span class="num">4</span>Acompanhamentos</div><div class="panel-body"><ul class="plain-list"><li>Leite em pó</li><li>Granola</li><li>Paçoca</li><li>Amendoim</li><li>Ovomaltine</li><li>Confete</li><li>Chocoball</li><li>Granulado</li><li>Fini</li></ul></div></article>
-            <article class="panel"><div class="panel-head"><span class="num">5</span>Caldas</div><div class="panel-body"><ul class="plain-list"><li>Leite condensado</li><li>Chocolate branco</li><li>Chocolate</li><li>Caramelo</li><li>Morango</li><li>Menta</li></ul></div></article>
-          </div>
-          <article class="panel" style="margin-top:6px"><div class="panel-head"><span class="num">6</span>Adicionais</div><div class="panel-body">
-            <div class="extras"><span>Nutella</span><strong>valor a confirmar</strong></div>
-            <div class="extras"><span>Skimo Branco</span><strong>valor a confirmar</strong></div>
-            <div class="extras"><span>Skimo Meio Amargo / Ao Leite</span><strong>valor a confirmar</strong></div>
-          </div></article>
-          <div class="ribbon">Monte do seu jeito e deixe o <span>Dudu</span> caprichar!</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="page" data-page="Milk-shakes">
-      <div class="sheet">
-        <header class="head"><img class="logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt="Açaí do Dudu"/><div><span class="eyebrow">Cardápio Oficial</span><h2>Milk-shakes</h2><p>Tradicional e Trufado.</p></div></header>
-        <div class="content">
-          <img class="product-visual" src="/assets/img/produtos/milkshake/trio-acai-e-milkshake-destaque-960.webp" alt="Milk-shakes do Açaí do Dudu"/>
-          <article class="panel"><div class="panel-head"><span class="num">1</span>Milk-shake Tradicional</div><div class="panel-body grid2">
-            <div><span class="section-label">Tamanhos</span><ul class="price-list"><li><span>300 ml</span><strong>R$ 16,00</strong></li><li><span>400 ml</span><strong>R$ 22,00</strong></li><li><span>500 ml</span><strong>R$ 28,00</strong></li><li><span>700 ml</span><strong>R$ 32,00</strong></li></ul></div>
-            <div><span class="section-label">Sabores</span><div class="tags"><span class="tag">Kinder Ovo</span><span class="tag">Chocolate</span><span class="tag">Morango</span><span class="tag">Ovomaltine</span><span class="tag">Algodão Doce</span><span class="tag">Prestígio</span><span class="tag">Laka</span><span class="tag">Menta</span><span class="tag">Maracujá</span><span class="tag">Abacaxi</span><span class="tag">Torta de Limão</span><span class="tag">Pistache</span></div></div>
-          </div><div class="panel-body" style="padding-top:0"><p class="note"><strong>Inclui:</strong> 1 cobertura + 1 acompanhamento. Extras: <strong>+ R$ 2,00 cada.</strong></p></div></article>
-          <article class="panel"><div class="panel-head"><span class="num">2</span>Milk-shake Trufado</div><div class="panel-body grid2">
-            <div><span class="section-label">Tamanhos</span><ul class="price-list"><li><span>300 ml</span><strong>R$ 18,00</strong></li><li><span>400 ml</span><strong>R$ 24,00</strong></li><li><span>500 ml</span><strong>R$ 30,00</strong></li><li><span>700 ml</span><strong>R$ 34,00</strong></li></ul></div>
-            <div><span class="section-label">Sabores</span><div class="tags"><span class="tag">Nutella</span><span class="tag">Café</span><span class="tag">Ninho</span><span class="tag">Morango</span></div></div>
-          </div><div class="panel-body" style="padding-top:0"><p class="note"><strong>Inclui:</strong> 1 cobertura + 1 acompanhamento. Extras: <strong>+ R$ 2,00 cada.</strong></p></div></article>
-          <div class="ribbon">Cremoso, gelado e caprichado do jeito do <span>Dudu</span>.</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="page" data-page="Trio do Dudu">
-      <div class="sheet">
-        <header class="head"><img class="logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt="Açaí do Dudu"/><div><span class="eyebrow">Cardápio Oficial</span><h2>Trio do Dudu</h2><p>Sobremesa montada.</p></div></header>
-        <div class="content">
-          <div class="trio-layout"><img class="product-visual" src="/assets/img/produtos/sorvetes/trio-sobremesas-tropicais-960.webp" alt="Trio do Dudu"/><div><div class="big-price"><small>Por apenas</small><strong>R$ 14,00</strong></div><p class="promo-copy">Uma combinação gelada e caprichada para levar e aproveitar.</p></div></div>
-          <div class="grid2" style="margin-top:6px">
-            <article class="panel"><div class="panel-head">O que vai no Trio</div><div class="panel-body"><ul class="check-list"><li>2 bolas de sorvete</li><li>1 casquinha</li><li>1 calda</li><li>Embalagem de isopor para viagem</li></ul></div></article>
-            <article class="panel"><div class="panel-head">Complementos</div><div class="panel-body" style="text-align:center;padding:16px 7px"><strong style="display:block;color:var(--p800);font-size:13px">Complementos extras</strong><strong style="display:block;color:var(--green);font-size:21px;margin-top:5px">+ R$ 2,00 cada</strong></div></article>
-          </div>
-          <div class="ribbon">Peça o seu e deixe o <span>Dudu</span> caprichar!</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="page" data-page="Batidão de Açaí">
-      <div class="sheet">
-        <header class="head"><img class="logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt="Açaí do Dudu"/><div><span class="eyebrow">Cardápio Oficial</span><h2>Batidão de Açaí</h2><p>Açaí batido com água.</p></div></header>
-        <div class="content">
-          <div class="batidao-layout">
-            <article class="panel"><div class="panel-head">Tamanhos</div><div class="panel-body"><ul class="price-list"><li><span>300 ml</span><strong>R$ 10,00</strong></li><li><span>500 ml</span><strong>R$ 16,00</strong></li><li><span>1 L</span><strong>R$ 22,00</strong></li></ul></div></article>
-            <img class="product-visual" src="/assets/img/produtos/acai/acai-origem-garrafas-960.webp" alt="Batidão de açaí servido na garrafa"/>
-          </div>
-          <article class="panel" style="margin-top:7px"><div class="panel-head">Informações</div><div class="panel-body"><ul class="check-list"><li>Açaí batido com água</li><li>Servido na garrafa</li><li>Adicionais e complementos cobrados à parte</li></ul></div></article>
-          <div class="ribbon">Refrescante e <span>pronto para levar</span>.</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="page" data-page="Sorvetes e para levar">
-      <div class="sheet">
-        <header class="head"><img class="logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt="Açaí do Dudu"/><div><span class="eyebrow">Cardápio Oficial</span><h2>Sorvetes e Para Levar</h2><p>Potes e opções para compartilhar.</p></div></header>
-        <div class="content">
-          <article class="panel"><div class="panel-head">Potes do Dudu</div><div class="panel-body">
-            <div class="product-row"><img src="/assets/img/produtos/pote-tradicional-dudu-2l-hero-960.webp" alt="Pote Tradicional do Dudu 2 litros"/><div><h3>Pote Tradicional do Dudu</h3><span class="price"><small>2 L</small> R$ 38,00</span></div></div>
-            <div class="product-row"><img src="/assets/assetslogologo-acai-sao-marcos.png" alt="Açaí do Dudu"/><div><h3>Pote Mesclado</h3><span class="price"><small>2 L</small> R$ 48,00</span><p class="note">Consulte as opções disponíveis na loja.</p></div></div>
-          </div></article>
-          <article class="panel"><div class="panel-head">Sergel Premium 2 L</div><div class="panel-body premium"><img src="/assets/img/produtos/sorvetes/sergel-2l-iogurte-com-amarena.webp" alt="Sorvete Sergel Premium 2 litros"/><div><strong class="price">R$ 56,00</strong><ul class="plain-list" style="margin-top:4px"><li>Iogurte com Amarena</li><li>Chocolate com Pedaços</li></ul></div></div></article>
-          <div class="ribbon">Opções para <span>todos os gostos</span> e momentos.</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="page" data-page="Picolés e água de coco">
-      <div class="sheet">
-        <header class="head"><img class="logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt="Açaí do Dudu"/><div><span class="eyebrow">Cardápio Oficial</span><h2>Picolés e Água de Coco</h2><p>Gelado para qualquer hora.</p></div></header>
-        <div class="content">
-          <article class="panel"><div class="panel-head">Picolés</div><div class="panel-body">
-            <div class="product-row"><img src="/assets/img/produtos/picoles-do-dudu-card.png" alt="Picolés do Dudu"/><div><h3>Picolés do Dudu</h3><span class="price"><small>a partir de</small> R$ 1,99</span></div></div>
-            <div class="product-row"><img src="/assets/img/produtos/picoles-sergel-card.png" alt="Picolés Sergel"/><div><h3>Picolés Sergel</h3><span class="price"><small>a partir de</small> R$ 4,80</span></div></div>
-          </div></article>
-          <article class="panel"><div class="panel-head">Água de Coco Gelada</div><div class="panel-body coco"><img src="/assets/img/produtos/agua-de-coco-dudu-hero-960.webp" alt="Água de coco gelada"/><ul class="price-list"><li><span>No coco</span><strong>R$ 10,00</strong></li><li><span>500 ml para viagem</span><strong>R$ 10,00</strong></li><li><span>1 L para viagem</span><strong>R$ 20,00</strong></li></ul></div></article>
-          <div class="ribbon">Leve, refrescante e pronta para <span>você</span>.</div>
-        </div>
-      </div>
-    </section>
+    <section class="page acai" data-page="Açaí"><div class="sheet"><header class="hero"><img class="hero-logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt="Açaí do Dudu"><div class="hero-copy"><span class="eyebrow">Cardápio Oficial</span><h1>Açaí</h1><p>Monte do seu jeito.</p></div><img class="hero-art" src="/assets/img/produtos/acai/acai-trufado-frutas-crocante-hero-960.webp" alt="Açaí montado com frutas e acompanhamentos"></header><div class="body"><div class="grid2"><article class="panel"><div class="panel-head"><span class="num">1</span>Tamanhos</div><div class="panel-body"><ul class="price-list"><li><span>300 ml</span><strong>R$ 16,00</strong></li><li><span>400 ml</span><strong>R$ 22,00</strong></li><li><span>500 ml</span><strong>R$ 28,00</strong></li><li><span>700 ml</span><strong>R$ 32,00</strong></li></ul></div></article><article class="panel"><div class="panel-head"><span class="num">2</span>Escolha seu Açaí</div><div class="panel-body"><ul class="plain-list"><li>Açaí Natural</li><li>Trufado de Ninho</li><li>Trufado de Nutella</li><li>Trufado de Danone</li><li>Trufado de Maracujá</li><li>Açaí com Cupuaçu</li><li>Cupuaçu</li></ul></div></article></div><div class="grid3"><article class="panel"><div class="panel-head"><span class="num">3</span>Frutas</div><div class="panel-body"><ul class="plain-list"><li>Morango</li><li>Manga</li><li>Uva-verde sem semente</li></ul></div></article><article class="panel"><div class="panel-head"><span class="num">4</span>Acompanhamentos</div><div class="panel-body"><ul class="plain-list"><li>Leite em pó</li><li>Granola</li><li>Paçoca</li><li>Amendoim</li><li>Ovomaltine</li><li>Confete</li><li>Chocoball</li><li>Granulado</li><li>Fini</li></ul></div></article><article class="panel"><div class="panel-head"><span class="num">5</span>Caldas</div><div class="panel-body"><ul class="plain-list"><li>Leite condensado</li><li>Chocolate branco</li><li>Chocolate</li><li>Caramelo</li><li>Morango</li><li>Menta</li></ul></div></article></div><article class="panel"><div class="panel-head"><span class="num">6</span>Adicionais</div><div class="panel-body"><div class="extras"><span>Nutella</span><strong>valor a confirmar</strong></div><div class="extras"><span>Skimo Branco</span><strong>valor a confirmar</strong></div><div class="extras"><span>Skimo Meio Amargo / Ao Leite</span><strong>valor a confirmar</strong></div></div></article><div class="ribbon">Monte do seu jeito e deixe o <span>Dudu</span> caprichar!</div></div></div></section>
+    <section class="page milk" data-page="Milk-shakes"><div class="sheet"><header class="hero"><img class="hero-logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt="Açaí do Dudu"><div class="hero-copy"><span class="eyebrow">Cardápio Oficial</span><h2>Milk-shakes</h2><p>Tradicional e Trufado.</p></div><img class="hero-art" src="/assets/img/produto-milkshake-sabores-960.webp" alt="Milk-shakes do Açaí do Dudu"></header><div class="body"><article class="panel milk-card"><div class="panel-head"><span class="num">1</span>Milk-shake Tradicional</div><div class="panel-body"><div><span class="section-label">Tamanhos</span><ul class="price-list"><li><span>300 ml</span><strong>R$ 16,00</strong></li><li><span>400 ml</span><strong>R$ 22,00</strong></li><li><span>500 ml</span><strong>R$ 28,00</strong></li><li><span>700 ml</span><strong>R$ 32,00</strong></li></ul></div><div><span class="section-label">Sabores</span><div class="tags"><span class="tag">Kinder Ovo</span><span class="tag">Chocolate</span><span class="tag">Morango</span><span class="tag">Ovomaltine</span><span class="tag">Algodão Doce</span><span class="tag">Prestígio</span><span class="tag">Laka</span><span class="tag">Menta</span><span class="tag">Maracujá</span><span class="tag">Abacaxi</span><span class="tag">Torta de Limão</span><span class="tag">Pistache</span></div></div></div><div class="panel-body" style="flex:0 0 auto;padding-top:0"><p class="note"><strong>Inclui:</strong> 1 cobertura + 1 acompanhamento. Extras: <strong>+ R$ 2,00 cada.</strong></p></div></article><article class="panel milk-card"><div class="panel-head"><span class="num">2</span>Milk-shake Trufado</div><div class="panel-body"><div><span class="section-label">Tamanhos</span><ul class="price-list"><li><span>300 ml</span><strong>R$ 18,00</strong></li><li><span>400 ml</span><strong>R$ 24,00</strong></li><li><span>500 ml</span><strong>R$ 30,00</strong></li><li><span>700 ml</span><strong>R$ 34,00</strong></li></ul></div><div><span class="section-label">Sabores</span><div class="tags"><span class="tag">Nutella</span><span class="tag">Café</span><span class="tag">Ninho</span><span class="tag">Morango</span></div></div></div><div class="panel-body" style="flex:0 0 auto;padding-top:0"><p class="note"><strong>Inclui:</strong> 1 cobertura + 1 acompanhamento. Extras: <strong>+ R$ 2,00 cada.</strong></p></div></article><div class="ribbon">Cremoso, gelado e caprichado do jeito do <span>Dudu</span>.</div></div></div></section>
+    <section class="page trio" data-page="Trio do Dudu"><div class="sheet"><header class="hero"><img class="hero-logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt="Açaí do Dudu"><div class="hero-copy"><span class="eyebrow">Cardápio Oficial</span><h2>Trio do Dudu</h2><p>Sobremesa montada.</p></div></header><div class="body"><div class="trio-main"><img class="trio-photo" src="/assets/img/produtos/sorvetes/trio-sobremesas-tropicais-960.webp" alt="Trio do Dudu"><div class="trio-price"><small>Por apenas</small><strong>R$ 14,00</strong><p>Uma combinação gelada e caprichada para levar e aproveitar.</p></div></div><div class="trio-info"><article class="panel"><div class="panel-head">O que vai no Trio</div><div class="panel-body"><ul class="check-list"><li>2 bolas de sorvete</li><li>1 casquinha</li><li>1 calda</li><li>Embalagem de isopor para viagem</li></ul></div></article><article class="panel"><div class="panel-head">Complementos</div><div class="panel-body" style="display:grid;place-items:center;text-align:center"><div><strong style="display:block;color:var(--p800);font-size:clamp(11px,1.6vh,16px)">Complementos extras</strong><strong style="display:block;color:var(--green);font-size:clamp(20px,3vh,31px);margin-top:5px">+ R$ 2,00 cada</strong></div></div></article></div><div class="ribbon">Peça o seu e deixe o <span>Dudu</span> caprichar!</div></div></div></section>
+    <section class="page batidao" data-page="Batidão de Açaí"><div class="sheet"><header class="hero"><img class="hero-logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt="Açaí do Dudu"><div class="hero-copy"><span class="eyebrow">Cardápio Oficial</span><h2>Batidão de Açaí</h2><p>Açaí batido com água.</p></div><img class="hero-art" src="/assets/img/produtos/acai/acai-origem-garrafas-960.webp" alt="Batidão de açaí na garrafa"></header><div class="body"><div class="batidao-grid"><article class="panel"><div class="panel-head"><span class="num">1</span>Tamanhos</div><div class="panel-body"><ul class="price-list"><li><span>300 ml</span><strong>R$ 10,00</strong></li><li><span>500 ml</span><strong>R$ 16,00</strong></li><li><span>1 L</span><strong>R$ 22,00</strong></li></ul></div></article><img class="batidao-photo" src="/assets/img/produtos/acai/acai-origem-garrafas-960.webp" alt="Garrafas de batidão de açaí"></div><article class="panel"><div class="panel-head"><span class="num">2</span>Informações</div><div class="panel-body"><ul class="check-list"><li>Açaí batido com água</li><li>Servido na garrafa</li><li>Adicionais e complementos cobrados à parte</li></ul></div></article><div class="ribbon">Refrescante e <span>pronto para levar</span>.</div></div></div></section>
+    <section class="page potes" data-page="Sorvetes e para levar"><div class="sheet"><header class="hero"><img class="hero-logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt="Açaí do Dudu"><div class="hero-copy"><span class="eyebrow">Cardápio Oficial</span><h2>Sorvetes e Para Levar</h2><p>Potes e opções para compartilhar.</p></div><img class="hero-art" src="/assets/img/produtos/pote-tradicional-dudu-2l-hero-960.webp" alt="Pote de açaí para levar"></header><div class="body"><article class="product-card"><img src="/assets/img/produtos/pote-tradicional-dudu-2l-hero-960.webp" alt="Pote Tradicional do Dudu 2 litros"><div><h3>Pote Tradicional do Dudu</h3><span class="litros">2 L</span><strong class="price">R$ 38,00</strong></div></article><article class="product-card"><div class="mesclado-art"><img src="/assets/assetslogologo-acai-sao-marcos.png" alt="Açaí do Dudu"></div><div><h3>Pote Mesclado</h3><span class="litros">2 L</span><strong class="price">R$ 48,00</strong><p class="note">Consulte as opções disponíveis na loja.</p></div></article><article class="product-card"><div class="sergel-images"><img src="/assets/img/produtos/sorvetes/sergel-2l-iogurte-com-amarena-960.webp" alt="Sergel Iogurte com Amarena 2 L"><img src="/assets/img/produtos/sorvetes/sergel-2l-chocolate-com-pedacos-960.webp" alt="Sergel Chocolate com Pedaços 2 L"></div><div><h3>Sergel Premium 2 L</h3><strong class="price">R$ 56,00</strong><ul class="plain-list" style="margin-top:4px"><li>Iogurte com Amarena</li><li>Chocolate com Pedaços</li></ul></div></article><div class="ribbon">Opções para <span>todos os gostos</span> e momentos.</div></div></div></section>
+    <section class="page picoles" data-page="Picolés e água de coco"><div class="sheet"><header class="hero"><img class="hero-logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt="Açaí do Dudu"><div class="hero-copy"><span class="eyebrow">Cardápio Oficial</span><h2>Picolés e Água de Coco</h2><p>Gelado para qualquer hora.</p></div><img class="hero-art" src="/assets/img/produtos/agua-de-coco-dudu-hero-960.webp" alt="Água de coco gelada"></header><div class="body"><article class="panel"><div class="panel-head"><span class="num">1</span>Picolés</div><div class="panel-body picole-grid"><div class="picole-item"><img src="/assets/img/produtos/picoles-do-dudu-card.png" alt="Picolés do Dudu"><div><h3>Picolés do Dudu</h3><span class="price"><small>a partir de</small>R$ 1,99</span></div></div><div class="picole-item"><img src="/assets/img/produtos/picoles-sergel-card.png" alt="Picolés Sergel"><div><h3>Picolés Sergel</h3><span class="price"><small>a partir de</small>R$ 4,80</span></div></div></div></article><article class="panel"><div class="panel-head"><span class="num">2</span>Água de Coco Gelada</div><div class="panel-body coco-grid"><img src="/assets/img/produtos/agua-de-coco-dudu-hero-960.webp" alt="Coco gelado"><ul class="price-list"><li><span>No coco</span><strong>R$ 10,00</strong></li><li><span>500 ml para viagem</span><strong>R$ 10,00</strong></li><li><span>1 L para viagem</span><strong>R$ 20,00</strong></li></ul></div></article><div class="ribbon">Leve, refrescante e pronta para <span>você</span>.</div></div></div></section>
   </main>
-
-  <button class="nav prev" type="button" data-prev aria-label="Página anterior" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-  <button class="nav next" type="button" data-next aria-label="Próxima página"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-  <div class="pager" aria-label="Páginas do cardápio">
-    <button class="dot active" type="button" aria-label="Açaí" data-index="0"></button><button class="dot" type="button" aria-label="Milk-shakes" data-index="1"></button><button class="dot" type="button" aria-label="Trio do Dudu" data-index="2"></button><button class="dot" type="button" aria-label="Batidão" data-index="3"></button><button class="dot" type="button" aria-label="Sorvetes e para levar" data-index="4"></button><button class="dot" type="button" aria-label="Picolés e água de coco" data-index="5"></button>
-  </div>
-
-  <script src="/assets/js/analytics-consent.js?v=20260902-menu-fit" defer></script>
-  <script>
-    (() => {
-      const book=document.querySelector('[data-book]');
-      const pages=[...document.querySelectorAll('.page')];
-      const dots=[...document.querySelectorAll('.dot')];
-      const current=document.querySelector('[data-current]');
-      const prev=document.querySelector('[data-prev]');
-      const next=document.querySelector('[data-next]');
-      let active=0,ticking=false;
-      const track=(event,payload={})=>{window.dataLayer=window.dataLayer||[];window.dataLayer.push({event,...payload})};
-      const setActive=(index,shouldTrack=false)=>{
-        const n=Math.max(0,Math.min(pages.length-1,index));active=n;
-        if(current)current.textContent=String(n+1);
-        dots.forEach((d,i)=>d.classList.toggle('active',i===n));
-        if(prev)prev.disabled=n===0;if(next)next.disabled=n===pages.length-1;
-        document.title=`${pages[n].dataset.page} | Cardápio Açaí do Dudu`;
-        if(shouldTrack)track('menu_page_view',{menu_page:pages[n].dataset.page,menu_page_number:n+1});
-      };
-      const goTo=(index)=>{const n=Math.max(0,Math.min(pages.length-1,index));book.scrollTo({left:n*book.clientWidth,behavior:'smooth'});setActive(n,true)};
-      book.addEventListener('scroll',()=>{if(ticking)return;ticking=true;requestAnimationFrame(()=>{const n=Math.round(book.scrollLeft/Math.max(1,book.clientWidth));if(n!==active)setActive(n,true);ticking=false})},{passive:true});
-      prev.addEventListener('click',()=>goTo(active-1));next.addEventListener('click',()=>goTo(active+1));
-      dots.forEach(d=>d.addEventListener('click',()=>goTo(Number(d.dataset.index||0))));
-      window.addEventListener('keydown',e=>{if(e.key==='ArrowRight')goTo(active+1);if(e.key==='ArrowLeft')goTo(active-1)});
-      setActive(0,true);
-    })();
-  </script>
+  <button class="nav prev" type="button" data-prev aria-label="Página anterior" disabled><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="nav next" type="button" data-next aria-label="Próxima página"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <div class="pager" aria-label="Páginas do cardápio"><button class="dot active" data-index="0" aria-label="Açaí"></button><button class="dot" data-index="1" aria-label="Milk-shakes"></button><button class="dot" data-index="2" aria-label="Trio do Dudu"></button><button class="dot" data-index="3" aria-label="Batidão"></button><button class="dot" data-index="4" aria-label="Sorvetes e para levar"></button><button class="dot" data-index="5" aria-label="Picolés e água de coco"></button></div>
+  <script src="/assets/js/analytics-consent.js?v=20260902-menu-premium" defer></script>
+  <script>(()=>{const book=document.querySelector('[data-book]'),pages=[...document.querySelectorAll('.page')],dots=[...document.querySelectorAll('.dot')],current=document.querySelector('[data-current]'),prev=document.querySelector('[data-prev]'),next=document.querySelector('[data-next]');let active=0,ticking=false;const track=(event,payload={})=>{window.dataLayer=window.dataLayer||[];window.dataLayer.push({event,...payload})};const setActive=(index,shouldTrack=false)=>{const n=Math.max(0,Math.min(pages.length-1,index));active=n;current.textContent=String(n+1);dots.forEach((d,i)=>d.classList.toggle('active',i===n));prev.disabled=n===0;next.disabled=n===pages.length-1;document.title=`${pages[n].dataset.page} | Cardápio Açaí do Dudu`;if(shouldTrack)track('menu_page_view',{menu_page:pages[n].dataset.page,menu_page_number:n+1})};const goTo=index=>{const n=Math.max(0,Math.min(pages.length-1,index));book.scrollTo({left:n*book.clientWidth,behavior:'smooth'});setActive(n,true)};book.addEventListener('scroll',()=>{if(ticking)return;ticking=true;requestAnimationFrame(()=>{const n=Math.round(book.scrollLeft/Math.max(1,book.clientWidth));if(n!==active)setActive(n,true);ticking=false})},{passive:true});prev.addEventListener('click',()=>goTo(active-1));next.addEventListener('click',()=>goTo(active+1));dots.forEach(d=>d.addEventListener('click',()=>goTo(Number(d.dataset.index||0))));window.addEventListener('keydown',e=>{if(e.key==='ArrowRight')goTo(active+1);if(e.key==='ArrowLeft')goTo(active-1)});setActive(0,true)})();</script>
 </body>
 </html>

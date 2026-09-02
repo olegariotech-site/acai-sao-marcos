@@ -28,8 +28,12 @@ const cleanLocalPath = (value, baseDir = '') => {
     trimmed = url.pathname;
   }
 
-  const withoutQuery = trimmed.split('#')[0].split('?')[0];
+  let withoutQuery = trimmed.split('#')[0].split('?')[0];
   if (!withoutQuery || withoutQuery === '/') return null;
+
+  // URLs públicas limpas como /cardapio/ representam o index.html do diretório.
+  // O auditor deve validar o arquivo realmente servido pelo GitHub Pages.
+  if (withoutQuery.endsWith('/')) withoutQuery += 'index.html';
 
   const fromRoot = withoutQuery.startsWith('/');
   const normalized = path.posix.normalize(

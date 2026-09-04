@@ -337,3 +337,15 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
   else init();
 })();
+
+(() => {
+  'use strict';
+  const path = window.location.pathname.replace(/\/+$/, '') || '/';
+  if (path !== '/cardapio' && path !== '/sabores') return;
+  if (document.getElementById('ot-cardapio-polish-script')) return;
+  const script = document.createElement('script');
+  script.id = 'ot-cardapio-polish-script';
+  script.src = '/assets/js/cardapio-polish.js?v=20260904-visual-1';
+  script.defer = true;
+  document.head.appendChild(script);
+})();

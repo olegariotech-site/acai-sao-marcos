@@ -47,7 +47,7 @@
 .nav{position:fixed;z-index:52;bottom:calc(var(--safeB) + 4px);width:35px;height:35px;border:1px solid #ffffff40;border-radius:50%;display:grid;place-items:center;background:#260130df;color:#fff;cursor:pointer}.nav:disabled{opacity:0;pointer-events:none}.prev{left:max(10px,calc(50% - 255px))}.next{right:max(10px,calc(50% - 255px))}
 .pager{position:fixed;z-index:53;left:50%;bottom:calc(var(--safeB) + 4px);transform:translateX(-50%);display:flex;gap:6px;padding:8px 10px;border-radius:999px;background:#260130df}.dot{width:7px;height:7px;border:0;border-radius:99px;background:#ffffff55;padding:0}.dot.active{width:21px;background:var(--y)}
 .acai .body{grid-template-rows:.82fr .98fr .78fr .70fr auto auto}.trio .body{grid-template-rows:1.05fr 1.16fr .68fr auto}.milk .body{grid-template-rows:1fr 1fr .72fr auto}.bat .body{grid-template-rows:.74fr .83fr .72fr auto}.potes .body{grid-template-rows:.84fr .84fr .84fr .92fr auto}.gelados .body{grid-template-rows:1.10fr .64fr auto}
-.trio-top{display:grid;grid-template-columns:1.05fr .95fr;gap:6px;min-height:0}.trio video{width:100%;height:100%;object-fit:cover;border-radius:13px;border:1.6px solid #6b1778;background:#210129}.bigprice{display:flex;flex-direction:column;justify-content:center;padding:8px;border-radius:13px;background:linear-gradient(145deg,#4e075e,#27012f);color:#fff;border:2px solid var(--y);overflow:hidden}.bigprice small{font-size:9.5px;font-weight:900;text-transform:uppercase}.bigprice strong{font-size:clamp(29px,4.8vh,44px);line-height:.92;color:var(--y)}.bigprice p{margin:4px 0 0;font-size:clamp(8.8px,1.08vh,11.2px);font-weight:800;line-height:1.18}
+.trio-top{display:grid;grid-template-columns:1.05fr .95fr;gap:6px;min-height:0}.trio video{width:100%;height:100%;object-fit:contain;object-position:center center;border-radius:13px;border:1.6px solid #6b1778;background:#210129}.bigprice{display:flex;flex-direction:column;justify-content:center;padding:8px;border-radius:13px;background:linear-gradient(145deg,#4e075e,#27012f);color:#fff;border:2px solid var(--y);overflow:hidden}.bigprice small{font-size:9.5px;font-weight:900;text-transform:uppercase}.bigprice strong{font-size:clamp(29px,4.8vh,44px);line-height:.92;color:var(--y)}.bigprice p{margin:4px 0 0;font-size:clamp(8.8px,1.08vh,11.2px);font-weight:800;line-height:1.18}
 .milk-card .inside{display:grid;grid-template-columns:.68fr 1.32fr;gap:7px}.label{display:block;margin-bottom:3px;color:var(--p800);font-weight:900;font-size:clamp(9.6px,1.15vh,11.5px);text-transform:uppercase}
 .prod{display:grid;grid-template-columns:34% 1fr;gap:7px;align-items:center;min-height:0;padding:5px 7px;border:1.6px solid #6b1778;border-radius:13px;background:#fff;overflow:hidden}.prod img{width:100%;height:100%;max-height:104px;object-fit:contain}.prod h3{margin:0;color:var(--p800);font-size:clamp(11px,1.42vh,14.5px);line-height:1.05}.prod .money{display:block;color:var(--p800);font-size:clamp(19px,2.65vh,28px);font-weight:900;line-height:1}.prod .tiny{margin-top:2px;font-size:clamp(8.1px,.96vh,10px);line-height:1.12;color:#63546a}
 .duoimgs{display:flex;height:100%;gap:3px}.duoimgs img{width:50%;height:100%;object-fit:contain}
@@ -55,16 +55,93 @@
 .catalog-link{display:flex;align-items:center;justify-content:center;min-height:34px;border-radius:11px;background:var(--y);color:#2a0430;text-decoration:none;font-size:clamp(10px,1.15vh,12px);font-weight:900}
 @media(max-height:720px){.sheet{grid-template-rows:14.5% minmax(0,1fr)}.hero{padding-top:calc(var(--safeT) + 34px)}.hero h1{font-size:clamp(24px,4.1vh,34px)}.body{padding-top:6px;gap:4px}.head{min-height:24px;padding:3px 6px}.inside{padding:4px 6px}.tag{font-size:8.4px;padding:2px 4px}.tags.dense .tag{font-size:7.9px}.prod{padding:4px 6px}}
 @media(max-width:370px){.body{padding-left:7px;padding-right:7px}.hero-copy{padding-left:52px}.logo{width:47px;height:47px}.tag{font-size:8.2px}}
+
+        .sheet{grid-template-rows:16.5% minmax(0,1fr)}
+        .hero{padding-top:calc(var(--safeT) + 43px);padding-bottom:10px}
+        .logo{left:14px;bottom:5px;width:36px;height:36px}
+        .hero-copy{padding-left:44px;max-width:88%}
+        .hero h1{font-size:clamp(25px,4.05vh,36px)}
+        .topbar{top:calc(var(--safeT) + 3px)}
+        .chip{min-height:28px;padding:5px 10px;font-size:10.5px}
+        .head{font-size:clamp(10.2px,1.28vh,13.2px);line-height:1.05}
+        .price{padding:1px 0;font-size:clamp(9.8px,1.16vh,12.2px);line-height:1.12}
+        .price strong{font-size:.96em;white-space:nowrap}
+
+        .hero-product{position:absolute;z-index:2;right:14px;bottom:14px;width:82px;height:82px;object-fit:cover;object-position:center;border-radius:18px;border:2px solid rgba(255,210,31,.92);box-shadow:0 8px 20px #0007;background:#2a0430}
+        .acai .hero-copy,.milk .hero-copy,.bat .hero-copy{max-width:67%}
+
+        .acai .body{grid-template-rows:1.02fr 1fr .76fr .64fr auto auto}
+        .acai .grid2:first-child .panel:first-child .inside{padding-top:3px;padding-bottom:3px}
+        .acai .grid2:first-child .panel:first-child .price{line-height:1.05}
+
+        .trio .body{grid-template-rows:1.50fr 1.00fr .58fr auto}
+        .trio-top{grid-template-columns:minmax(0,1.12fr) minmax(128px,.88fr);gap:8px;align-items:stretch}
+        .trio .tags.dense .tag{font-size:clamp(7.6px,.90vh,9.2px);padding:2px 4px}
+        .bigprice{justify-content:flex-start;padding:12px 10px 8px;gap:5px;overflow:hidden}
+        .bigprice small{font-size:10.2px}
+        .bigprice strong{font-size:clamp(23px,3.65vh,34px);line-height:.92;white-space:nowrap}
+        .bigprice p{margin:0;font-size:clamp(8px,.96vh,10px);line-height:1.14}
+
+        .bat .body{grid-template-rows:.76fr .83fr .70fr auto}
+        .bat .hero h1{font-size:clamp(22px,3.45vh,31px);line-height:.88}
+        .prod .money{font-size:clamp(18px,2.35vh,25px);white-space:nowrap}
+        .gelados .body{grid-template-rows:1.08fr .66fr auto}
+        .gelados .hero h1{font-size:clamp(23px,3.7vh,33px);line-height:.88}
+        .gelados .hero-copy,.potes .hero-copy{max-width:90%}
+        .picitem b{font-size:clamp(18px,2.45vh,26px);white-space:nowrap}
+
+        @media(max-width:390px){
+          .hero h1{font-size:clamp(22px,3.55vh,32px)}
+          .hero-product{right:10px;bottom:12px;width:68px;height:68px;border-radius:15px}
+          .acai .hero-copy,.milk .hero-copy,.bat .hero-copy{max-width:69%}
+          .bat .hero h1,.gelados .hero h1{font-size:clamp(20px,3.15vh,28px)}
+          .trio .body{grid-template-rows:1.46fr 1.02fr .58fr auto}
+          .trio-top{grid-template-columns:minmax(0,1.15fr) minmax(116px,.85fr);gap:6px}
+          .bigprice strong{font-size:clamp(21px,3.25vh,30px)}
+          .bigprice{padding:10px 7px 7px}
+          .prod .money{font-size:clamp(17px,2.2vh,23px)}
+        }
+
+
+/* Reserve separate space for navigation, identity and decorative product imagery. */
+.sheet{grid-template-rows:minmax(calc(var(--safeT) + 124px),16.5%) minmax(0,1fr)}
+.hero{display:grid;grid-template-columns:36px minmax(0,1fr);gap:8px;align-items:end;padding:calc(var(--safeT) + 38px) 12px 12px}
+.acai .hero,.milk .hero,.bat .hero{grid-template-columns:36px minmax(0,1fr) 64px}
+.logo{position:static;width:36px;height:36px;align-self:end}
+.hero-copy,.acai .hero-copy,.milk .hero-copy,.bat .hero-copy,.gelados .hero-copy,.potes .hero-copy{padding:0;max-width:none;min-width:0}
+.hero h1{font-size:clamp(23px,3.6dvh,34px);line-height:.98;overflow-wrap:normal}
+.bat .hero h1,.gelados .hero h1{font-size:clamp(22px,3.35dvh,31px);line-height:.98}
+.hero p{font-size:clamp(9px,1.15dvh,11px);line-height:1.15}
+.hero-product{position:static;width:64px;height:64px;max-height:100%;border-radius:15px;align-self:end;pointer-events:none}
+.topbar{top:var(--safeT)}.chip{min-height:34px;padding:6px 10px}
+.grid2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.price>span{min-width:0}.price strong{flex-shrink:0}
+.milk-card .inside{grid-template-columns:minmax(116px,.85fr) minmax(0,1.15fr)}
+.trio .body{grid-template-rows:minmax(140px,1.35fr) minmax(148px,1fr) minmax(82px,.58fr) auto}
+.trio-top{grid-template-columns:minmax(0,1.12fr) minmax(128px,.88fr);min-height:0;align-items:stretch}
+.trio-media{position:relative;min-width:0;min-height:0;overflow:hidden;border-radius:13px;background:#210129}
+.trio video{position:absolute;inset:0;display:block;min-width:0;min-height:0;width:100%;height:100%;object-fit:contain;object-position:center center}
+.bigprice{min-width:0;min-height:0;justify-content:flex-start;padding:10px 8px;gap:6px}
+.bigprice strong{font-size:clamp(23px,3.5dvh,32px);line-height:1.08;white-space:nowrap}
+.bigprice p{font-size:clamp(9px,1.15dvh,11px);line-height:1.2}
+.trio-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:6px;min-height:44px;padding:8px 12px;border:1px solid #ffd21f;border-radius:999px;background:#260130eb;color:#fff;font-size:11px;font-weight:800;white-space:nowrap;cursor:pointer}
+.trio-play[hidden]{display:none}.trio-play:focus-visible{outline:3px solid #ffd21f;outline-offset:3px}
+.bat .grid2 .price{flex-wrap:wrap;row-gap:2px}.bat .grid2 .price strong{margin-left:auto}
+@media(max-height:700px){
+  .hero h1{font-size:23px}.bat .hero h1,.gelados .hero h1{font-size:22px}
+  .hero-product{height:60px}.body{gap:4px}.head{min-height:24px}
+  .trio .tags.dense .tag{font-size:7.9px;line-height:1.05;padding:2px 4px}
+}
 </style>
 </head>
 <body>
 <nav class="topbar"><a class="chip" href="/">← Site</a><span class="chip"><span data-current>1</span>/6</span></nav>
 <main class="book" data-book>
 <section class="page acai" data-page="Açaí"><div class="sheet">
-<header class="hero"><img class="logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt=""><div class="hero-copy"><small>Cardápio oficial</small><h1>Açaí</h1><p>Monte em sequência e envie seu pedido do seu jeito.</p></div></header>
+<header class="hero"><img class="logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt=""><div class="hero-copy"><small>Cardápio oficial</small><h1>Açaí</h1><p>Monte em sequência e envie seu pedido do seu jeito.</p></div><img class="hero-product" src="/assets/img/produtos/acai/acai-trufado-frutas-crocante-hero-960.webp" alt="" decoding="async"></header>
 <div class="body">
 <div class="grid2">
-<article class="panel"><div class="head"><span class="step">1º</span>Escolha o tamanho</div><div class="inside"><div class="price"><span>300 ml</span><strong>R$ 16</strong></div><div class="price"><span>400 ml</span><strong>R$ 22</strong></div><div class="price"><span>500 ml</span><strong>R$ 28</strong></div><div class="price"><span>700 ml</span><strong>R$ 32</strong></div></div></article>
+<article class="panel"><div class="head"><span class="step">1º</span>Escolha o tamanho</div><div class="inside"><div class="price"><span>300 ml</span><strong>R$ 16,00</strong></div><div class="price"><span>400 ml</span><strong>R$ 22,00</strong></div><div class="price"><span>500 ml</span><strong>R$ 28,00</strong></div><div class="price"><span>700 ml</span><strong>R$ 32,00</strong></div></div></article>
 <article class="panel"><div class="head"><span class="step">2º</span>Escolha o açaí</div><div class="inside"><div class="tags dense"><span class="tag">Natural</span><span class="tag">Ninho trufado</span><span class="tag">Nutella trufado</span><span class="tag">Danone trufado</span><span class="tag">Maracujá trufado</span><span class="tag">Açaí + Cupuaçu</span><span class="tag">Cupuaçu</span></div></div></article>
 </div>
 <div class="grid2">
@@ -72,7 +149,7 @@
 <article class="panel"><div class="head"><span class="step">3º</span>Complementos</div><div class="inside"><div class="tags dense"><span class="tag">Leite em pó</span><span class="tag">Granola</span><span class="tag">Paçoca</span><span class="tag">Amendoim</span><span class="tag">Ovomaltine</span><span class="tag">Confete</span><span class="tag">Chocoball</span><span class="tag">Granulado</span><span class="tag">Fini</span></div><p class="note"><strong>Até 2 complementos</strong> incluídos.</p></div></article>
 </div>
 <article class="panel"><div class="head"><span class="step">4º</span>Escolha a cobertura</div><div class="inside"><div class="tags"><span class="tag">Chocolate</span><span class="tag">Tutti-frutti</span><span class="tag">Leite condensado</span><span class="tag">Morango</span><span class="tag">Caramelo</span><span class="tag">Abacaxi</span><span class="tag">Menta</span><span class="tag">Limão</span></div><p class="note"><strong>Leite condensado + 1 cobertura</strong> entram no preço.</p></div></article>
-<article class="panel"><div class="head">Adicionais especiais</div><div class="inside"><div class="price"><span>Nutella</span><strong>+ R$ 10</strong></div><div class="price"><span>Skimo Branco</span><strong>+ R$ 4</strong></div><div class="price"><span>Skimo Preto ao Leite</span><strong>+ R$ 4</strong></div></div></article>
+<article class="panel"><div class="head">Adicionais especiais</div><div class="inside"><div class="price"><span>Nutella</span><strong>+ R$ 10,00</strong></div><div class="price"><span>Skimo Branco</span><strong>+ R$ 4,00</strong></div><div class="price"><span>Skimo Preto ao Leite</span><strong>+ R$ 4,00</strong></div></div></article>
 <div class="ok">Chocolate branco não faz mais parte das coberturas. Adicionais especiais são cobrados à parte.</div>
 <div class="ribbon">1º tamanho → 2º açaí → 3º frutas/complementos → 4º cobertura → <b>adicionais</b></div>
 </div></div></section>
@@ -80,37 +157,37 @@
 <section class="page trio" data-page="Trio do Dudu"><div class="sheet">
 <header class="hero"><img class="logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt=""><div class="hero-copy"><small>2º card</small><h1>Trio do Dudu</h1><p>Preço fixo, escolha os sabores e personalize.</p></div></header>
 <div class="body">
-<div class="trio-top"><video autoplay muted loop playsinline poster="/assets/img/produtos/sorvetes/trio-sobremesas-tropicais-960.webp"><source src="/assets/video/trio-do-dudu.mp4" type="video/mp4"></video><div class="bigprice"><small>Preço fixo</small><strong>R$ 14</strong><p>2 bolas de sorvete + 1 casquinha + 1 cobertura + embalagem para viagem.</p></div></div>
+<div class="trio-top"><div class="trio-media"><video id="trio-video" aria-label="Montagem do Trio do Dudu" preload="metadata" autoplay muted loop playsinline poster="/assets/img/produtos/sorvetes/trio-sobremesas-tropicais-960.webp"><source src="/assets/video/trio-do-dudu.mp4" type="video/mp4"></video><button class="trio-play" type="button" aria-label="Reproduzir vídeo do Trio" aria-controls="trio-video" hidden>▶ <span>Ver montagem</span></button></div><div class="bigprice"><small>Preço fixo</small><strong>R$ 14,00</strong><p>2 bolas de sorvete + 1 casquinha + 1 cobertura + embalagem para viagem.</p></div></div>
 <article class="panel"><div class="head">Escolha os sabores</div><div class="inside"><div class="tags dense"><span class="tag">Algodão doce</span><span class="tag">Coco</span><span class="tag">Morango</span><span class="tag">Chocolate</span><span class="tag">Pistache</span><span class="tag">Flocos</span><span class="tag">Céu azul</span><span class="tag">Chiclete</span><span class="tag">Milho verde</span><span class="tag">Ovomaltine</span><span class="tag">Abacaxi ao vinho</span><span class="tag">Prestígio</span><span class="tag">Chocolate branco</span><span class="tag">Maracujá trufado</span><span class="tag">Nutella trufado</span><span class="tag">Maracujá</span><span class="tag">Torta de limão</span><span class="tag">Café trufado</span><span class="tag">Abacaxi</span><span class="tag">Ninho trufado</span><span class="tag">Pavê trufado</span><span class="tag">Uva</span><span class="tag">Frutas do bosque</span><span class="tag">Floresta negra</span><span class="tag">Morango trufado</span><span class="tag">Chocomenta</span><span class="tag">Kinder Ovo</span><span class="tag">Iogurte com frutas vermelhas</span></div></div></article>
-<article class="panel"><div class="head">Adicionais · + R$ 2 cada</div><div class="inside"><div class="tags"><span class="tag">Ovomaltine</span><span class="tag">Amendoim</span><span class="tag">Paçoca</span><span class="tag">Leite em pó</span><span class="tag">Granola</span><span class="tag">Confete</span><span class="tag">Granulado</span><span class="tag">Granulado colorido</span></div><p class="note">Canudo wafer não entra. <strong>1 cobertura já está incluída.</strong></p></div></article>
-<div class="ribbon">1 cobertura inclusa · demais complementos <b>+ R$ 2 cada</b></div>
+<article class="panel"><div class="head">Adicionais · + R$ 2,00 cada</div><div class="inside"><div class="tags"><span class="tag">Ovomaltine</span><span class="tag">Amendoim</span><span class="tag">Paçoca</span><span class="tag">Leite em pó</span><span class="tag">Granola</span><span class="tag">Confete</span><span class="tag">Granulado</span><span class="tag">Granulado colorido</span></div><p class="note">Canudo wafer não entra. <strong>1 cobertura já está incluída.</strong></p></div></article>
+<div class="ribbon">1 cobertura inclusa · demais complementos <b>+ R$ 2,00 cada</b></div>
 </div></div></section>
 
 <section class="page milk" data-page="Milk-shakes"><div class="sheet">
-<header class="hero"><img class="logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt=""><div class="hero-copy"><small>3º card</small><h1>Milk-shakes</h1><p>1 cobertura + 1 complemento incluídos.</p></div></header>
+<header class="hero"><img class="logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt=""><div class="hero-copy"><small>3º card</small><h1>Milk-shakes</h1><p>1 cobertura + 1 complemento incluídos.</p></div><img class="hero-product" src="/assets/img/produto-milkshake-sabores-960.webp" alt="" decoding="async"></header>
 <div class="body">
-<article class="panel milk-card"><div class="head">Tradicional</div><div class="inside"><div><span class="label">Tamanhos</span><div class="price"><span>300 ml</span><strong>R$ 16</strong></div><div class="price"><span>400 ml</span><strong>R$ 22</strong></div><div class="price"><span>500 ml</span><strong>R$ 28</strong></div><div class="price"><span>700 ml</span><strong>R$ 32</strong></div></div><div><span class="label">Sabores</span><div class="tags dense"><span class="tag">Kinder Ovo</span><span class="tag">Chocolate</span><span class="tag">Morango</span><span class="tag">Ovomaltine</span><span class="tag">Algodão doce</span><span class="tag">Prestígio</span><span class="tag">Laka</span><span class="tag">Menta</span><span class="tag">Maracujá</span><span class="tag">Abacaxi</span><span class="tag">Torta de limão</span><span class="tag">Pistache</span></div></div></div></article>
-<article class="panel milk-card"><div class="head">Trufado</div><div class="inside"><div><span class="label">Tamanhos</span><div class="price"><span>300 ml</span><strong>R$ 18</strong></div><div class="price"><span>400 ml</span><strong>R$ 24</strong></div><div class="price"><span>500 ml</span><strong>R$ 30</strong></div><div class="price"><span>700 ml</span><strong>R$ 34</strong></div></div><div><span class="label">Sabores</span><div class="tags"><span class="tag">Nutella</span><span class="tag">Café</span><span class="tag">Ninho</span><span class="tag">Morango</span><span class="tag">Maracujá trufado</span></div></div></div></article>
+<article class="panel milk-card"><div class="head">Tradicional</div><div class="inside"><div><span class="label">Tamanhos</span><div class="price"><span>300 ml</span><strong>R$ 16,00</strong></div><div class="price"><span>400 ml</span><strong>R$ 22,00</strong></div><div class="price"><span>500 ml</span><strong>R$ 28,00</strong></div><div class="price"><span>700 ml</span><strong>R$ 32,00</strong></div></div><div><span class="label">Sabores</span><div class="tags dense"><span class="tag">Kinder Ovo</span><span class="tag">Chocolate</span><span class="tag">Morango</span><span class="tag">Ovomaltine</span><span class="tag">Algodão doce</span><span class="tag">Prestígio</span><span class="tag">Laka</span><span class="tag">Menta</span><span class="tag">Maracujá</span><span class="tag">Abacaxi</span><span class="tag">Torta de limão</span><span class="tag">Pistache</span></div></div></div></article>
+<article class="panel milk-card"><div class="head">Trufado</div><div class="inside"><div><span class="label">Tamanhos</span><div class="price"><span>300 ml</span><strong>R$ 18,00</strong></div><div class="price"><span>400 ml</span><strong>R$ 24,00</strong></div><div class="price"><span>500 ml</span><strong>R$ 30,00</strong></div><div class="price"><span>700 ml</span><strong>R$ 34,00</strong></div></div><div><span class="label">Sabores</span><div class="tags"><span class="tag">Nutella</span><span class="tag">Café</span><span class="tag">Ninho</span><span class="tag">Morango</span><span class="tag">Maracujá trufado</span></div></div></div></article>
 <div class="grid2"><article class="panel"><div class="head">Complementos</div><div class="inside"><div class="tags dense"><span class="tag">Ovomaltine</span><span class="tag">Paçoca</span><span class="tag">Amendoim</span><span class="tag">Granulado</span><span class="tag">Granulado colorido</span><span class="tag">Fini Dentadura</span><span class="tag">Fini Beijinho</span><span class="tag">Fini Banana</span></div></div></article><article class="panel"><div class="head">Coberturas</div><div class="inside"><div class="tags dense"><span class="tag">Chocolate</span><span class="tag">Tutti-frutti</span><span class="tag">Leite condensado</span><span class="tag">Morango</span><span class="tag">Caramelo</span><span class="tag">Abacaxi</span><span class="tag">Menta</span><span class="tag">Limão</span></div></div></article></div>
-<div class="ribbon">Extras <b>+ R$ 2 cada</b> · sem confete e sem granola no milk-shake</div>
+<div class="ribbon">Extras <b>+ R$ 2,00 cada</b> · sem confete e sem granola no milk-shake</div>
 </div></div></section>
 
 <section class="page bat" data-page="Batidão"><div class="sheet">
-<header class="hero"><img class="logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt=""><div class="hero-copy"><small>4º card</small><h1>Batidão de Açaí</h1><p>Base de água na garrafa + personalização.</p></div></header>
+<header class="hero"><img class="logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt=""><div class="hero-copy"><small>4º card</small><h1>Batidão de Açaí</h1><p>Base de água na garrafa + personalização.</p></div><img class="hero-product" src="/assets/img/produtos/acai/acai-origem-garrafas-960.webp" alt="" decoding="async"></header>
 <div class="body">
-<div class="grid2"><article class="panel"><div class="head">Tamanhos</div><div class="inside"><div class="price"><span>300 ml</span><strong>R$ 10</strong></div><div class="price"><span>500 ml</span><strong>R$ 16</strong></div><div class="price"><span>1 L</span><strong>R$ 22</strong></div></div></article><article class="panel"><div class="head">Incluso</div><div class="inside"><div class="price"><span>Base</span><strong>Açaí + água</strong></div><div class="price"><span>Leite condensado</span><strong>Sem acréscimo</strong></div><p class="note">Servido na garrafa.</p></div></article></div>
-<article class="panel"><div class="head">Personalize</div><div class="inside"><div class="grid2"><div><div class="price"><span>Base com leite</span><strong>+ R$ 2</strong></div><div class="price"><span>Fruta</span><strong>+ R$ 2 cada</strong></div><p class="note">Até 2 frutas · consulte opções do dia.</p></div><div><div class="price"><span>Complemento</span><strong>+ R$ 2 cada</strong></div><div class="price"><span>Creatina 5 g</span><strong>+ R$ 3</strong></div></div></div></div></article>
+<div class="grid2"><article class="panel"><div class="head">Tamanhos</div><div class="inside"><div class="price"><span>300 ml</span><strong>R$ 10,00</strong></div><div class="price"><span>500 ml</span><strong>R$ 16,00</strong></div><div class="price"><span>1 L</span><strong>R$ 22,00</strong></div></div></article><article class="panel"><div class="head">Incluso</div><div class="inside"><div class="price"><span>Base</span><strong>Açaí + água</strong></div><div class="price"><span>Leite condensado</span><strong>Sem acréscimo</strong></div><p class="note">Servido na garrafa.</p></div></article></div>
+<article class="panel"><div class="head">Personalize</div><div class="inside"><div class="grid2"><div><div class="price"><span>Base com leite</span><strong>+ R$ 2,00</strong></div><div class="price"><span>Fruta</span><strong>+ R$ 2,00 cada</strong></div><p class="note">Até 2 frutas · consulte opções do dia.</p></div><div><div class="price"><span>Complemento</span><strong>+ R$ 2,00 cada</strong></div><div class="price"><span>Creatina 5 g</span><strong>+ R$ 3,00</strong></div></div></div></div></article>
 <article class="panel"><div class="head">Complementos</div><div class="inside"><div class="tags"><span class="tag">Paçoca</span><span class="tag">Ovomaltine</span><span class="tag">Amendoim</span><span class="tag">Leite em pó</span></div><p class="note">Leite condensado permanece opção inclusa.</p></div></article>
-<div class="ribbon">Adicionais cobrados por item · <b>creatina 5 g + R$ 3</b></div>
+<div class="ribbon">Adicionais cobrados por item · <b>creatina 5 g + R$ 3,00</b></div>
 </div></div></section>
 
 <section class="page potes" data-page="Potes"><div class="sheet">
 <header class="hero"><img class="logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt=""><div class="hero-copy"><small>5º card · para levar</small><h1>Potes</h1><p>Linhas Dudu, Mesclado e Sergel.</p></div></header>
 <div class="body">
-<article class="prod"><img src="/assets/img/produtos/pote-tradicional-dudu-2l-hero-960.webp" alt="Pote Dudu tradicional"><div><h3>Dudu Tradicional · 2 L</h3><span class="money">R$ 38</span><div class="tiny">Flocos · Maracujá · Iogurte com frutas vermelhas · Kinder Ovo</div></div></article>
-<article class="prod"><img src="/assets/img/produtos/pote-tradicional-dudu-2l-hero-960.webp" alt="Pote Dudu trufado"><div><h3>Dudu Trufado · 2 L</h3><span class="money">R$ 40</span><div class="tiny">Café · Leitinho · Morango trufado · Maracujá trufado · Nutella trufado</div></div></article>
-<article class="prod"><img src="/assets/img/produtos/pote-mesclado-dudu-2l-card.webp" alt="Pote Mesclado do Dudu"><div><h3>Pote Mesclado · 2 L</h3><span class="money">R$ 48</span><div class="tiny">Consulte sabores e disponibilidade do dia.</div></div></article>
-<article class="prod"><div class="duoimgs"><img src="/assets/img/produtos/sorvetes/sergel-2l-iogurte-com-amarena-960.webp" alt=""><img src="/assets/img/produtos/sorvetes/sergel-2l-chocolate-com-pedacos-960.webp" alt=""></div><div><h3>Sergel Premium · 1,6 L</h3><span class="money">R$ 54</span><div class="tiny">Iogurte com Amarena · Crocante Maltado · Chocolate Maltado · Leitinho Trufado · Leitinho Rocher · Tentação de Leitinho · Carbafeu Paris</div></div></article>
+<article class="prod"><img src="/assets/img/produtos/pote-tradicional-dudu-2l-hero-960.webp" alt="Pote Dudu tradicional"><div><h3>Dudu Tradicional · 2 L</h3><span class="money">R$ 38,00</span><div class="tiny">Flocos · Maracujá · Iogurte com frutas vermelhas · Kinder Ovo</div></div></article>
+<article class="prod"><img src="/assets/img/produtos/pote-tradicional-dudu-2l-hero-960.webp" alt="Pote Dudu trufado"><div><h3>Dudu Trufado · 2 L</h3><span class="money">R$ 40,00</span><div class="tiny">Café · Leitinho · Morango trufado · Maracujá trufado · Nutella trufado</div></div></article>
+<article class="prod"><img src="/assets/img/produtos/pote-mesclado-dudu-2l-card.webp" alt="Pote Mesclado do Dudu"><div><h3>Pote Mesclado · 2 L</h3><span class="money">R$ 48,00</span><div class="tiny">Consulte sabores e disponibilidade do dia.</div></div></article>
+<article class="prod"><div class="duoimgs"><img src="/assets/img/produtos/sorvetes/sergel-2l-iogurte-com-amarena-960.webp" alt=""><img src="/assets/img/produtos/sorvetes/sergel-2l-chocolate-com-pedacos-960.webp" alt=""></div><div><h3>Sergel Premium · 1,6 L</h3><span class="money">R$ 54,00</span><div class="tiny">Iogurte com Amarena · Crocante Maltado · Chocolate Maltado · Leitinho Trufado · Leitinho Rocher · Tentação de Leitinho · Carbafeu Paris</div></div></article>
 <a class="catalog-link" href="/sabores/#potes">Ver todos os sabores de potes →</a>
 </div></div></section>
 
@@ -118,13 +195,13 @@
 <header class="hero"><img class="logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt=""><div class="hero-copy"><small>6º card</small><h1>Picolés e Coco</h1><p>Resumo rápido + catálogo completo de sabores.</p></div></header>
 <div class="body">
 <article class="panel"><div class="head">Picolés</div><div class="inside picgrid"><div class="picitem"><img src="/assets/img/produtos/picoles-do-dudu-card.png" alt="Picolés do Dudu"><div><strong>Dudu</strong><b>R$ 1,99</b></div></div><div class="picitem"><img src="/assets/img/produtos/picoles-sergel-card.png" alt="Picolés Sergel"><div><strong>Sergel</strong><b>R$ 4,80</b></div></div></div></article>
-<article class="panel"><div class="head">Água de Coco</div><div class="inside"><div class="price"><span>No coco</span><strong>R$ 10</strong></div><div class="price"><span>500 ml para viagem</span><strong>R$ 12</strong></div><div class="price"><span>1 L para viagem</span><strong>R$ 20</strong></div><p class="note">Sabores e estoque de picolés variam conforme o dia.</p></div></article>
+<article class="panel"><div class="head">Água de Coco</div><div class="inside"><div class="price"><span>No coco</span><strong>R$ 10,00</strong></div><div class="price"><span>500 ml para viagem</span><strong>R$ 12,00</strong></div><div class="price"><span>1 L para viagem</span><strong>R$ 20,00</strong></div><p class="note">Sabores e estoque de picolés variam conforme o dia.</p></div></article>
 <a class="catalog-link" href="/sabores/">Abrir todos os sabores de picolés e potes →</a>
 </div></div></section>
 </main>
 <button class="nav prev" data-prev aria-label="Card anterior">‹</button><button class="nav next" data-next aria-label="Próximo card">›</button>
 <div class="pager"><button class="dot active" data-i="0" aria-label="Açaí"></button><button class="dot" data-i="1" aria-label="Trio do Dudu"></button><button class="dot" data-i="2" aria-label="Milk-shakes"></button><button class="dot" data-i="3" aria-label="Batidão"></button><button class="dot" data-i="4" aria-label="Potes"></button><button class="dot" data-i="5" aria-label="Picolés e Coco"></button></div>
-<script src="/assets/js/analytics-consent.js?v=20260903-menu-final" defer></script>
+<script src="/assets/js/analytics-consent.js?v=20260905-final-2" defer></script>
 <script>
 (()=>{const b=document.querySelector('[data-book]'),p=[...document.querySelectorAll('.page')],d=[...document.querySelectorAll('.dot')],c=document.querySelector('[data-current]'),pr=document.querySelector('[data-prev]'),nx=document.querySelector('[data-next]');let a=0,t=false;function set(i){a=Math.max(0,Math.min(p.length-1,i));c.textContent=a+1;d.forEach((x,j)=>x.classList.toggle('active',j===a));pr.disabled=a===0;nx.disabled=a===p.length-1;document.title=p[a].dataset.page+' | Cardápio Açaí do Dudu'}function go(i){const n=Math.max(0,Math.min(p.length-1,i));b.scrollTo({left:n*b.clientWidth,behavior:'smooth'});set(n);window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'menu_card_view',menu_card:n+1,menu_name:p[n].dataset.page})}b.addEventListener('scroll',()=>{if(t)return;t=true;requestAnimationFrame(()=>{set(Math.round(b.scrollLeft/Math.max(1,b.clientWidth)));t=false})},{passive:true});pr.onclick=()=>go(a-1);nx.onclick=()=>go(a+1);d.forEach(x=>x.onclick=()=>go(+x.dataset.i));window.addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(a+1);if(e.key==='ArrowLeft')go(a-1)});set(0)})();
 </script>

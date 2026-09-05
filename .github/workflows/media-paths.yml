@@ -31,6 +31,8 @@ jobs:
           node --check assets/js/site-v2.js
           node --check assets/js/mobile-fixes.js
           node --check assets/js/analytics-consent.js
+          node --check assets/js/cardapio-polish.js
+          node --check tools/check-cardapio-layout.mjs
           node --check tools/check-media-paths.mjs
           node --check tools/check-interactions.mjs
           node --check tools/check-social-preview.mjs
@@ -66,3 +68,17 @@ jobs:
 
       - name: Testar notebook, Android Chrome e iOS Safari WebKit
         run: node tools/check-browser-navigation.mjs
+
+      - name: Validar cardápio e catálogo em todas as telas
+        env:
+          CARDAPIO_SCREENSHOTS: /tmp/cardapio-qa
+          CARDAPIO_LOG_EVIDENCE: '1'
+        run: node tools/check-cardapio-layout.mjs
+
+      - name: Guardar evidências visuais
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cardapio-android-webkit
+          path: /tmp/cardapio-qa
+          if-no-files-found: ignore

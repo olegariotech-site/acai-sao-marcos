@@ -341,7 +341,7 @@
 (() => {
   'use strict';
   const path = window.location.pathname.replace(/\/+$/, '') || '/';
-  if (path !== '/cardapio' && path !== '/sabores') return;
+  if (path !== '/cardapio') return;
   if (document.getElementById('ot-cardapio-polish-script')) return;
   const script = document.createElement('script');
   script.id = 'ot-cardapio-polish-script';

@@ -32,6 +32,7 @@ jobs:
           node --check assets/js/mobile-fixes.js
           node --check assets/js/analytics-consent.js
           node --check assets/js/cardapio-polish.js
+          node --check assets/js/catalogo.js
           node --check tools/check-cardapio-layout.mjs
           node --check tools/check-media-paths.mjs
           node --check tools/check-interactions.mjs

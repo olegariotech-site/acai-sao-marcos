@@ -92,22 +92,51 @@ try {
               if(process.env.CARDAPIO_LOG_EVIDENCE==='1' && width===360 && height===740) console.log(`QA_IMAGE ${file} ${bytes.toString('base64')}`);
             }
           }
-          // Exercise both catalog links, its three pages and the back link.
+          // Preserve the originating main card while switching catalog categories.
           await page.getByRole('button',{name:'Potes',exact:true}).click();
           await page.getByRole('link',{name:'Ver todos os sabores de potes →',exact:true}).click();
-          await page.waitForURL('**/sabores/#potes');
-          await page.waitForFunction(()=>Math.abs(document.querySelector('[data-book]').scrollLeft-2*innerWidth)<2);
-          for(const name of ['Picolés Dudu','Picolés Sergel','Potes e Açaí']) {
-            await page.getByRole('button',{name,exact:true}).click();
-            const i=['Picolés Dudu','Picolés Sergel','Potes e Açaí'].indexOf(name);
-            await page.waitForFunction(i=>Math.abs(document.querySelector('[data-book]').scrollLeft-i*innerWidth)<2,i);
-            assert.deepEqual(await page.locator('.page').nth(i).evaluate(clipping),[],`${engine} ${width}x${height} catálogo ${name}`);
+          await page.waitForURL('**/sabores/?from=potes#potes');
+          for(const [id,name] of [['dudu','PICOLÉS DUDU'],['sergel','PICOLÉS SERGEL'],['potes','POTES']]) {
+            await page.getByRole('link',{name,exact:true}).click();
+            await page.waitForFunction(id=>document.querySelector('.categories [aria-current]').hash==='#'+id,id);
+            assert.equal(await page.locator('#'+id).isVisible(),true);
+            assert.equal(await page.locator('.category:visible').count(),1);
+            assert.deepEqual(await page.locator('#'+id).evaluate(clipping),[],`${engine} ${width}x${height} catálogo ${name}`);
+            const state=await page.evaluate(()=>({
+              overflow:document.documentElement.scrollWidth>innerWidth,
+              vertical:document.documentElement.scrollHeight>innerHeight,
+              small:[...document.querySelectorAll('.category:not([hidden]) .flavors li')].some(e=>parseFloat(getComputedStyle(e).fontSize)<14),
+              targets:[...document.querySelectorAll('.categories a')].every(e=>e.getBoundingClientRect().height>=44),
+              h1:document.querySelectorAll('h1').length,
+              polish:!!document.querySelector('script[src*="cardapio-polish"]')
+            }));
+            assert.deepEqual(state,{overflow:false,vertical:true,small:false,targets:true,h1:1,polish:false});
+            await page.locator('#'+id+' figure img').scrollIntoViewIfNeeded();
+            await page.waitForFunction(id=>{const im=document.querySelector('#'+id+' img');return im.complete&&im.naturalWidth>0;},id);
+            await page.evaluate(()=>window.scrollTo(0,0));
+            if(width===390 || width===1366) {
+              const file=`catalogo-${engine}-${width}x${height}-${id}.jpg`;
+              const bytes=await page.screenshot({path:`${output}/${file}`,type:'jpeg',quality:75,fullPage:true});
+              if(process.env.CARDAPIO_LOG_EVIDENCE==='1' && height!==664) console.log(`QA_IMAGE ${file} ${bytes.toString('base64')}`);
+            }
           }
-          await page.getByRole('link',{name:'← Cardápio',exact:true}).click();
-          await page.waitForURL('**/cardapio/');
+          assert.equal(await page.getByRole('link',{name:'Como chegar',exact:true}).getAttribute('href'),'https://www.google.com/maps/search/?api=1&query=Rua%20Claudemires%20dos%20Santos%2086%20S%C3%A3o%20Marcos%20Valinhos%20SP');
+          assert.ok((await page.getByRole('link',{name:'Consultar disponibilidade',exact:true}).getAttribute('href')).startsWith('https://wa.me/5519991288849?text='));
+          await page.getByRole('link',{name:'← Voltar ao cardápio',exact:true}).first().click();
+          await page.waitForURL('**/cardapio/#potes');
+          await page.waitForFunction(()=>Math.abs(document.querySelector('[data-book]').scrollLeft-4*innerWidth)<2);
           await page.getByRole('button',{name:'Picolés e Coco',exact:true}).click();
           await page.getByRole('link',{name:'Abrir todos os sabores de picolés e potes →',exact:true}).click();
-          await page.waitForURL('**/sabores/');
+          await page.waitForURL('**/sabores/?from=picoles#dudu');
+          await page.getByRole('link',{name:'POTES',exact:true}).click();
+          await page.getByRole('link',{name:'← Voltar ao cardápio',exact:true}).first().click();
+          await page.waitForURL('**/cardapio/#picoles');
+          await page.waitForFunction(()=>Math.abs(document.querySelector('[data-book]').scrollLeft-5*innerWidth)<2);
+          for(const id of ['dudu','sergel','potes']) {
+            await page.goto(`${base}/sabores/#${id}`);
+            await page.waitForFunction(id=>document.querySelector('.categories [aria-current]').hash==='#'+id,id);
+            assert.equal(await page.locator('#'+id).isVisible(),true);
+          }
           assert.deepEqual(errors,[],'Uncaught page errors');
           console.log(`PASS ${engine} ${width}x${height}: six cards, full video, text bounds, prices, catalog navigation`);
         } catch(error) {

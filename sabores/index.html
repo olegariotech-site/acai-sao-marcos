@@ -3,57 +3,283 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Sabores | Açaí do Dudu</title>
-<meta name="description" content="Catálogo de sabores de picolés e potes do Açaí do Dudu. Consulte disponibilidade do dia.">
+<title>Sabores de picolés e potes em Valinhos | Açaí do Dudu</title>
+<meta name="description" content="Catálogo de sabores do Açaí do Dudu em Valinhos: picolés Dudu, Sergel, potes e açaí para levar. Consulte a disponibilidade do dia.">
 <meta name="theme-color" content="#31043d">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://acaidodudu.com.br/sabores/">
-<link rel="icon" href="/assets/assetslogologo-acai-sao-marcos.png" type="image/png">
-<meta property="og:locale" content="pt_BR"><meta property="og:site_name" content="Açaí do Dudu"><meta property="og:title" content="Sabores | Açaí do Dudu"><meta property="og:description" content="Picolés Dudu, Sergel e potes: veja as opções e consulte o estoque do dia."><meta property="og:type" content="website"><meta property="og:url" content="https://acaidodudu.com.br/sabores/"><meta property="og:image" content="https://acaidodudu.com.br/assets/img/acai-do-dudu-link-preview-1200x630-v2.jpg?v=20260903-sabores"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<link rel="icon" href="/assets/img/brand/logo-menu-128.webp" type="image/webp">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Açaí do Dudu">
+<meta property="og:title" content="Sabores | Açaí do Dudu">
+<meta property="og:description" content="Picolés Dudu, Sergel e potes: veja as opções e consulte o estoque do dia.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://acaidodudu.com.br/sabores/">
+<meta property="og:image" content="https://acaidodudu.com.br/assets/img/acai-do-dudu-link-preview-1200x630-v2.jpg?v=20260903-sabores">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <style>
-:root{--p:#4d075d;--p2:#25012d;--y:#ffd21f;--paper:#fffaf2;--ink:#2e1736;--safeT:max(8px,env(safe-area-inset-top));--safeB:max(8px,env(safe-area-inset-bottom))}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#130018;font-family:Arial,Helvetica,sans-serif;color:var(--ink)}.book{display:flex;width:100vw;height:100dvh;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}.book::-webkit-scrollbar{display:none}.page{flex:0 0 100vw;height:100dvh;scroll-snap-align:start;overflow:hidden}.sheet{width:min(100%,540px);height:100dvh;margin:auto;background:linear-gradient(#fffdf8,#fff8ed);display:grid;grid-template-rows:15% minmax(0,1fr);padding-bottom:calc(45px + var(--safeB));overflow:hidden}
-.hero{position:relative;background:radial-gradient(circle at 90% 0,#7b208c,#3d0649 48%,#220129);color:#fff;padding:calc(var(--safeT) + 38px) 14px 8px;display:flex;align-items:flex-end;overflow:hidden}.hero:after{content:"";position:absolute;left:-4%;right:-4%;bottom:-10px;height:20px;background:var(--y);border-radius:50% 50% 0 0/100% 100% 0 0}.logo{position:absolute;left:12px;bottom:15px;width:48px;height:48px;object-fit:contain;z-index:2}.copy{padding-left:53px;position:relative;z-index:2;max-width:87%}.copy small{font-size:9px;font-weight:900;letter-spacing:1px;text-transform:uppercase}.copy h1{margin:2px 0 0;color:var(--y);font-family:Impact,Arial Black,sans-serif;font-size:clamp(24px,4.3vh,38px);line-height:.9;text-transform:uppercase}.copy p{margin:3px 0 0;color:#c4df69;font-size:clamp(9.4px,1.15vh,11.8px);font-weight:800}
-.body{min-height:0;padding:8px 10px 7px;display:grid;gap:6px}.panel{min-height:0;border:1.6px solid #6b1778;border-radius:13px;background:#fff;overflow:hidden;display:flex;flex-direction:column}.head{flex:0 0 auto;padding:4px 7px;background:linear-gradient(90deg,#521061,#731982);color:#fff;font-family:Impact,Arial Black,sans-serif;text-transform:uppercase;font-size:clamp(10.5px,1.35vh,13.5px)}.inside{min-height:0;flex:1;padding:5px 7px;overflow:hidden}.tags{display:flex;flex-wrap:wrap;gap:3px;align-content:flex-start}.tag{padding:2px 5px;border-radius:999px;background:#f4ead7;border:1px solid #e0cfaa;font-size:clamp(8.5px,1.0vh,10.2px);font-weight:800;line-height:1.05}.price{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #e5d8bf;font-size:clamp(9.5px,1.15vh,12px)}.price:last-child{border-bottom:0}.price strong{color:var(--p)}.note{margin:3px 0 0;font-size:clamp(8.4px,1.0vh,10.2px);line-height:1.15;color:#67566c}.stock{padding:5px 7px;border-radius:10px;background:#f1f8e6;border:1px solid #a8cc68;color:#3d5916;font-size:clamp(8.7px,1.0vh,10.3px);font-weight:900;line-height:1.14}
-.navbar{position:fixed;z-index:20;top:var(--safeT);left:max(8px,calc(50% - 262px));right:max(8px,calc(50% - 262px));display:flex;justify-content:space-between;pointer-events:none}.chip{pointer-events:auto;min-height:31px;display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;background:#260130df;border:1px solid #ffffff40;color:#fff;text-decoration:none;font-size:11px;font-weight:900}.pager{position:fixed;z-index:21;left:50%;bottom:calc(var(--safeB) + 4px);transform:translateX(-50%);display:flex;gap:6px;padding:7px 10px;border-radius:999px;background:#260130df}.dot{width:7px;height:7px;border:0;border-radius:99px;background:#ffffff55;padding:0}.dot.active{width:21px;background:var(--y)}.arrow{position:fixed;z-index:22;bottom:calc(var(--safeB) + 4px);width:34px;height:34px;border-radius:50%;border:1px solid #ffffff40;background:#260130df;color:#fff;font-size:18px}.prev{left:max(10px,calc(50% - 255px))}.next{right:max(10px,calc(50% - 255px))}.arrow:disabled{opacity:0}
-.dudu .body{grid-template-rows:1fr auto}.sergel .body{grid-template-rows:1fr .38fr auto}.potes .body{grid-template-rows:.55fr .55fr .60fr .80fr .48fr auto}
-@media(max-height:720px){.sheet{grid-template-rows:13.5% minmax(0,1fr)}.hero{padding-top:calc(var(--safeT) + 32px)}.copy h1{font-size:clamp(23px,4vh,33px)}.body{padding-top:6px;gap:4px}.head{padding:3px 6px}.inside{padding:4px 6px}.tag{font-size:8.1px;padding:2px 4px}.stock{padding:4px 6px}}
-
-/* Header content stays below the back button, including the two-line Dudu title. */
-.sheet{grid-template-rows:minmax(calc(var(--safeT) + 138px),15%) minmax(0,1fr)}
-.hero{display:grid;grid-template-columns:36px minmax(0,1fr);gap:8px;padding:calc(var(--safeT) + 38px) 12px 12px;align-items:end}
-.logo{position:static;width:36px;height:36px}.copy{padding:0;max-width:none;min-width:0}
-.copy h1{font-size:clamp(23px,3dvh,28px);line-height:1}.copy p{font-size:clamp(9px,1.1dvh,11px)}
-.chip{min-height:34px}.head{font-size:clamp(9.8px,1.23dvh,12.6px);line-height:1.08}
-.price{font-size:clamp(9.3px,1.1dvh,11.7px)}.price strong{white-space:nowrap}
-.potes .body{grid-template-rows:.55fr .55fr .60fr .80fr 1.2fr auto}
+:root{--purple:#420a50;--deep:#270632;--yellow:#ffd326;--paper:#fffaf2;--ink:#321b38;--muted:#705d73}*{box-sizing:border-box}html{background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif}body{margin:0;line-height:1.5}a{color:inherit}a:focus-visible{outline:3px solid #a53eb0;outline-offset:4px}h1,h2,h3,p,figure{margin:0}h1{font-size:clamp(26px,5vw,38px);line-height:1.15}h2{font-size:clamp(30px,5vw,44px);line-height:1.15;margin:8px 0 12px;letter-spacing:-1px}h3{font-size:19px;line-height:1.3}.wrap{width:min(1080px,100% - 32px);margin:auto}.masthead{background:var(--deep);color:white;border-bottom:4px solid var(--yellow);padding:20px 0}.brand{display:flex;gap:14px;align-items:center}.brand img{width:64px;height:64px;object-fit:contain}.brand h1{color:var(--yellow)}.brand p{color:#eadbef;margin-top:5px;font-size:14px}.back{display:inline-flex;align-items:center;min-height:44px;font-size:14px;font-weight:bold;text-decoration:none;margin-bottom:8px}.categories{position:sticky;top:0;z-index:5;background:var(--paper);padding:12px 0;border-bottom:1px solid #e8dce8}.categories .wrap{display:grid;grid-template-columns:1fr 1fr .7fr;gap:6px}.categories a{display:flex;align-items:center;justify-content:center;text-align:center;min-height:48px;padding:8px 5px;border:1px solid #d6c5d9;border-radius:12px;text-decoration:none;font-size:12px;line-height:1.2;font-weight:800;transition:background .15s,color .15s}.categories a[aria-current]{background:var(--purple);border-color:var(--purple);color:white;box-shadow:inset 0 -3px var(--yellow)}.category{padding:24px 0 32px;scroll-margin-top:90px}.category[hidden]{display:none}.category-hero{display:grid;gap:18px;margin-bottom:24px;align-items:center}.category-hero>div>p:last-child{color:var(--muted);font-size:16px;max-width:440px}.eyebrow{text-transform:uppercase;font-size:12px;font-weight:800;letter-spacing:2px;color:var(--purple)}figure{min-width:0}figure img{width:100%;height:170px;object-fit:contain;background:#faf0e3;border-radius:20px;display:block}figcaption{font-size:12px;color:var(--muted);margin-top:5px;text-align:right}.families{display:grid;gap:16px;align-items:start}.family{border:1px solid #e3d5df;background:#fff;border-radius:18px;padding:22px;min-width:0;box-shadow:0 5px 18px #420a5005}.family header{padding-bottom:16px;border-bottom:2px solid #f2e9d8;margin-bottom:10px}.price{color:var(--purple);font-size:17px;font-weight:700;margin-top:8px}.price strong{white-space:nowrap}.flavors{padding:0;list-style:none;margin:0;display:grid;grid-template-columns:minmax(0,1fr);column-gap:28px}.flavors li{font-size:16px;line-height:1.5;padding:9px 0;border-bottom:1px solid #f0e9ee;overflow-wrap:anywhere}.family>p{font-size:15px;color:var(--muted);margin-top:14px}.takeaway{margin:0}.takeaway div{padding:12px 0;border-bottom:1px solid #eee2ed}.takeaway dt{font-size:16px}.takeaway dd{margin:4px 0 0;font-size:18px;font-weight:700;color:var(--purple)}.visit{background:var(--deep);color:white;border-radius:20px;padding:26px;margin-bottom:30px}.visit h2{font-size:26px;letter-spacing:0;margin:0 0 12px}.stock{font-size:14px;color:#eadbef;margin-bottom:18px}.visit address{font-size:16px;font-style:normal;margin-bottom:22px}.actions{display:flex;gap:10px;flex-wrap:wrap}.cta{display:inline-flex;justify-content:center;align-items:center;min-height:48px;border:1px solid #8c7394;padding:12px 18px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none}.cta.primary{background:var(--yellow);color:var(--deep);border-color:var(--yellow)}.footer{padding-bottom:24px;font-size:14px;color:var(--muted)}@media(min-width:420px){.flavors{grid-template-columns:repeat(2,minmax(0,1fr))}.categories a{font-size:14px}}@media(min-width:720px){.masthead .wrap{display:flex;align-items:center;justify-content:space-between;flex-direction:row-reverse}.back{margin:0}.categories .wrap{display:flex}.categories a{padding:12px 28px}.category{padding-top:32px}.category-hero{grid-template-columns:1fr 340px;gap:40px}figure img{height:220px}.families{grid-template-columns:repeat(2,minmax(0,1fr))}.families.single{grid-template-columns:1fr}.single .flavors{grid-template-columns:repeat(3,minmax(0,1fr))}.visit{padding:32px}.category-hero h2{max-width:480px}}@media(prefers-reduced-motion:no-preference){.category:not([hidden]){animation:appear .18s ease-out}@keyframes appear{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}}
 </style>
 </head>
 <body>
-<nav class="navbar"><a class="chip" href="/cardapio/">← Cardápio</a><span class="chip"><span data-current>1</span>/3</span></nav>
-<main class="book" data-book>
-<section class="page dudu" data-page="Picolés Dudu"><div class="sheet"><header class="hero"><img class="logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt=""><div class="copy"><small>Catálogo de sabores</small><h1>Picolés Dudu · <span style="white-space:nowrap">R$ 1,99</span></h1><p>Sabores da casa para consultar no WhatsApp ou na loja.</p></div></header><div class="body">
-<article class="panel"><div class="head">Sabores tradicionais</div><div class="inside"><div class="tags"><span class="tag">Abacaxi</span><span class="tag">Nata</span><span class="tag">Flocos</span><span class="tag">Amendoim</span><span class="tag">Coco queimado</span><span class="tag">Açaí</span><span class="tag">Doce de leite</span><span class="tag">Limão suíço</span><span class="tag">Abacaxi ao vinho</span><span class="tag">Limão</span><span class="tag">Mamão</span><span class="tag">Manga</span><span class="tag">Ice Ninho</span><span class="tag">Goiaba</span><span class="tag">Abacaxi suíço</span><span class="tag">Banana</span><span class="tag">Chiclete</span><span class="tag">Blue Ice</span><span class="tag">Leite condensado</span><span class="tag">Creme</span><span class="tag">Groselha</span><span class="tag">Mousse de maracujá</span><span class="tag">Pinta língua</span><span class="tag">Morango</span><span class="tag">Coco branco</span><span class="tag">Chocolate branco</span><span class="tag">Maracujá</span><span class="tag">Torta de limão</span><span class="tag">Menta</span><span class="tag">Uva</span><span class="tag">Milho</span><span class="tag">Chocolate</span></div></div></article>
-<div class="stock">Sabores sujeitos ao estoque do dia. Confirme a disponibilidade antes de escolher.</div>
-</div></div></section>
-
-<section class="page sergel" data-page="Picolés Sergel"><div class="sheet"><header class="hero"><img class="logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt=""><div class="copy"><small>Catálogo de sabores</small><h1>Picolés Sergel</h1><p>Tradicionais a R$ 4,80 + linha Light.</p></div></header><div class="body">
-<article class="panel"><div class="head">Tradicionais · R$ 4,80</div><div class="inside"><div class="tags"><span class="tag">Pistache</span><span class="tag">Amendoim</span><span class="tag">Chocolate</span><span class="tag">Maracujá</span><span class="tag">Leite condensado</span><span class="tag">Mamão</span><span class="tag">Morango</span><span class="tag">Leitinho</span><span class="tag">Açaí</span><span class="tag">Iogurte</span><span class="tag">Creme de avelã com cacau</span><span class="tag">Coco branco</span><span class="tag">Milho</span><span class="tag">Flocos</span><span class="tag">Goiaba</span><span class="tag">Limão</span><span class="tag">Abacaxi</span><span class="tag">Uva</span><span class="tag">Creme holandês</span><span class="tag">Cocada queimada</span><span class="tag">Iogurte com morango</span><span class="tag">Torta de limão</span><span class="tag">Algodão doce</span><span class="tag">Nata</span><span class="tag">Groselha</span></div></div></article>
-<article class="panel"><div class="head">Sergel Light · consulte o valor</div><div class="inside"><div class="tags"><span class="tag">Chocolate</span><span class="tag">Açaí</span><span class="tag">Amendoim</span><span class="tag">Leitinho</span><span class="tag">Coco</span></div></div></article>
-<div class="stock">Linhas e sabores variam conforme o estoque da loja.</div>
-</div></div></section>
-
-<section class="page potes" id="potes" data-page="Potes e Açaí"><div class="sheet"><header class="hero"><img class="logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt=""><div class="copy"><small>Catálogo de sabores</small><h1>Potes para levar</h1><p>Dudu, Sergel e açaí em tamanhos maiores.</p></div></header><div class="body">
-<article class="panel"><div class="head">Dudu Tradicional · 2 L · R$ 38,00</div><div class="inside"><div class="tags"><span class="tag">Flocos</span><span class="tag">Maracujá</span><span class="tag">Iogurte com frutas vermelhas</span><span class="tag">Kinder Ovo</span></div></div></article>
-<article class="panel"><div class="head">Dudu Trufado · 2 L · R$ 40,00</div><div class="inside"><div class="tags"><span class="tag">Café</span><span class="tag">Leitinho</span><span class="tag">Morango trufado</span><span class="tag">Maracujá trufado</span><span class="tag">Nutella trufado</span></div></div></article>
-<article class="panel"><div class="head">Açaí · 1,5 L</div><div class="inside"><div class="price"><span>Tradicional / cremoso</span><strong>R$ 40,00</strong></div><div class="price"><span>Concentrado</span><strong>R$ 45,00</strong></div></div></article>
-<article class="panel"><div class="head">Sergel Premium · 1,6 L · R$ 54,00</div><div class="inside"><div class="tags"><span class="tag">Carbafeu Paris</span><span class="tag">Iogurte com Amarena</span><span class="tag">Crocante Maltado</span><span class="tag">Chocolate Maltado</span><span class="tag">Leitinho Trufado</span><span class="tag">Leitinho Rocher</span><span class="tag">Tentação de Leitinho</span></div></div></article>
-<article class="panel"><div class="head">Sergel tradicionais / mesclados · 1,6 L</div><div class="inside"><div class="tags"><span class="tag">Coco</span><span class="tag">Pistache</span><span class="tag">Passas ao rum</span><span class="tag">Chocolate branco</span><span class="tag">Chocolate preto com pedaços</span><span class="tag">Chocolate branco com pedaços</span><span class="tag">Morango com pedaços de chocolate</span><span class="tag">Açaí</span><span class="tag">Chocolate branco com cookies</span><span class="tag">Chocolate preto com cookies</span><span class="tag">Creme</span><span class="tag">Milho</span><span class="tag">Napolitana</span></div><p class="note">Consulte valor e disponibilidade desta linha.</p></div></article>
-<div class="stock">Pote Mesclado Dudu 2 L: R$ 48,00. Sabores e embalagens podem variar conforme o estoque.</div>
-</div></div></section>
+<header class="masthead">
+<div class="wrap">
+<a class="back" data-back href="/cardapio/#picoles">← Voltar ao cardápio</a>
+<div class="brand">
+<img src="/assets/img/brand/logo-menu-128.webp" width="64" height="64" alt="Açaí do Dudu">
+<div>
+<h1>Sabores do Dudu</h1>
+<p>São Marcos · Valinhos</p>
+</div>
+</div>
+</div>
+</header>
+<nav class="categories" aria-label="Categorias de sabores">
+<div class="wrap">
+<a href="#dudu" aria-current="page">PICOLÉS DUDU</a>
+<a href="#sergel">PICOLÉS SERGEL</a>
+<a href="#potes">POTES</a>
+</div>
+</nav>
+<main class="wrap">
+<section id="dudu" class="category">
+<header class="category-hero">
+<div>
+<p class="eyebrow">Escolha seu favorito</p>
+<h2>Picolés Dudu</h2>
+<p>Uma pausa gelada, do seu jeito.</p>
+</div>
+<figure>
+<img src="/assets/img/catalogo/dudu.webp" width="600" height="400" alt="Composição ilustrativa de picolés sem embalagem" loading="lazy">
+<figcaption>Imagem ilustrativa</figcaption>
+</figure>
+</header>
+<div class="families single">
+<article class="family">
+<header>
+<h3>Sabores tradicionais</h3>
+<p class="price">
+<strong>R$ 1,99</strong> · cada picolé</p>
+</header>
+<ul class="flavors">
+<li>Abacaxi</li>
+<li>Nata</li>
+<li>Flocos</li>
+<li>Amendoim</li>
+<li>Coco queimado</li>
+<li>Açaí</li>
+<li>Doce de leite</li>
+<li>Limão suíço</li>
+<li>Abacaxi ao vinho</li>
+<li>Limão</li>
+<li>Mamão</li>
+<li>Manga</li>
+<li>Ice Ninho</li>
+<li>Goiaba</li>
+<li>Abacaxi suíço</li>
+<li>Banana</li>
+<li>Chiclete</li>
+<li>Blue Ice</li>
+<li>Leite condensado</li>
+<li>Creme</li>
+<li>Groselha</li>
+<li>Mousse de maracujá</li>
+<li>Pinta língua</li>
+<li>Morango</li>
+<li>Coco branco</li>
+<li>Chocolate branco</li>
+<li>Maracujá</li>
+<li>Torta de limão</li>
+<li>Menta</li>
+<li>Uva</li>
+<li>Milho</li>
+<li>Chocolate</li>
+</ul>
+</article>
+</div>
+</section>
+<section id="sergel" class="category">
+<header class="category-hero">
+<div>
+<p class="eyebrow">Escolha seu favorito</p>
+<h2>Picolés Sergel</h2>
+<p>Encontre seu favorito entre os tradicionais e a linha Light.</p>
+</div>
+<figure>
+<img src="/assets/img/catalogo/sergel.webp" width="600" height="400" alt="Composição ilustrativa de picolés sem embalagem" loading="lazy">
+<figcaption>Imagem ilustrativa</figcaption>
+</figure>
+</header>
+<div class="families">
+<article class="family">
+<header>
+<h3>Tradicionais</h3>
+<p class="price">
+<strong>R$ 4,80</strong> · cada picolé</p>
+</header>
+<ul class="flavors">
+<li>Pistache</li>
+<li>Amendoim</li>
+<li>Chocolate</li>
+<li>Maracujá</li>
+<li>Leite condensado</li>
+<li>Mamão</li>
+<li>Morango</li>
+<li>Leitinho</li>
+<li>Açaí</li>
+<li>Iogurte</li>
+<li>Creme de avelã com cacau</li>
+<li>Coco branco</li>
+<li>Milho</li>
+<li>Flocos</li>
+<li>Goiaba</li>
+<li>Limão</li>
+<li>Abacaxi</li>
+<li>Uva</li>
+<li>Creme holandês</li>
+<li>Cocada queimada</li>
+<li>Iogurte com morango</li>
+<li>Torta de limão</li>
+<li>Algodão doce</li>
+<li>Nata</li>
+<li>Groselha</li>
+</ul>
+</article>
+<article class="family">
+<header>
+<h3>Sergel Light</h3>
+<p class="price">Consulte o valor</p>
+</header>
+<ul class="flavors">
+<li>Chocolate</li>
+<li>Açaí</li>
+<li>Amendoim</li>
+<li>Leitinho</li>
+<li>Coco</li>
+</ul>
+</article>
+</div>
+</section>
+<section id="potes" class="category">
+<header class="category-hero">
+<div>
+<p class="eyebrow">Escolha seu favorito</p>
+<h2>Potes para levar</h2>
+<p>Dudu, Sergel e açaí para aproveitar em casa.</p>
+</div>
+<figure>
+<img src="/assets/img/catalogo/potes.webp" width="600" height="400" alt="Composição ilustrativa de sorvete de flocos servido em uma tigela" loading="lazy">
+<figcaption>Imagem ilustrativa · sugestão de consumo</figcaption>
+</figure>
+</header>
+<div class="families">
+<article class="family">
+<header>
+<h3>Dudu Tradicional</h3>
+<p class="price">2 L · <strong>R$ 38,00</strong>
+</p>
+</header>
+<ul class="flavors">
+<li>Flocos</li>
+<li>Maracujá</li>
+<li>Iogurte com frutas vermelhas</li>
+<li>Kinder Ovo</li>
+</ul>
+</article>
+<article class="family">
+<header>
+<h3>Dudu Trufado</h3>
+<p class="price">2 L · <strong>R$ 40,00</strong>
+</p>
+</header>
+<ul class="flavors">
+<li>Café</li>
+<li>Leitinho</li>
+<li>Morango trufado</li>
+<li>Maracujá trufado</li>
+<li>Nutella trufado</li>
+</ul>
+</article>
+<article class="family">
+<header>
+<h3>Mesclado Dudu</h3>
+<p class="price">2 L · <strong>R$ 48,00</strong>
+</p>
+</header>
+<p>Consulte os sabores na loja ou pelo WhatsApp.</p>
+</article>
+<article class="family">
+<header>
+<h3>Açaí para levar</h3>
+<p class="price">1,5 L</p>
+</header>
+<dl class="takeaway">
+<div>
+<dt>Tradicional / cremoso</dt>
+<dd>R$ 40,00</dd>
+</div>
+<div>
+<dt>Concentrado</dt>
+<dd>R$ 45,00</dd>
+</div>
+</dl>
+</article>
+<article class="family">
+<header>
+<h3>Sergel Premium</h3>
+<p class="price">1,6 L · <strong>R$ 54,00</strong>
+</p>
+</header>
+<ul class="flavors">
+<li>Carbafeu Paris</li>
+<li>Iogurte com Amarena</li>
+<li>Crocante Maltado</li>
+<li>Chocolate Maltado</li>
+<li>Leitinho Trufado</li>
+<li>Leitinho Rocher</li>
+<li>Tentação de Leitinho</li>
+</ul>
+</article>
+<article class="family">
+<header>
+<h3>Sergel tradicionais / mesclados</h3>
+<p class="price">1,6 L · Consulte o valor</p>
+</header>
+<ul class="flavors">
+<li>Coco</li>
+<li>Pistache</li>
+<li>Passas ao rum</li>
+<li>Chocolate branco</li>
+<li>Chocolate preto com pedaços</li>
+<li>Chocolate branco com pedaços</li>
+<li>Morango com pedaços de chocolate</li>
+<li>Açaí</li>
+<li>Chocolate branco com cookies</li>
+<li>Chocolate preto com cookies</li>
+<li>Creme</li>
+<li>Milho</li>
+<li>Napolitana</li>
+</ul>
+</article>
+</div>
+</section>
+<aside class="visit" aria-labelledby="visit-title">
+<p class="stock">Sabores sujeitos à disponibilidade do dia.</p>
+<h2 id="visit-title">Seu próximo sabor está aqui.</h2>
+<address>Rua Claudemires dos Santos, 86<br>Jardim São Marcos · Valinhos/SP</address>
+<div class="actions">
+<a class="cta primary" href="https://www.google.com/maps/search/?api=1&amp;query=Rua%20Claudemires%20dos%20Santos%2086%20S%C3%A3o%20Marcos%20Valinhos%20SP" target="_blank" rel="noopener noreferrer">Como chegar</a>
+<a class="cta" href="https://wa.me/5519991288849?text=Ol%C3%A1!%20Vim%20pelo%20cat%C3%A1logo%20de%20sabores%20e%20queria%20confirmar%20a%20disponibilidade%20de%20um%20produto." target="_blank" rel="noopener noreferrer">Consultar disponibilidade</a>
+</div>
+</aside>
 </main>
-<button class="arrow prev" data-prev aria-label="Anterior">‹</button><button class="arrow next" data-next aria-label="Próximo">›</button>
-<div class="pager"><button class="dot active" data-i="0" aria-label="Picolés Dudu"></button><button class="dot" data-i="1" aria-label="Picolés Sergel"></button><button class="dot" data-i="2" aria-label="Potes e Açaí"></button></div>
-<script src="/assets/js/analytics-consent.js?v=20260905-final-2" defer></script>
-<script>(()=>{const b=document.querySelector('[data-book]'),p=[...document.querySelectorAll('.page')],d=[...document.querySelectorAll('.dot')],c=document.querySelector('[data-current]'),pr=document.querySelector('[data-prev]'),nx=document.querySelector('[data-next]');let a=location.hash==='#potes'?2:0,t=false;function set(i){a=Math.max(0,Math.min(p.length-1,i));c.textContent=a+1;d.forEach((x,j)=>x.classList.toggle('active',j===a));pr.disabled=a===0;nx.disabled=a===p.length-1;document.title=p[a].dataset.page+' | Sabores Açaí do Dudu'}function go(i,instant=false){const n=Math.max(0,Math.min(p.length-1,i));b.scrollTo({left:n*b.clientWidth,behavior:instant?'auto':'smooth'});set(n)}b.addEventListener('scroll',()=>{if(t)return;t=true;requestAnimationFrame(()=>{set(Math.round(b.scrollLeft/Math.max(1,b.clientWidth)));t=false})},{passive:true});pr.onclick=()=>go(a-1);nx.onclick=()=>go(a+1);d.forEach(x=>x.onclick=()=>go(+x.dataset.i));requestAnimationFrame(()=>go(a,true))})();</script>
-</body></html>
+<footer class="wrap footer">
+<a data-back href="/cardapio/#picoles">← Voltar ao cardápio</a>
+</footer>
+<script src="/assets/js/analytics-consent.js?v=20260905-catalogo" defer>
+</script>
+<script src="/assets/js/catalogo.js?v=20260905" defer>
+</script>
+</body>
+</html>

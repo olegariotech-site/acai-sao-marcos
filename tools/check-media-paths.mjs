@@ -67,7 +67,7 @@ const check = (value, source, baseDir = '') => {
 
 const walk = (directory) => fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
   const absolute = path.join(directory, entry.name);
-  if (entry.name === '.git') return [];
+  if (['.git', 'node_modules'].includes(entry.name)) return [];
   if (entry.isDirectory()) return walk(absolute);
   return [absolute];
 });

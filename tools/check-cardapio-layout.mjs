@@ -6,6 +6,7 @@ import assert from 'node:assert/strict';
 const base = process.env.CARDAPIO_BASE_URL || 'http://127.0.0.1:4174';
 const output = process.env.CARDAPIO_SCREENSHOTS || '/tmp/cardapio-qa';
 const sizes = [[360,800],[360,740],[390,844],[393,852],[412,915],[430,932],[360,640],[390,664],[1366,768]];
+const failures = [];
 const names = ['Açaí','Trio do Dudu','Milk-shakes','Batidão','Potes','Picolés e Coco'];
 const server = process.env.CARDAPIO_BASE_URL ? null : spawn('python3',['-m','http.server','4174','--bind','127.0.0.1'],{stdio:'ignore'});
 await mkdir(output,{recursive:true});
@@ -112,7 +113,8 @@ try {
         } catch(error) {
           const bytes=await page.screenshot({path:`${output}/failure-${engine}-${width}x${height}.jpg`,type:'jpeg',quality:65});
           if(process.env.CARDAPIO_LOG_EVIDENCE==='1') console.log(`QA_IMAGE failure-${engine}-${width}x${height}.jpg ${bytes.toString('base64')}`);
-          throw error;
+          failures.push(`${engine} ${width}x${height}: ${error.message}`);
+          console.error(error.message);
         } finally { await context.close(); }
       }
 
@@ -146,4 +148,5 @@ try {
       await context.close();
     } finally { await browser.close(); }
   }
+  assert.deepEqual(failures, [], 'Layout failures');
 } finally { server?.kill('SIGTERM'); }

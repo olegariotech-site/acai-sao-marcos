@@ -184,7 +184,7 @@ const requiredCommercialProducts = {
   'agua-de-coco-gelada': [10, 10, 20],
   'pote-tradicional-dudu-2l': [38],
   'milkshake-trufado': [18, 24, 30, 34],
-  'batidao-acai-15l': [10, 16, 22],
+  'batidao-acai-15l': [10, 16, 32],
   'picoles-do-dudu': [1.99],
   'picoles-sergel': [4.8]
 };

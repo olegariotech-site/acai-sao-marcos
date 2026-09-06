@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 
 const base = process.env.CARDAPIO_BASE_URL || 'http://127.0.0.1:4174';
 const output = process.env.CARDAPIO_SCREENSHOTS || '/tmp/cardapio-qa';
-const sizes = [[360,800],[360,740],[390,844],[393,852],[412,915],[430,932],[360,640],[390,664],[1366,768]];
+const sizes = [[360,800],[360,740],[390,844],[393,852],[412,915],[430,932],[360,640],[390,664],[1366,768],[1440,900],[1920,1080]];
 const failures = [];
 const names = ['Açaí','Trio do Dudu','Milk-shakes','Batidão','Potes','Picolés e Coco'];
 const server = process.env.CARDAPIO_BASE_URL ? null : spawn('python3',['-m','http.server','4174','--bind','127.0.0.1'],{stdio:'ignore'});
@@ -77,6 +77,21 @@ try {
             assert.equal(geometry.vertical,false,'Vertical document overflow');
             assert.ok(geometry.cardHeight<=height+1,'Card exceeds viewport');
             assert.equal(/R\$\s*\d+(?![\d,])/.test(await card.innerText()),false,'Currency missing cents');
+            if(i===0) {
+              assert.deepEqual(await card.locator('.step').allTextContents(),['1º','2º','3º','4º','5º']);
+              assert.equal((await card.innerText()).toLowerCase().includes('chocolate branco'),false);
+              assert.ok((await card.locator('.ok').innerText()).includes('Itens além das quantidades incluídas são cobrados como adicionais à parte.'));
+              assert.ok((await card.innerText()).includes('Até 2 frutas'));
+              assert.ok((await card.innerText()).includes('Até 2 complementos'));
+              assert.ok((await card.innerText()).includes('Leite condensado + 1 cobertura'));
+            }
+            if(i===3) {
+              assert.equal(await card.evaluate(root=>root.querySelector('.hero-copy').getBoundingClientRect().bottom<=root.querySelector('.hero').getBoundingClientRect().bottom-10),true,'Batidão subtitle overlaps decorative wave');
+              const rows=await card.locator('.price').allTextContents();
+              for(const expected of ['1 LR$ 32,00','Base padrãoAçaí + água','Base com leite+ R$ 4,00','Fruta+ R$ 2,00 cada','Complemento+ R$ 2,00 cada','Creatina 5 g+ R$ 3,00']) assert.ok(rows.includes(expected),expected);
+              assert.ok((await card.innerText()).includes('Leite condensado: sem acréscimo.'));
+              assert.ok((await card.innerText()).includes('Até 2 frutas · consulte opções do dia.'));
+            }
             if(i===1) {
               const state=await card.locator('video').evaluate(v=>{
                 const box=v.getBoundingClientRect(),frame=v.closest('.trio-top').getBoundingClientRect();
@@ -86,10 +101,10 @@ try {
               assert.equal(state.muted,true);assert.equal(state.inline,true);
               assert.equal(await card.locator('.bigprice strong').innerText(),'R$ 14,00');
             }
-            if(width===360 && [640,740].includes(height) || width===390 && height===844) {
+            if(width===360 && [640,740].includes(height) || width===390 && height===844 || width>=1366 && [0,3].includes(i)) {
               const file=`${engine}-${width}x${height}-card-${i+1}.jpg`;
               const bytes=await page.screenshot({path:`${output}/${file}`,type:'jpeg',quality:65});
-              if(process.env.CARDAPIO_LOG_EVIDENCE==='1' && width===360 && height===740) console.log(`QA_IMAGE ${file} ${bytes.toString('base64')}`);
+              if(process.env.CARDAPIO_LOG_EVIDENCE==='1' && ((width===390 && height===844 && [0,1,3].includes(i)) || (width===1366 && [0,3].includes(i)) || (width===1920 && [0,3].includes(i)))) console.log(`QA_IMAGE ${file} ${bytes.toString('base64')}`);
             }
           }
           // Preserve the originating main card while switching catalog categories.
@@ -117,7 +132,7 @@ try {
             if(width===390 || width===1366) {
               const file=`catalogo-${engine}-${width}x${height}-${id}.jpg`;
               const bytes=await page.screenshot({path:`${output}/${file}`,type:'jpeg',quality:75,fullPage:true});
-              if(process.env.CARDAPIO_LOG_EVIDENCE==='1' && height!==664) console.log(`QA_IMAGE ${file} ${bytes.toString('base64')}`);
+              if(process.env.CARDAPIO_LOG_EVIDENCE==='1' && process.env.CATALOG_LOG_EVIDENCE==='1' && height!==664) console.log(`QA_IMAGE ${file} ${bytes.toString('base64')}`);
             }
           }
           assert.equal(await page.getByRole('link',{name:'Como chegar',exact:true}).getAttribute('href'),'https://www.google.com/maps/search/?api=1&query=Rua%20Claudemires%20dos%20Santos%2086%20S%C3%A3o%20Marcos%20Valinhos%20SP');

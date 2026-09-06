@@ -132,6 +132,45 @@
   .hero-product{height:60px}.body{gap:4px}.head{min-height:24px}
   .trio .tags.dense .tag{font-size:7.9px;line-height:1.05;padding:2px 4px}
 }
+
+/* Feedback Eduardo, 06/09: three distinct choices; the approved Trio is excluded. */
+.bat .body{grid-template-rows:.75fr 1fr 1.35fr auto}
+.bat .bat-sizes .inside{display:flex;flex-direction:column;justify-content:center}
+.bat .bat-base .inside{display:flex;flex-direction:column;justify-content:center;gap:2px}
+.bat .bat-extras .inside{display:flex;flex-direction:column;justify-content:center;gap:5px}
+.bat .bat-extras .tags{margin:1px 0 3px}
+.acai .ribbon{line-height:1.25}
+@media(min-width:768px) and (min-height:740px){
+  .page:not(.trio) .head{font-size:clamp(13px,1.6dvh,17px);min-height:30px;line-height:1.12}
+  .page:not(.trio) .step{font-size:11px;height:23px;flex-basis:28px}
+  .page:not(.trio) .inside{padding:7px 9px}
+  .page:not(.trio) .price{font-size:clamp(14px,1.8dvh,18px);line-height:1.22;padding:3px 0}
+  .page:not(.trio) .tag{font-size:clamp(11px,1.45dvh,15px);padding:3px 6px;line-height:1.15}
+  .page:not(.trio) .tags.dense .tag{font-size:clamp(10.5px,1.35dvh,14px);padding:3px 5px}
+  .page:not(.trio) .tags{gap:4px}
+  .page:not(.trio) .note{font-size:clamp(11px,1.35dvh,14px);line-height:1.25;margin-top:5px}
+  .page:not(.trio) .ok,.page:not(.trio) .ribbon{font-size:clamp(11px,1.35dvh,14px);line-height:1.25;padding:6px 8px}
+  .page:not(.trio) .label{font-size:clamp(12px,1.5dvh,16px)}
+  .page:not(.trio) .hero p{font-size:clamp(11px,1.35dvh,14px);line-height:1.2}
+  .page:not(.trio) .prod h3{font-size:clamp(14px,1.8dvh,19px);line-height:1.15}
+  .page:not(.trio) .prod .tiny{font-size:clamp(11px,1.35dvh,14px);line-height:1.22}
+  .page:not(.trio) .prod .money{font-size:clamp(25px,3dvh,32px);line-height:1.15}
+  .page:not(.trio) .catalog-link{font-size:clamp(12px,1.5dvh,16px)}
+  .page:not(.trio) .picitem strong{font-size:16px}.page:not(.trio) .picitem b{font-size:30px;line-height:1.15}
+  .acai .body{grid-template-rows:1.02fr 1.12fr .76fr .85fr auto auto}
+  .acai .grid2:first-child .panel:first-child .price{line-height:1.22}
+  .bat .price{font-size:clamp(16px,2dvh,21px)}
+}
+@media(min-width:768px) and (min-height:740px) and (max-height:820px){
+  .acai .body{grid-template-rows:1.02fr 1fr .88fr .85fr auto auto}
+}
+@media(max-width:767px){
+  .bat .sheet{grid-template-rows:minmax(calc(var(--safeT) + 142px),16.5%) minmax(0,1fr)}
+  .bat .head{font-size:12px;line-height:1.15}
+  .bat .price{font-size:13px;line-height:1.2;padding:2px 0}
+  .bat .note{font-size:11px;line-height:1.2}
+  .bat .tag{font-size:10px;line-height:1.1}
+}
 </style>
 </head>
 <body>
@@ -146,12 +185,12 @@
 </div>
 <div class="grid2">
 <article class="panel"><div class="head"><span class="step">3º</span>Frutas</div><div class="inside"><div class="tags"><span class="tag">Morango</span><span class="tag">Manga</span><span class="tag">Uva-verde</span><span class="tag">Banana</span><span class="tag">Kiwi</span></div><p class="note"><strong>Até 2 frutas</strong> incluídas.</p></div></article>
-<article class="panel"><div class="head"><span class="step">3º</span>Complementos</div><div class="inside"><div class="tags dense"><span class="tag">Leite em pó</span><span class="tag">Granola</span><span class="tag">Paçoca</span><span class="tag">Amendoim</span><span class="tag">Ovomaltine</span><span class="tag">Confete</span><span class="tag">Chocoball</span><span class="tag">Granulado</span><span class="tag">Fini</span></div><p class="note"><strong>Até 2 complementos</strong> incluídos.</p></div></article>
+<article class="panel"><div class="head"><span class="step">4º</span>Complementos</div><div class="inside"><div class="tags dense"><span class="tag">Leite em pó</span><span class="tag">Granola</span><span class="tag">Paçoca</span><span class="tag">Amendoim</span><span class="tag">Ovomaltine</span><span class="tag">Confete</span><span class="tag">Chocoball</span><span class="tag">Granulado</span><span class="tag">Fini</span></div><p class="note"><strong>Até 2 complementos</strong> incluídos.</p></div></article>
 </div>
-<article class="panel"><div class="head"><span class="step">4º</span>Escolha a cobertura</div><div class="inside"><div class="tags"><span class="tag">Chocolate</span><span class="tag">Tutti-frutti</span><span class="tag">Leite condensado</span><span class="tag">Morango</span><span class="tag">Caramelo</span><span class="tag">Abacaxi</span><span class="tag">Menta</span><span class="tag">Limão</span></div><p class="note"><strong>Leite condensado + 1 cobertura</strong> entram no preço.</p></div></article>
+<article class="panel"><div class="head"><span class="step">5º</span>Escolha a cobertura</div><div class="inside"><div class="tags"><span class="tag">Chocolate</span><span class="tag">Tutti-frutti</span><span class="tag">Leite condensado</span><span class="tag">Morango</span><span class="tag">Caramelo</span><span class="tag">Abacaxi</span><span class="tag">Menta</span><span class="tag">Limão</span></div><p class="note"><strong>Leite condensado + 1 cobertura</strong> entram no preço.</p></div></article>
 <article class="panel"><div class="head">Adicionais especiais</div><div class="inside"><div class="price"><span>Nutella</span><strong>+ R$ 10,00</strong></div><div class="price"><span>Skimo Branco</span><strong>+ R$ 4,00</strong></div><div class="price"><span>Skimo Preto ao Leite</span><strong>+ R$ 4,00</strong></div></div></article>
-<div class="ok">Chocolate branco não faz mais parte das coberturas. Adicionais especiais são cobrados à parte.</div>
-<div class="ribbon">1º tamanho → 2º açaí → 3º frutas/complementos → 4º cobertura → <b>adicionais</b></div>
+<div class="ok">Itens além das quantidades incluídas são cobrados como adicionais à parte.</div>
+<div class="ribbon">1º tamanho → 2º açaí → 3º frutas → 4º complementos → 5º cobertura</div>
 </div></div></section>
 
 <section class="page trio" data-page="Trio do Dudu"><div class="sheet">
@@ -175,10 +214,10 @@
 <section class="page bat" data-page="Batidão"><div class="sheet">
 <header class="hero"><img class="logo" src="/assets/assetslogologo-acai-sao-marcos.png" alt=""><div class="hero-copy"><small>4º card</small><h1>Batidão de Açaí</h1><p>Base de água na garrafa + personalização.</p></div><img class="hero-product" src="/assets/img/produtos/acai/acai-origem-garrafas-960.webp" alt="" decoding="async"></header>
 <div class="body">
-<div class="grid2"><article class="panel"><div class="head">Tamanhos</div><div class="inside"><div class="price"><span>300 ml</span><strong>R$ 10,00</strong></div><div class="price"><span>500 ml</span><strong>R$ 16,00</strong></div><div class="price"><span>1 L</span><strong>R$ 22,00</strong></div></div></article><article class="panel"><div class="head">Incluso</div><div class="inside"><div class="price"><span>Base</span><strong>Açaí + água</strong></div><div class="price"><span>Leite condensado</span><strong>Sem acréscimo</strong></div><p class="note">Servido na garrafa.</p></div></article></div>
-<article class="panel"><div class="head">Personalize</div><div class="inside"><div class="grid2"><div><div class="price"><span>Base com leite</span><strong>+ R$ 2,00</strong></div><div class="price"><span>Fruta</span><strong>+ R$ 2,00 cada</strong></div><p class="note">Até 2 frutas · consulte opções do dia.</p></div><div><div class="price"><span>Complemento</span><strong>+ R$ 2,00 cada</strong></div><div class="price"><span>Creatina 5 g</span><strong>+ R$ 3,00</strong></div></div></div></div></article>
-<article class="panel"><div class="head">Complementos</div><div class="inside"><div class="tags"><span class="tag">Paçoca</span><span class="tag">Ovomaltine</span><span class="tag">Amendoim</span><span class="tag">Leite em pó</span></div><p class="note">Leite condensado permanece opção inclusa.</p></div></article>
-<div class="ribbon">Adicionais cobrados por item · <b>creatina 5 g + R$ 3,00</b></div>
+<article class="panel bat-sizes"><div class="head">1 · Escolha o tamanho</div><div class="inside"><div class="price"><span>300 ml</span><strong>R$ 10,00</strong></div><div class="price"><span>500 ml</span><strong>R$ 16,00</strong></div><div class="price"><span>1 L</span><strong>R$ 32,00</strong></div></div></article>
+<article class="panel bat-base"><div class="head">2 · Escolha a base</div><div class="inside"><div class="price"><span>Base padrão</span><strong>Açaí + água</strong></div><div class="price"><span>Base com leite</span><strong>+ R$ 4,00</strong></div><p class="note">O acréscimo de R$ 4,00 é somente pela troca da base.</p><p class="note"><strong>Leite condensado: sem acréscimo.</strong> Servido na garrafa.</p></div></article>
+<article class="panel bat-extras"><div class="head">3 · Adicionais à sua escolha</div><div class="inside"><div class="price"><span>Fruta</span><strong>+ R$ 2,00 cada</strong></div><p class="note">Até 2 frutas · consulte opções do dia.</p><div class="price"><span>Complemento</span><strong>+ R$ 2,00 cada</strong></div><div class="tags"><span class="tag">Paçoca</span><span class="tag">Ovomaltine</span><span class="tag">Amendoim</span><span class="tag">Leite em pó</span></div><div class="price"><span>Creatina 5 g</span><strong>+ R$ 3,00</strong></div></div></article>
+<div class="ribbon">Tamanho + base escolhida + adicionais</div>
 </div></div></section>
 
 <section class="page potes" data-page="Potes"><div class="sheet">

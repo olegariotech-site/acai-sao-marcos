@@ -266,7 +266,7 @@
       "sizes": [
         { "label": "300 ml", "price": 10.0 },
         { "label": "500 ml", "price": 16.0 },
-        { "label": "1 L", "price": 22.0 }
+        { "label": "1 L", "price": 32.0 }
       ],
       "includes": ["Açaí batido com água como base", "Garrafa no tamanho escolhido"],
       "flavors": [],

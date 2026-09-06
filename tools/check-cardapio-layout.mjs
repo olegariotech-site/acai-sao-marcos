@@ -86,6 +86,7 @@ try {
               assert.ok((await card.innerText()).includes('Leite condensado + 1 cobertura'));
             }
             if(i===3) {
+              assert.equal(await card.evaluate(root=>root.querySelector('.hero-copy').getBoundingClientRect().bottom<=root.querySelector('.hero').getBoundingClientRect().bottom-10),true,'Batidão subtitle overlaps decorative wave');
               const rows=await card.locator('.price').allTextContents();
               for(const expected of ['1 LR$ 32,00','Base padrãoAçaí + água','Base com leite+ R$ 4,00','Fruta+ R$ 2,00 cada','Complemento+ R$ 2,00 cada','Creatina 5 g+ R$ 3,00']) assert.ok(rows.includes(expected),expected);
               assert.ok((await card.innerText()).includes('Leite condensado: sem acréscimo.'));

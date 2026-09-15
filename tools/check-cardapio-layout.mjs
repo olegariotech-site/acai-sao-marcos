@@ -77,6 +77,23 @@ try {
             assert.equal(geometry.vertical,false,'Vertical document overflow');
             assert.ok(geometry.cardHeight<=height+1,'Card exceeds viewport');
             assert.equal(/R\$\s*\d+(?![\d,])/.test(await card.innerText()),false,'Currency missing cents');
+            const controls=await card.evaluate(root=>{
+              const strip=document.querySelector('.menu-controls').getBoundingClientRect();
+              const body=root.querySelector('.body').getBoundingClientRect();
+              const buttons=[...document.querySelectorAll('.menu-controls .nav,.menu-controls .pager')].filter(e=>!e.disabled).map(e=>e.getBoundingClientRect());
+              return {clear:body.bottom<=strip.top+1,contained:buttons.every(b=>b.top>=strip.top&&b.bottom<=strip.bottom&&b.left>=strip.left&&b.right<=strip.right),aligned:buttons.every(b=>Math.abs(b.top-buttons[0].top)<1)};
+            });
+            assert.deepEqual(controls,{clear:true,contained:true,aligned:true},'Navigation stays in its reserved strip');
+            if(i===1 || i===2) {
+              const expected=['Chocolate','Tutti-frutti','Leite condensado','Morango','Caramelo','Abacaxi','Menta','Limão','Fini Dentadura','Fini Beijinho','Fini Banana'];
+              assert.deepEqual(await card.locator('.toppings .tag').allTextContents(),expected,'Same existing toppings for Trio and Milk-shakes');
+              if(i===2) assert.equal(await card.locator('.body>.grid2>.panel').first().innerText().then(t=>t.includes('Fini')),false);
+            }
+            if(i===4) {
+              const product=card.locator('.prod').nth(2);
+              assert.equal(await product.locator('h3').innerText(),'Mesclado Sergel · 1,6 L');
+              assert.equal(await product.locator('.money').innerText(),'R$ 46,00');
+            }
             if(i===0) {
               assert.deepEqual(await card.locator('.step').allTextContents(),['1º','2º','3º','4º','5º']);
               assert.equal((await card.innerText()).toLowerCase().includes('chocolate branco'),false);
@@ -101,12 +118,21 @@ try {
               assert.equal(state.muted,true);assert.equal(state.inline,true);
               assert.equal(await card.locator('.bigprice strong').innerText(),'R$ 14,00');
             }
-            if(width===360 && [640,740].includes(height) || width===390 && height===844 || width>=1366 && [0,3].includes(i)) {
+            if(width===360 && [640,740].includes(height) || width===390 && height===844 || width>=1366 && [0,1,2,3,4,5].includes(i)) {
               const file=`${engine}-${width}x${height}-card-${i+1}.jpg`;
               const bytes=await page.screenshot({path:`${output}/${file}`,type:'jpeg',quality:65});
-              if(process.env.CARDAPIO_LOG_EVIDENCE==='1' && ((width===390 && height===844 && [0,1,3].includes(i)) || (width===1366 && [0,3].includes(i)) || (width===1920 && [0,3].includes(i)))) console.log(`QA_IMAGE ${file} ${bytes.toString('base64')}`);
+              if(process.env.CARDAPIO_LOG_EVIDENCE==='1' && ((width===390 && height===844 && [1,2,4,5].includes(i)) || (width===1366 && [1,2,4,5].includes(i)))) console.log(`QA_IMAGE ${file} ${bytes.toString('base64')}`);
             }
           }
+          assert.equal(await page.getByRole('button',{name:'Próximo card',exact:true}).isEnabled(),false);
+          await page.getByRole('button',{name:'Card anterior',exact:true}).click();
+          await page.waitForFunction(()=>Math.abs(document.querySelector('[data-book]').scrollLeft-4*innerWidth)<2);
+          await page.getByRole('button',{name:'Próximo card',exact:true}).click();
+          await page.waitForFunction(()=>Math.abs(document.querySelector('[data-book]').scrollLeft-5*innerWidth)<2);
+          await page.keyboard.press('ArrowLeft');
+          await page.waitForFunction(()=>Math.abs(document.querySelector('[data-book]').scrollLeft-4*innerWidth)<2);
+          await page.keyboard.press('ArrowRight');
+          await page.waitForFunction(()=>Math.abs(document.querySelector('[data-book]').scrollLeft-5*innerWidth)<2);
           // Preserve the originating main card while switching catalog categories.
           await page.getByRole('button',{name:'Potes',exact:true}).click();
           await page.getByRole('link',{name:'Ver todos os sabores de potes →',exact:true}).click();
@@ -183,7 +209,8 @@ try {
       const play=page.getByRole('button',{name:'Reproduzir vídeo do Trio',exact:true});
       await play.waitFor({state:'visible'});await play.click();
       await page.waitForFunction(()=>{const v=document.querySelector('.trio video');return !v.paused&&v.currentTime>0;});
-      assert.equal(await play.isVisible(),false);
+      // Playback state can advance before the playing handler updates the button.
+      await play.waitFor({state:'hidden',timeout:5000});
       await page.getByRole('button',{name:'Milk-shakes',exact:true}).click();
       await page.waitForFunction(()=>document.querySelector('.trio video').paused);
       await page.getByRole('button',{name:'Trio do Dudu',exact:true}).click();

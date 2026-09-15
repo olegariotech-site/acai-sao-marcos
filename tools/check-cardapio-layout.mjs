@@ -124,6 +124,15 @@ try {
               if(process.env.CARDAPIO_LOG_EVIDENCE==='1' && ((width===390 && height===844 && [1,2,4,5].includes(i)) || (width===1366 && [1,2,4,5].includes(i)))) console.log(`QA_IMAGE ${file} ${bytes.toString('base64')}`);
             }
           }
+          assert.equal(await page.getByRole('button',{name:'Próximo card',exact:true}).isEnabled(),false);
+          await page.getByRole('button',{name:'Card anterior',exact:true}).click();
+          await page.waitForFunction(()=>Math.abs(document.querySelector('[data-book]').scrollLeft-4*innerWidth)<2);
+          await page.getByRole('button',{name:'Próximo card',exact:true}).click();
+          await page.waitForFunction(()=>Math.abs(document.querySelector('[data-book]').scrollLeft-5*innerWidth)<2);
+          await page.keyboard.press('ArrowLeft');
+          await page.waitForFunction(()=>Math.abs(document.querySelector('[data-book]').scrollLeft-4*innerWidth)<2);
+          await page.keyboard.press('ArrowRight');
+          await page.waitForFunction(()=>Math.abs(document.querySelector('[data-book]').scrollLeft-5*innerWidth)<2);
           // Preserve the originating main card while switching catalog categories.
           await page.getByRole('button',{name:'Potes',exact:true}).click();
           await page.getByRole('link',{name:'Ver todos os sabores de potes →',exact:true}).click();

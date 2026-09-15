@@ -209,7 +209,8 @@ try {
       const play=page.getByRole('button',{name:'Reproduzir vídeo do Trio',exact:true});
       await play.waitFor({state:'visible'});await play.click();
       await page.waitForFunction(()=>{const v=document.querySelector('.trio video');return !v.paused&&v.currentTime>0;});
-      assert.equal(await play.isVisible(),false);
+      // Playback state can advance before the playing handler updates the button.
+      await play.waitFor({state:'hidden',timeout:5000});
       await page.getByRole('button',{name:'Milk-shakes',exact:true}).click();
       await page.waitForFunction(()=>document.querySelector('.trio video').paused);
       await page.getByRole('button',{name:'Trio do Dudu',exact:true}).click();

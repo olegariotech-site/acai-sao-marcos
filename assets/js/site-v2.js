@@ -441,7 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
       video.load();
 
       elements.modalMedia.dataset.mediaFallbackStep = '0';
-      elements.modalMedia.dataset.fallback = product.imageFallback || 'assets/assetslogologo-acai-sao-marcos.png?v=20260815-1';
+      elements.modalMedia.dataset.fallback = product.imageFallback || 'assets/img/brand/logo-acai-512.webp?v=20261019-quality-1';
       elements.modalMedia.src = product.image;
       elements.modalMedia.alt = product.name;
       elements.modalMedia.hidden = false;
@@ -470,7 +470,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     elements.modalMedia.dataset.mediaFallbackStep = '0';
-    elements.modalMedia.dataset.fallback = product.imageFallback || 'assets/assetslogologo-acai-sao-marcos.png?v=20260815-1';
+    elements.modalMedia.dataset.fallback = product.imageFallback || 'assets/img/brand/logo-acai-512.webp?v=20261019-quality-1';
     elements.modalMedia.hidden = false;
     elements.modalMedia.src = product.image;
     elements.modalMedia.alt = product.name;

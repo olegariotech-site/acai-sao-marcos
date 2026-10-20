@@ -186,8 +186,8 @@ const runProfile = async ({ name, browserType, context: contextOptions, touch })
     assert(await sergelCards.count() === 4, `[${name}] Vitrine de Picolés/Sergel deve ter 4 cards.`);
 
     for (const selector of [
-      'img[src="assets/img/produtos/picoles-do-dudu-card.png"]',
-      'img[src="assets/img/produtos/picoles-sergel-card.png"]'
+      'img[src*="picoles-do-dudu-card"]',
+      'img[src*="picoles-sergel-card"]'
     ]) {
       const image = page.locator(selector);
       await image.scrollIntoViewIfNeeded();

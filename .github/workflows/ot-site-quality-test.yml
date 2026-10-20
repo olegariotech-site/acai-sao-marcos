@@ -1,7 +1,7 @@
 name: OT Site Quality Cross-Repo Test
 # Evidence pass: actionable axe details
 # Architecture pass: diagnostic performance policy
-# V0.2 visual readiness rerun after WebKit media settle fix
+# V0.2 audit evidence rerun with diagnostic visual summary
 
 on:
   pull_request:

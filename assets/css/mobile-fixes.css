@@ -32,7 +32,7 @@
 /* Visual fallback: if the main hero image is late or fails, another local image remains behind it. */
 .hero-image-frame {
   background-color: var(--purple-900);
-  background-image: url('../img/hero-copo-acai-morango.png?v=20260816-2');
+  background-image: url('../img/hero-copo-acai-morango-1280.webp?v=20261019-quality-1');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -249,7 +249,7 @@
 
 .button-whatsapp {
   color: #fff !important;
-  background: #25D366 !important;
+  background: #0B7A46 !important;
   box-shadow: 0 14px 30px rgba(37, 211, 102, .2);
 }
 

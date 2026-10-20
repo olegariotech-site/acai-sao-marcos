@@ -53,6 +53,15 @@ jobs:
                       kwargs["quality"] = quality
                   im.save(dst, **kwargs)
                   print(f"{src} -> {dst}: {src.stat().st_size} -> {dst.stat().st_size} bytes; {im.width}x{im.height}")
+
+          logo = Path("assets/assetslogologo-acai-sao-marcos.png")
+          favicon = Path("assets/img/brand/favicon-64.png")
+          with Image.open(logo) as im:
+              im.load()
+              im = im.resize((64, 64), Image.Resampling.LANCZOS)
+              favicon.parent.mkdir(parents=True, exist_ok=True)
+              im.save(favicon, format="PNG", optimize=True)
+              print(f"{logo} -> {favicon}: {logo.stat().st_size} -> {favicon.stat().st_size} bytes; 64x64")
           PY
 
       - name: Commit optimized assets
@@ -61,7 +70,8 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add             assets/img/hero-copo-acai-morango-1280.webp             assets/img/brand/logo-acai-512.webp             assets/img/produtos/picoles-do-dudu-card-960.webp             assets/img/produtos/picoles-sergel-card-960.webp
+          git add             assets/img/hero-copo-acai-morango-1280.webp             assets/img/brand/logo-acai-512.webp             assets/img/produtos/picoles-do-dudu-card-960.webp             assets/img/produtos/picoles-sergel-card-960.webp \
+            assets/img/brand/favicon-64.png
           if git diff --cached --quiet; then
             echo "No generated changes."
             exit 0

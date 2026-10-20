@@ -1,8 +1,8 @@
 (() => {
   'use strict';
 
-  const PRIMARY_FALLBACK = 'assets/img/hero-copo-acai-morango.png?v=20260816-final-1';
-  const FINAL_FALLBACK = 'assets/assetslogologo-acai-sao-marcos.png?v=20260816-final-1';
+  const PRIMARY_FALLBACK = 'assets/img/hero-copo-acai-morango-1280.webp?v=20261019-quality-1';
+  const FINAL_FALLBACK = 'assets/img/brand/logo-acai-512.webp?v=20261019-quality-1';
   const WHATSAPP_BASE = 'https://wa.me/5519991288849';
   const PRODUCT_CATEGORY = {
     'acai-natural': 'acai',
@@ -106,7 +106,7 @@
   const applyImageFallback = (img) => {
     if (!(img instanceof HTMLImageElement)) return;
     const currentSrc = img.getAttribute('src') || '';
-    if (currentSrc.includes('assetslogologo-acai-sao-marcos.png')) {
+    if (currentSrc.includes('logo-acai-512.webp') || currentSrc.includes('assetslogologo-acai-sao-marcos.png')) {
       img.style.visibility = 'hidden';
       return;
     }

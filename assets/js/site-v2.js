@@ -611,31 +611,18 @@ document.addEventListener('DOMContentLoaded', () => {
     scope.querySelectorAll?.('[data-reveal]:not(.revealed)').forEach((item) => revealObserver.observe(item));
   }
 
-  const renderDeferredCatalogContent = () => {
-    if (!state.catalog) return;
-
-    const renderProductsIfNeeded = () => {
-      if (!state.productsRendered) renderProducts();
-    };
-    const renderGalleryIfNeeded = () => {
-      if (!state.galleryRendered) renderGallery();
-    };
-
-    // Deep links must be ready immediately.
-    if (window.location.hash === '#cardapio') renderProductsIfNeeded();
+  const renderDeferredGallery = () => {
+    if (!state.catalog || !elements.galleryGrid || state.galleryRendered) return;
 
     if (!('IntersectionObserver' in window)) {
-      renderProductsIfNeeded();
-      renderGalleryIfNeeded();
+      renderGallery();
       return;
     }
 
-    const deferredObserver = new IntersectionObserver((entries, observer) => {
+    const galleryObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-
-        if (entry.target === elements.productGrid) renderProductsIfNeeded();
-        if (entry.target === elements.galleryGrid) renderGalleryIfNeeded();
+        renderGallery();
         observer.unobserve(entry.target);
       });
     }, {
@@ -643,8 +630,7 @@ document.addEventListener('DOMContentLoaded', () => {
       threshold: 0.01
     });
 
-    if (elements.productGrid) deferredObserver.observe(elements.productGrid);
-    if (elements.galleryGrid) deferredObserver.observe(elements.galleryGrid);
+    galleryObserver.observe(elements.galleryGrid);
   };
 
   const loadCatalog = async () => {
@@ -653,12 +639,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!response.ok) throw new Error(`Falha ao carregar catálogo: ${response.status}`);
       state.catalog = await response.json();
 
-      // Lightweight content that supports the first decision path stays immediate.
+      // The catalog is part of the core visitor journey and stays immediately available.
       renderCategories();
       renderOffers();
+      renderProducts();
 
-      // Media-heavy catalog/gallery work is prepared only when the visitor approaches it.
-      renderDeferredCatalogContent();
+      // The gallery is secondary and can wait until the visitor approaches it.
+      renderDeferredGallery();
     } catch (error) {
       console.error(error);
       if (elements.productGrid) {

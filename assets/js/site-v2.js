@@ -79,7 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
     catalog: null,
     activeCategory: 'destaques',
     activeProduct: null,
-    lastFocused: null
+    lastFocused: null,
+    productsRendered: false,
+    galleryRendered: false
   };
 
   const elements = {
@@ -285,24 +287,8 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const productMediaTemplate = (product) => {
-    if (product.video) {
-      return `
-        ${productImageTemplate(product, { alt: '', className: 'product-video-fallback', ariaHidden: true })}
-        <video
-          src="${escapeHTML(product.video)}"
-          poster="${escapeHTML(product.image)}"
-          data-fallback="${escapeHTML(product.imageFallback || product.image)}"
-          aria-label="Vídeo de ${escapeHTML(product.name)}"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          style="width:100%;height:100%;object-fit:cover;opacity:0;"
-        ></video>
-      `;
-    }
-
+    // Keep product cards light. Video remains available inside the product modal,
+    // where it is loaded only after an explicit visitor action.
     return productImageTemplate(product);
   };
 
@@ -332,6 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const renderProducts = () => {
     if (!elements.productGrid) return;
+    state.productsRendered = true;
     const products = getVisibleProducts();
 
     if (!products.length) {
@@ -380,6 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const renderGallery = () => {
     if (!state.catalog || !elements.galleryGrid) return;
+    state.galleryRendered = true;
     elements.galleryGrid.innerHTML = state.catalog.gallery.map((item) => {
       const sourceWidth = Number(item.width) || 0;
       const mobileWidth = Number(item.mobileWidth) || 0;
@@ -623,15 +611,54 @@ document.addEventListener('DOMContentLoaded', () => {
     scope.querySelectorAll?.('[data-reveal]:not(.revealed)').forEach((item) => revealObserver.observe(item));
   }
 
+  const renderDeferredCatalogContent = () => {
+    if (!state.catalog) return;
+
+    const renderProductsIfNeeded = () => {
+      if (!state.productsRendered) renderProducts();
+    };
+    const renderGalleryIfNeeded = () => {
+      if (!state.galleryRendered) renderGallery();
+    };
+
+    // Deep links must be ready immediately.
+    if (window.location.hash === '#cardapio') renderProductsIfNeeded();
+
+    if (!('IntersectionObserver' in window)) {
+      renderProductsIfNeeded();
+      renderGalleryIfNeeded();
+      return;
+    }
+
+    const deferredObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        if (entry.target === elements.productGrid) renderProductsIfNeeded();
+        if (entry.target === elements.galleryGrid) renderGalleryIfNeeded();
+        observer.unobserve(entry.target);
+      });
+    }, {
+      rootMargin: '900px 0px',
+      threshold: 0.01
+    });
+
+    if (elements.productGrid) deferredObserver.observe(elements.productGrid);
+    if (elements.galleryGrid) deferredObserver.observe(elements.galleryGrid);
+  };
+
   const loadCatalog = async () => {
     try {
       const response = await fetch('data/products.json', { cache: 'no-store' });
       if (!response.ok) throw new Error(`Falha ao carregar catálogo: ${response.status}`);
       state.catalog = await response.json();
+
+      // Lightweight content that supports the first decision path stays immediate.
       renderCategories();
       renderOffers();
-      renderProducts();
-      renderGallery();
+
+      // Media-heavy catalog/gallery work is prepared only when the visitor approaches it.
+      renderDeferredCatalogContent();
     } catch (error) {
       console.error(error);
       if (elements.productGrid) {

@@ -1,6 +1,7 @@
 name: OT Site Quality Cross-Repo Test
 # Evidence pass: actionable axe details
 # Architecture pass: diagnostic performance policy
+# V0.2 visual readiness rerun after YAML input fix
 
 on:
   pull_request:

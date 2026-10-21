@@ -1,0 +1,25 @@
+name: OT Site Quality V0.2 — Açaí A11y Acceptance
+
+on:
+  pull_request:
+    branches:
+      - fix/acai-accessibility-audit-baseline
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    uses: olegariotech-site/olegariotech-site/.github/workflows/reusable-site-quality.yml@5e6412d0cf6f55ac86cd7a0230fc335264527eb1
+    with:
+      serve_dir: "."
+      url_path: "/"
+      primary_selector: 'a[href*="wa.me"]'
+      strict_axe: true
+      fail_on_console_errors: false
+      stabilize_visual_capture: true
+      enforce_performance: false
+      min_performance: 0.75
+      min_accessibility: 0.90
+      min_best_practices: 0.85
+      min_seo: 0.85

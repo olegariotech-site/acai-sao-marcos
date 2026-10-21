@@ -98,6 +98,7 @@ try {
         await page.evaluate(() => document.fonts.ready);
         if (await page.locator('[data-cookie-reject]').isVisible()) await page.locator('[data-cookie-reject]').click();
         await page.addStyleTag({ content: 'html{scroll-behavior:auto!important}' });
+        await page.evaluate(() => document.activeElement?.blur());
         for (let y = 0; y < await page.evaluate(() => document.documentElement.scrollHeight); y += height * .8) {
           await page.evaluate(y => scrollTo(0, y), y); await page.waitForTimeout(90);
         }
@@ -134,7 +135,7 @@ try {
             images: [...el.querySelectorAll('img')].map(img => ({ src: new URL(img.currentSrc).pathname.replace(/^\/(before|candidate)/, ''), loaded: img.complete && img.naturalWidth > 0 })),
             geometry: [...el.querySelectorAll('h1,h2,p,a,img,.sergel-card')].map(node => ({ font: getComputedStyle(node).font, tag: node.tagName, x: node.offsetLeft, y: node.offsetTop, width: node.offsetWidth, height: node.offsetHeight })) }));
           assert(result.sections[section].images.every(image => image.loaded), `${version}/${name}: unloaded image`);
-          await element.screenshot({ path: `${output}/${version}-${name}-${section}.png`, animations: 'disabled', scale: 'css' });
+          await element.screenshot({ path: `${output}/${version}-${name}-${section}.png`, animations: 'disabled', scale: 'css', style: '.skip-link,.whatsapp-float,.whatsapp-contact-float{visibility:hidden!important}' + (section === 'sergel' ? '.site-header{visibility:hidden!important}' : '') });
         }
         await page.evaluate(() => scrollTo(0, 0));
         const axe = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze();

@@ -133,7 +133,20 @@ try {
           await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
         });
         await page.evaluate(() => scrollTo(0, 0)); await page.waitForTimeout(1000);
-        const result = { version, profile: name, width, height, engine: browser.version(), errors, failedLocal, sections: {} };
+        let baseReloadControl = null;
+        if (version === 'before') {
+          const initialHeight = await page.locator('.sergel-showcase').evaluate(el => el.offsetHeight);
+          await page.evaluate(async () => {
+            await Promise.all([...document.querySelectorAll('link[rel=stylesheet]')].filter(link => /(?:site-v2|sergel-premium)\.css/.test(link.href)).map(link => new Promise((resolve, reject) => {
+              link.onload = resolve; link.onerror = reject;
+              const url = new URL(link.href); url.search = '?unchanged-base-control'; link.href = url.href;
+            })));
+            await document.fonts.ready;
+          });
+          await page.waitForTimeout(1000);
+          baseReloadControl = { initialHeight, afterUnchangedBaseReload: await page.locator('.sergel-showcase').evaluate(el => el.offsetHeight) };
+        }
+        const result = { version, baseReloadControl, profile: name, width, height, engine: browser.version(), errors, failedLocal, sections: {} };
         assert.match(await page.title(), /Açaí do Dudu/);
         result.overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1);
         assert.equal(result.overflow, false, `${version}/${name}: overflow`);

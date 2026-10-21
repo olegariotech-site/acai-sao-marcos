@@ -23,7 +23,7 @@ jobs:
           node-version: '22'
       - name: Prepare isolated QA dependencies
         run: |
-          npm install --no-save playwright@1.62.1 @axe-core/playwright
+          npm install --no-save playwright@1.62.1 @axe-core/playwright pngjs@7
           npx playwright install --with-deps chromium webkit
       - name: Compare immutable base with candidate at five requested sizes
         run: node tools/check-purple-aurora.mjs

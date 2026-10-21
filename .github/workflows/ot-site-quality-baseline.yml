@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   quality:
-    uses: olegariotech-site/olegariotech-site/.github/workflows/reusable-site-quality.yml@9f71a4267e365d320d1846cf4ceb6377313de634
+    uses: olegariotech-site/olegariotech-site/.github/workflows/reusable-site-quality.yml@195cb9657bf13fefccec886c183a5f19ff3279d3
     with:
       serve_dir: "."
       url_path: "/"

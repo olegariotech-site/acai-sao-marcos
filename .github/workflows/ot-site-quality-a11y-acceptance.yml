@@ -1,4 +1,4 @@
-name: OT Site Quality V0.2 — Açaí A11y Acceptance
+name: OT Site Quality V0.2.1 — Açaí A11y Acceptance
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   quality:
-    uses: olegariotech-site/olegariotech-site/.github/workflows/reusable-site-quality.yml@5e6412d0cf6f55ac86cd7a0230fc335264527eb1
+    uses: olegariotech-site/olegariotech-site/.github/workflows/reusable-site-quality.yml@760776aeaf26dfa9b461eb3de87c30695f02620f
     with:
       serve_dir: "."
       url_path: "/"

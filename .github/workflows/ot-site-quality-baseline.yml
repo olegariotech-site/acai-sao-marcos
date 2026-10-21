@@ -1,0 +1,25 @@
+name: OT Site Quality — Baseline Only (Draft)
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    uses: olegariotech-site/olegariotech-site/.github/workflows/reusable-site-quality.yml@9f71a4267e365d320d1846cf4ceb6377313de634
+    with:
+      serve_dir: "."
+      url_path: "/"
+      primary_selector: 'a[href*="wa.me"]'
+      strict_axe: true
+      fail_on_console_errors: false
+      stabilize_visual_capture: true
+      enforce_performance: false
+      min_performance: 0.75
+      min_accessibility: 0.90
+      min_best_practices: 0.85
+      min_seo: 0.85

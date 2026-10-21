@@ -145,7 +145,7 @@ try {
           assert.deepEqual(clipped, [], `${version}/${name}/${section}: clipped text`);
           result.sections[section] = await element.evaluate(el => ({ text: el.innerText, width: el.offsetWidth, height: el.offsetHeight,
             images: [...el.querySelectorAll('img')].map(img => ({ src: new URL(img.currentSrc).pathname.replace(/^\/(before|candidate)/, ''), loaded: img.complete && img.naturalWidth > 0 })),
-            geometry: [...el.querySelectorAll('h1,h2,p,a,img,.sergel-card')].map(node => ({ font: getComputedStyle(node).font, tag: node.tagName, x: node.offsetLeft, y: node.offsetTop, width: node.offsetWidth, height: node.offsetHeight })) }));
+            geometry: [...el.querySelectorAll('h1,h2,h3,p,a,img,.sergel-card,.sergel-card-content,.sergel-price-row,.sergel-price,.sergel-price small,.sergel-price strong')].map(node => ({ font: getComputedStyle(node).font, tag: node.tagName, x: node.offsetLeft, y: node.offsetTop, width: node.offsetWidth, height: node.offsetHeight })) }));
           assert(result.sections[section].images.every(image => image.loaded), `${version}/${name}: unloaded image`);
           // Keep the requested viewport constant. WebKit's tall element screenshot
           // temporarily resizes the viewport and can trigger mobile text autosizing.

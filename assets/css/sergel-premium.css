@@ -3,14 +3,14 @@
   overflow: hidden;
   padding: clamp(78px, 9vw, 128px) 0;
   color: #fff;
-  /* A lower violet pool frames the cards while keeping the heading dark. */
-  --aurora-halo-size: 45% 46%;
-  --aurora-halo-at: 70% 50%;
-  --aurora-body-at: 89% 72%;
-  --aurora-veil-at: 52% 4%;
+  background:
+    radial-gradient(ellipse 45% 46% at 70% 50%, rgba(171, 143, 241, .40), transparent 82%),
+    radial-gradient(ellipse 48% 78% at 89% 72%, rgba(137, 96, 240, .38), transparent 80%),
+    radial-gradient(ellipse 54% 46% at 52% 4%, rgba(106, 47, 141, .48), transparent 82%),
+    linear-gradient(125deg, var(--purple-950), var(--purple-900));
 }
 
-/* Shared aurora and secondary texture are defined in site-v2.css. */
+/* Shared secondary texture is defined with .hero::before in site-v2.css. */
 
 .sergel-shell {
   position: relative;
@@ -247,9 +247,11 @@
 
 @media (max-width: 720px) {
   .sergel-showcase {
-    --aurora-halo-size: 92% 34%;
-    --aurora-halo-at: 66% 48%;
-    --aurora-body-at: 82% 82%;
+    background:
+      radial-gradient(ellipse 92% 34% at 66% 48%, rgba(171, 143, 241, .40), transparent 82%),
+      radial-gradient(ellipse 48% 78% at 82% 82%, rgba(137, 96, 240, .38), transparent 80%),
+      radial-gradient(ellipse 54% 46% at 52% 4%, rgba(106, 47, 141, .48), transparent 82%),
+      linear-gradient(125deg, var(--purple-950), var(--purple-900));
     padding: 72px 0;
   }
 

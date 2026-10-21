@@ -101,6 +101,24 @@ try {
         for (let y = 0; y < await page.evaluate(() => document.documentElement.scrollHeight); y += height * .8) {
           await page.evaluate(y => scrollTo(0, y), y); await page.waitForTimeout(90);
         }
+        // WebKit can defer IntersectionObserver deliveries during a rapid sweep.
+        // Visit each study item and wait for the real reveal state before measuring.
+        for (const element of await page.locator('.hero [data-reveal], .sergel-showcase [data-reveal]').all()) {
+          await element.scrollIntoViewIfNeeded();
+          await element.evaluate(el => new Promise((resolve, reject) => {
+            if (el.classList.contains('revealed')) return resolve();
+            const timer = setTimeout(() => { observer.disconnect(); reject(new Error('Reveal did not settle')); }, 5000);
+            const observer = new MutationObserver(() => {
+              if (el.classList.contains('revealed')) { clearTimeout(timer); observer.disconnect(); resolve(); }
+            });
+            observer.observe(el, { attributes: true, attributeFilter: ['class'] });
+          }));
+        }
+        await page.evaluate(async () => {
+          await Promise.all(['400 16px Poppins','500 16px Poppins','600 16px Poppins','700 16px Poppins','800 16px Poppins','500 40px Fredoka','600 40px Fredoka','700 40px Fredoka'].map(font => document.fonts.load(font)));
+          await document.fonts.ready;
+          await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+        });
         await page.evaluate(() => scrollTo(0, 0)); await page.waitForTimeout(1000);
         const result = { version, profile: name, width, height, engine: browser.version(), errors, failedLocal, sections: {} };
         assert.match(await page.title(), /Açaí do Dudu/);
@@ -114,7 +132,7 @@ try {
           assert.deepEqual(clipped, [], `${version}/${name}/${section}: clipped text`);
           result.sections[section] = await element.evaluate(el => ({ text: el.innerText, width: el.offsetWidth, height: el.offsetHeight,
             images: [...el.querySelectorAll('img')].map(img => ({ src: new URL(img.currentSrc).pathname.replace(/^\/(before|candidate)/, ''), loaded: img.complete && img.naturalWidth > 0 })),
-            geometry: [...el.querySelectorAll('h1,h2,p,a,img,.sergel-card')].map(node => ({ tag: node.tagName, x: node.offsetLeft, y: node.offsetTop, width: node.offsetWidth, height: node.offsetHeight })) }));
+            geometry: [...el.querySelectorAll('h1,h2,p,a,img,.sergel-card')].map(node => ({ font: getComputedStyle(node).font, tag: node.tagName, x: node.offsetLeft, y: node.offsetTop, width: node.offsetWidth, height: node.offsetHeight })) }));
           assert(result.sections[section].images.every(image => image.loaded), `${version}/${name}: unloaded image`);
           await element.screenshot({ path: `${output}/${version}-${name}-${section}.png`, animations: 'disabled', scale: 'css' });
         }

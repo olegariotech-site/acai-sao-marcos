@@ -7,6 +7,7 @@ import { execFileSync } from 'node:child_process';
 import assert from 'node:assert/strict';
 import { chromium, webkit } from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
+import { PNG } from 'pngjs';
 
 const baseSha = 'f20a92377663050c949078e5b7f3891d83ff86fb';
 const output = path.resolve(process.env.AURORA_OUTPUT || '/tmp/purple-aurora-study');
@@ -135,7 +136,24 @@ try {
             images: [...el.querySelectorAll('img')].map(img => ({ src: new URL(img.currentSrc).pathname.replace(/^\/(before|candidate)/, ''), loaded: img.complete && img.naturalWidth > 0 })),
             geometry: [...el.querySelectorAll('h1,h2,p,a,img,.sergel-card')].map(node => ({ font: getComputedStyle(node).font, tag: node.tagName, x: node.offsetLeft, y: node.offsetTop, width: node.offsetWidth, height: node.offsetHeight })) }));
           assert(result.sections[section].images.every(image => image.loaded), `${version}/${name}: unloaded image`);
-          await element.screenshot({ path: `${output}/${version}-${name}-${section}.png`, animations: 'disabled', scale: 'css', style: '.skip-link,.whatsapp-float,.whatsapp-contact-float{visibility:hidden!important}' + (section === 'sergel' ? '.site-header{visibility:hidden!important}' : '') });
+          // Keep the requested viewport constant. WebKit's tall element screenshot
+          // temporarily resizes the viewport and can trigger mobile text autosizing.
+          const box = await element.evaluate(el => { const r = el.getBoundingClientRect(); return { top: Math.floor(r.top + scrollY), bottom: Math.ceil(r.bottom + scrollY) }; });
+          const stitched = new PNG({ width, height: box.bottom - box.top });
+          let copied = 0;
+          while (copied < stitched.height) {
+            await page.evaluate(y => scrollTo({ top: y, behavior: 'instant' }), box.top + copied);
+            await page.waitForTimeout(180);
+            const scrollY = await page.evaluate(() => window.scrollY);
+            const sourceY = Math.max(0, Math.round(box.top + copied - scrollY));
+            const tile = PNG.sync.read(await page.screenshot({ fullPage: false, animations: 'disabled', scale: 'css', style: '.skip-link,.whatsapp-float,.whatsapp-contact-float,.category-rail-wrap{visibility:hidden!important}' + (section === 'sergel' ? '.site-header{visibility:hidden!important}' : '') }));
+            const count = Math.min(tile.height - sourceY, stitched.height - copied);
+            assert(count > 0 && tile.width === width, 'Unexpected screenshot tile geometry');
+            PNG.bitblt(tile, stitched, 0, sourceY, width, count, 0, copied);
+            copied += count;
+          }
+          fs.writeFileSync(`${output}/${version}-${name}-${section}.png`, PNG.sync.write(stitched));
+          assert.equal(await element.evaluate(el => el.offsetHeight), result.sections[section].height, 'Capture changed layout');
         }
         await page.evaluate(() => scrollTo(0, 0));
         const axe = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze();

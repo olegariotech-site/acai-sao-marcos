@@ -361,6 +361,7 @@ body.menu-open .mobile-menu {
   line-height: 1;
 }
 
+/* V3-B: native, static light. Brand palette and content layers stay intact. */
 .hero {
   position: relative;
   min-height: 760px;
@@ -369,32 +370,33 @@ body.menu-open .mobile-menu {
   padding: 138px 0 84px;
   color: var(--white);
   background:
-    radial-gradient(circle at 82% 28%, rgba(109, 181, 45, .28), transparent 26%),
-    radial-gradient(circle at 12% 18%, rgba(255, 210, 31, .18), transparent 30%),
-    linear-gradient(135deg, var(--purple-950) 0%, var(--purple-800) 50%, #6a1b75 100%);
+    radial-gradient(ellipse 30% 62% at 77% 43%, rgba(171, 143, 241, .40), transparent 82%),
+    radial-gradient(ellipse 48% 78% at 86% 62%, rgba(137, 96, 240, .38), transparent 80%),
+    radial-gradient(ellipse 54% 46% at 53% 0%, rgba(106, 47, 141, .48), transparent 82%),
+    linear-gradient(125deg, var(--purple-950), var(--purple-900));
   overflow: hidden;
 }
 
+/* One uniform, unmasked grid: no horizontal opacity ramp or edge fade.
+   The texture is intentionally subordinate to the product and light. */
 .hero::before,
 .sergel-showcase::before {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  /* Unmasked fallback keeps the same small, sparse dot grid. */
-  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, .075) 1px, transparent 0);
-  background-size: 28px 28px;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, .035) 1px, transparent 0);
+  background-size: 32px 32px;
 }
 
-@supports (mask-image: radial-gradient(#000, transparent)) {
-  .hero::before,
-  .sergel-showcase::before {
-    /* Compensate the lighter purple at the right; no edge fades to zero. */
-    background-image: linear-gradient(110deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .105));
-    background-size: 100% 100%;
-    mask-image: radial-gradient(circle at 1px 1px, #000 1px, transparent 0);
-    mask-size: 28px 28px;
-    mask-repeat: repeat;
+/* Move only the light when the existing layout stacks; geometry is unchanged. */
+@media (max-width: 1060px) {
+  .hero {
+    background:
+      radial-gradient(ellipse 58% 36% at 54% 73%, rgba(171, 143, 241, .40), transparent 82%),
+      radial-gradient(ellipse 48% 78% at 72% 86%, rgba(137, 96, 240, .38), transparent 80%),
+      radial-gradient(ellipse 54% 46% at 53% 0%, rgba(106, 47, 141, .48), transparent 82%),
+      linear-gradient(125deg, var(--purple-950), var(--purple-900));
   }
 }
 

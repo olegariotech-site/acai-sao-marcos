@@ -1,0 +1,36 @@
+name: Purple Aurora V3 visual study
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'assets/css/site-v2.css'
+      - 'assets/css/sergel-premium.css'
+      - 'index.html'
+      - 'tools/check-purple-aurora.mjs'
+      - '.github/workflows/purple-aurora-study.yml'
+permissions:
+  contents: read
+jobs:
+  visual-study:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - name: Prepare isolated QA dependencies
+        run: |
+          npm install --no-save playwright@1.62.1 @axe-core/playwright pngjs@7
+          npx playwright install --with-deps chromium webkit
+      - name: Compare immutable base with candidate at five requested sizes
+        run: node tools/check-purple-aurora.mjs
+      - name: Upload full Hero and Sergel captures and audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: purple-aurora-study
+          path: /tmp/purple-aurora-study
+          retention-days: 30

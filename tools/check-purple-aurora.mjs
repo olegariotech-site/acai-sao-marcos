@@ -39,7 +39,7 @@ const profiles = [
   ['android', 393, 873, chromium],
   ['iphone-webkit', 390, 844, webkit],
 ];
-const report = { baseSha, candidateSha: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), results: [], failures: [], limitations: [] };
+const report = { comparisonMethod: 'Same DOM with full replacement of the two target stylesheets; fixed-viewport tiles; fresh candidate navigation checked separately by OT quality and existing regression.', baseSha, candidateSha: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), results: [], failures: [], limitations: [] };
 const externalCache = new Map();
 // Actual text rectangles against clipping ancestors, restricted to the study surfaces.
 const clippedText = root => {
@@ -68,10 +68,11 @@ try {
     if (engine === chromium && process.env.CHROMIUM_EXECUTABLE) { options.executablePath = process.env.CHROMIUM_EXECUTABLE; options.args = ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--no-zygote']; }
     const browser = await engine.launch(options);
     const pair = [];
+    let sharedContext, sharedPage;
     try {
       for (const version of ['before', 'candidate']) {
-        const context = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: 1, isMobile: width < 600, hasTouch: width < 600 });
-        const page = await context.newPage();
+        const context = sharedContext ||= await browser.newContext({ viewport: { width, height }, deviceScaleFactor: 1, isMobile: width < 600, hasTouch: width < 600 });
+        const page = sharedPage ||= await context.newPage();
         const errors = [], failedLocal = [];
         page.on('pageerror', error => errors.push(error.message));
         page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
@@ -95,7 +96,17 @@ try {
           }
           return route.fulfill({ status: 200, body: '' });
         });
-        await page.goto(`${origin}/${version}/`, { waitUntil: 'load' });
+        if (version === 'before') await page.goto(`${origin}/before/`, { waitUntil: 'load' });
+        else {
+          // Same DOM, assets, fonts, scroll and viewport: isolate the two CSS surfaces.
+          // Full fresh candidate navigation is covered by the existing regression and OT quality jobs.
+          await page.evaluate(async origin => {
+            await Promise.all([...document.querySelectorAll('link[rel=stylesheet]')].filter(link => /(?:site-v2|sergel-premium)\.css/.test(link.href)).map(link => new Promise((resolve, reject) => {
+              link.onload = resolve; link.onerror = reject;
+              const url = new URL(link.href); url.pathname = url.pathname.replace('/before/', '/candidate/'); url.search = '?aurora-comparison'; link.href = url.href;
+            })));
+          }, origin);
+        }
         await page.evaluate(() => document.fonts.ready);
         if (await page.locator('[data-cookie-reject]').isVisible()) await page.locator('[data-cookie-reject]').click();
         await page.addStyleTag({ content: 'html{scroll-behavior:auto!important}' });
@@ -167,7 +178,7 @@ try {
         result.interactions = 'Açaí Natural modal and responsive menu passed';
         assert.deepEqual(errors, [], `${version}/${name}: console`); assert.deepEqual(failedLocal, [], `${version}/${name}: local HTTP failures`);
         report.results.push(result); pair.push(result);
-        await context.close();
+
       }
       for (const section of ['hero', 'sergel']) assert.deepEqual(pair[1].sections[section], pair[0].sections[section], `${name}/${section}: content, images or layout changed`);
       console.log(`PASS ${name} ${width}x${height}: base/candidate content, geometry, images, axe, overflow, clipping, modal/menu`);

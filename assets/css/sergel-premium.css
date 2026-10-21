@@ -9,15 +9,7 @@
     linear-gradient(145deg, #23052f 0%, #4e0f60 48%, #6a1b75 100%);
 }
 
-.sergel-showcase::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: .55;
-  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, .11) 1px, transparent 0);
-  background-size: 28px 28px;
-}
+/* Shared background dots are defined with .hero::before in site-v2.css. */
 
 .sergel-shell {
   position: relative;

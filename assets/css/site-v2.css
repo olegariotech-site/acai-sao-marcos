@@ -375,14 +375,27 @@ body.menu-open .mobile-menu {
   overflow: hidden;
 }
 
-.hero::before {
+.hero::before,
+.sergel-showcase::before {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: .55;
-  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, .11) 1px, transparent 0);
+  /* Unmasked fallback keeps the same small, sparse dot grid. */
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, .075) 1px, transparent 0);
   background-size: 28px 28px;
+}
+
+@supports (mask-image: radial-gradient(#000, transparent)) {
+  .hero::before,
+  .sergel-showcase::before {
+    /* Compensate the lighter purple at the right; no edge fades to zero. */
+    background-image: linear-gradient(110deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .105));
+    background-size: 100% 100%;
+    mask-image: radial-gradient(circle at 1px 1px, #000 1px, transparent 0);
+    mask-size: 28px 28px;
+    mask-repeat: repeat;
+  }
 }
 
 .hero-inner {

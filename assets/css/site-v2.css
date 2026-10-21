@@ -361,6 +361,26 @@ body.menu-open .mobile-menu {
   line-height: 1;
 }
 
+/* V3-B Cinematic Purple Aurora: static spotlight, shared by these surfaces.
+   Brand tokens remain authoritative; these values are decorative light only. */
+.hero,
+.sergel-showcase {
+  --aurora-halo: rgba(171, 143, 241, .40);
+  --aurora-body: rgba(137, 96, 240, .38);
+  --aurora-veil: rgba(106, 47, 141, .48);
+  --aurora-halo-size: 30% 62%;
+  --aurora-halo-at: 77% 43%;
+  --aurora-body-at: 86% 62%;
+  --aurora-veil-at: 53% 0%;
+  --aurora-start: var(--purple-950);
+  --aurora-end: var(--purple-900);
+  background:
+    radial-gradient(ellipse var(--aurora-halo-size) at var(--aurora-halo-at), var(--aurora-halo), transparent 82%),
+    radial-gradient(ellipse 48% 78% at var(--aurora-body-at), var(--aurora-body), transparent 80%),
+    radial-gradient(ellipse 54% 46% at var(--aurora-veil-at), var(--aurora-veil), transparent 82%),
+    linear-gradient(125deg, var(--aurora-start), var(--aurora-end));
+}
+
 .hero {
   position: relative;
   min-height: 760px;
@@ -368,33 +388,27 @@ body.menu-open .mobile-menu {
   align-items: center;
   padding: 138px 0 84px;
   color: var(--white);
-  background:
-    radial-gradient(circle at 82% 28%, rgba(109, 181, 45, .28), transparent 26%),
-    radial-gradient(circle at 12% 18%, rgba(255, 210, 31, .18), transparent 30%),
-    linear-gradient(135deg, var(--purple-950) 0%, var(--purple-800) 50%, #6a1b75 100%);
   overflow: hidden;
 }
 
+/* One uniform, unmasked grid: no horizontal opacity ramp or edge fade.
+   The texture is intentionally subordinate to the product and light. */
 .hero::before,
 .sergel-showcase::before {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  /* Unmasked fallback keeps the same small, sparse dot grid. */
-  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, .075) 1px, transparent 0);
-  background-size: 28px 28px;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, .035) 1px, transparent 0);
+  background-size: 32px 32px;
 }
 
-@supports (mask-image: radial-gradient(#000, transparent)) {
-  .hero::before,
-  .sergel-showcase::before {
-    /* Compensate the lighter purple at the right; no edge fades to zero. */
-    background-image: linear-gradient(110deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .105));
-    background-size: 100% 100%;
-    mask-image: radial-gradient(circle at 1px 1px, #000 1px, transparent 0);
-    mask-size: 28px 28px;
-    mask-repeat: repeat;
+/* Move only the light when the existing layout stacks; geometry is unchanged. */
+@media (max-width: 1060px) {
+  .hero {
+    --aurora-halo-size: 58% 36%;
+    --aurora-halo-at: 54% 73%;
+    --aurora-body-at: 72% 86%;
   }
 }
 

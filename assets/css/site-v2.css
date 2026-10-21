@@ -361,26 +361,7 @@ body.menu-open .mobile-menu {
   line-height: 1;
 }
 
-/* V3-A Soft Purple Aurora: static light, shared only by these two surfaces.
-   Brand tokens remain authoritative; these values are decorative light only. */
-.hero,
-.sergel-showcase {
-  --aurora-halo: rgba(171, 143, 241, .27);
-  --aurora-body: rgba(106, 47, 141, .58);
-  --aurora-veil: rgba(137, 96, 240, .12);
-  --aurora-halo-size: 54% 68%;
-  --aurora-halo-at: 78% 42%;
-  --aurora-body-at: 80% 70%;
-  --aurora-veil-at: 35% 4%;
-  --aurora-start: var(--purple-900);
-  --aurora-end: var(--purple-800);
-  background:
-    radial-gradient(ellipse var(--aurora-halo-size) at var(--aurora-halo-at), var(--aurora-halo), transparent 78%),
-    radial-gradient(ellipse 78% 84% at var(--aurora-body-at), var(--aurora-body), transparent 82%),
-    radial-gradient(ellipse 60% 48% at var(--aurora-veil-at), var(--aurora-veil), transparent 86%),
-    linear-gradient(125deg, var(--aurora-start), var(--aurora-end));
-}
-
+/* V3-A: native, static light. Brand palette and content layers stay intact. */
 .hero {
   position: relative;
   min-height: 760px;
@@ -388,6 +369,11 @@ body.menu-open .mobile-menu {
   align-items: center;
   padding: 138px 0 84px;
   color: var(--white);
+  background:
+    radial-gradient(ellipse 54% 68% at 78% 42%, rgba(171, 143, 241, .27), transparent 78%),
+    radial-gradient(ellipse 78% 84% at 80% 70%, rgba(106, 47, 141, .58), transparent 82%),
+    radial-gradient(ellipse 60% 48% at 35% 4%, rgba(137, 96, 240, .12), transparent 86%),
+    linear-gradient(125deg, var(--purple-900), var(--purple-800));
   overflow: hidden;
 }
 
@@ -406,9 +392,11 @@ body.menu-open .mobile-menu {
 /* Move only the light when the existing layout stacks; geometry is unchanged. */
 @media (max-width: 1060px) {
   .hero {
-    --aurora-halo-size: 72% 42%;
-    --aurora-halo-at: 54% 73%;
-    --aurora-body-at: 72% 86%;
+    background:
+      radial-gradient(ellipse 72% 42% at 54% 73%, rgba(171, 143, 241, .27), transparent 78%),
+      radial-gradient(ellipse 78% 84% at 72% 86%, rgba(106, 47, 141, .58), transparent 82%),
+      radial-gradient(ellipse 60% 48% at 35% 4%, rgba(137, 96, 240, .12), transparent 86%),
+      linear-gradient(125deg, var(--purple-900), var(--purple-800));
   }
 }
 

@@ -3,13 +3,14 @@
   overflow: hidden;
   padding: clamp(78px, 9vw, 128px) 0;
   color: #fff;
-  background:
-    radial-gradient(circle at 12% 8%, rgba(255, 210, 31, .18), transparent 24%),
-    radial-gradient(circle at 88% 18%, rgba(109, 181, 45, .16), transparent 22%),
-    linear-gradient(145deg, #23052f 0%, #4e0f60 48%, #6a1b75 100%);
+  /* A broad upper light connects the heading and the product display. */
+  --aurora-halo-size: 68% 48%;
+  --aurora-halo-at: 62% 25%;
+  --aurora-body-at: 82% 58%;
+  --aurora-veil-at: 18% 4%;
 }
 
-/* Shared background dots are defined with .hero::before in site-v2.css. */
+/* Shared aurora and secondary texture are defined in site-v2.css. */
 
 .sergel-shell {
   position: relative;
@@ -246,6 +247,9 @@
 
 @media (max-width: 720px) {
   .sergel-showcase {
+    --aurora-halo-size: 100% 40%;
+    --aurora-halo-at: 66% 48%;
+    --aurora-body-at: 82% 82%;
     padding: 72px 0;
   }
 
